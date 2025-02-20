@@ -7,13 +7,12 @@ project(factoryHub)
 #Set the required language to C11
 set(CMAKE_CXX_STANDARD 20)
 
-set(INCROOT ${CMAKE_SOURCE_DIR}/include)
+file(GLOB_RECURSE HEADER_FILES "../include/**.hpp")
 file(GLOB_RECURSE SRC "${CMAKE_CURRENT_SOURCE_DIR}/**.cpp")
+foreach(HEADER_FILE ${HEADER_FILES})
+    get_filename_component(HEADER_DIR ${HEADER_FILE} DIRECTORY)
+    include_directories(${HEADER_DIR})
+endforeach()
 
 #create exectuable hello from hello_world.c
 add_executable(${PROJECT_NAME} ${SRC})
-
-target_include_directories(${PROJECT_NAME}
-    PUBLIC
-        ${INCROOT}
-)

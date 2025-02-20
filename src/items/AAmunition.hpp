@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "item.hpp"
+#include "IItem.hpp"
 
 class AAmunition : public IItem
 {

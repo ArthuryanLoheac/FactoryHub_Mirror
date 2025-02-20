@@ -5,7 +5,7 @@
 ** map_grid
 */
 
-#include "map_grid.hpp"
+#include "MapGrid.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
