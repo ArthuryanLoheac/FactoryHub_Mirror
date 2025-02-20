@@ -10,7 +10,7 @@ on:
 
 env:
   MIRROR_URL: 'git@github.com:ArthuryanLoheac/FactoryHub'
-  EXECUTABLES: 'FactoryHub'
+  EXECUTABLES: 'factoryHub'
   FUNCTIONS_BANNED: ''
 
 jobs:
