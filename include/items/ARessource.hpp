@@ -1,5 +1,5 @@
 #pragma once
-#include "item.hpp"
+#include "IItem.hpp"
 
 class ARessource : public IItem
 {
