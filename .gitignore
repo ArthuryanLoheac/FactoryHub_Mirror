@@ -10,5 +10,5 @@ unit_tests
 *.out
 *.d
 obj/
-FactoryHub
+factoryHub
 build
