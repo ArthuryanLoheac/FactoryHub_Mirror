@@ -75,6 +75,7 @@ $(NAME_LIB): $(OBJ)
 
 # ============= CLEANS ============= #
 
+
 clean:
 	@printf "$(RED)[🚫] $(BLUE)Clean$(NC)\n"
 	rm -rf $(OBJ_DIR)
