@@ -19,11 +19,11 @@ MapGrid::MapGrid(size_t X, size_t Y)
     }
 }
 
-IBlock *MapGrid::GetIBlockAtPos(size_t X, size_t Y, size_t Z)
+std::shared_ptr<IBlock> MapGrid::GetIBlockAtPos(size_t X, size_t Y, size_t Z)
 {
     if (X >= _sizeX || Y >= _sizeY || Z >= _grid[X][Y].size())
         throw std::out_of_range("Out of range");
-    return _grid[X][Y][Z].get();
+    return _grid[X][Y][Z];
 }
 
 std::vector<std::shared_ptr<IBlock>> MapGrid::getAllBlocksAtPos(size_t X, size_t Y)
