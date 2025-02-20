@@ -55,8 +55,6 @@ jobs:
       - name: "Make"
         timeout-minutes: 2
         run: ./myBuild.sh
-      - name: "Cleaning"
-        run: make clean
       - name: "Check existing executables"
         run: |
           LIST=$(echo $EXECUTABLES | tr ',' ' ')
