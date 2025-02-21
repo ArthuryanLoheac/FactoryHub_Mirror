@@ -14,6 +14,11 @@ AVein::AVein(Item item)
     _isBlocking = false;
 }
 
+Item AVein::getRessource() const
+{
+    return _ressource;
+}
+
 void AVein::setPosX(float posX)
 {
     _posX = posX;

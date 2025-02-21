@@ -20,6 +20,7 @@ class AVein : public IBlock
         Item _ressource;
         AVein(Item item);
     public:
+        Item getRessource() const;
         void setPosX(float posX) override;
         void setPosY(float posY) override;
         float getPosX() const override;
