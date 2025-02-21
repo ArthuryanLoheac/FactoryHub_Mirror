@@ -12,6 +12,6 @@
 class AVein : public IBlock
 {
     protected:
-        IItem _ressource;
-        AVein(IItem item);
+        std::shared_ptr<IItem> _ressource;
+        AVein(std::shared_ptr<IItem> item);
 };
