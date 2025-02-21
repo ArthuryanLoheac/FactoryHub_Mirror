@@ -6,9 +6,12 @@
 */
 
 #pragma once
+#include "MapGrid.hpp"
 #include <stdexcept>
 #include <vector>
 #include <memory>
+
+class MapGrid;
 
 class IBlock
 {
@@ -19,5 +22,5 @@ class IBlock
         virtual float getPosY() const = 0;
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
-        virtual void update(float deltaTime) = 0;
+        virtual void update(float deltaTime, MapGrid map) = 0;
 };
