@@ -9,8 +9,7 @@
 #include <vector>
 #include <stdexcept>
 #include <memory>
-
-class IBlock;
+#include "IBlock.hpp"
 
 class MapGrid
 {
