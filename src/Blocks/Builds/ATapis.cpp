@@ -78,6 +78,10 @@ void ATapis::update(float deltaTime, MapGrid map)
             outElementTapis(std::get<1>(item).getName(), map);
         }
     }
+    // Scan for items to Extract (All but _direction)
+    // si pourcentage du dernier element du _itemsTransitting
+        // est > _speedPercent alors on peut sortir un item
+    // si item dans _outs du block a cote alors on le sort et le met sur le tapis avec AddElementTapis
 }
 
 ATapis::ATapis()
