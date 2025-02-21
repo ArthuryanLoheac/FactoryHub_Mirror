@@ -2,21 +2,17 @@
 ** EPITECH PROJECT, 2025
 ** FactoryHub
 ** File description:
-** AAmunition
+** ARessource
 */
 
 #pragma once
-#include <vector>
 #include "IItem.hpp"
 
-class AAmunition : public IItem
+class ARessource : public IItem
 {
-    protected:
-        AAmunition(std::string name);
     private:
         std::string _name;
-        size_t _tier;
-    public:
-        size_t getTier() const;
+    protected:
+        ARessource(std::string name);
         std::string getName() const override;
 };
