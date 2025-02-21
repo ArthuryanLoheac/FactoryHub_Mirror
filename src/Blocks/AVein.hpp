@@ -7,11 +7,11 @@
 
 #pragma once
 #include "IBlock.hpp"
-#include "IItem.hpp"
+#include "Item.hpp"
 
 class AVein : public IBlock
 {
     protected:
-        std::shared_ptr<IItem> _ressource;
-        AVein(std::shared_ptr<IItem> item);
+        Item _ressource;
+        AVein(Item item);
 };

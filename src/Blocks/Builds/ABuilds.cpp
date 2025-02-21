@@ -7,7 +7,7 @@
 
 #include "ABuilds.hpp"
 
-bool ABuilds::addElement(std::shared_ptr<IItem> item)
+bool ABuilds::addElement(Item item)
 {
     if (_noMax == false && _Ins.size() >= _MaxIn)
         return false;
@@ -28,7 +28,7 @@ bool ABuilds::outElement(std::string name)
 {
     int i = 0;
 
-    for (std::shared_ptr<IItem> &it: _Ins) {
+    for (Item &it: _Ins) {
         if (it->getName() == name) {
             _Outs.erase(_Outs.begin() + i);
             return true;

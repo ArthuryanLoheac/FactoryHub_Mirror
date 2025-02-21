@@ -7,20 +7,20 @@
 
 #pragma once
 #include "IBlock.hpp"
-#include "IItem.hpp"
+#include "Item.hpp"
 
 class ABuilds : public IBlock
 {
     private:
         std::vector<std::string> _AcceptedItems;
         bool _AllItemAccepted;
-        std::vector<std::shared_ptr<IItem>> _Ins;
-        std::vector<std::shared_ptr<IItem>> _Outs;
+        std::vector<Item> _Ins;
+        std::vector<Item> _Outs;
         size_t _MaxIn;
         size_t _MaxOut;
         bool _noMax;
     public:
-        bool addElement(std::shared_ptr<IItem> item);
+        bool addElement(Item item);
         bool outElement(std::string name);
     protected:
         ABuilds();

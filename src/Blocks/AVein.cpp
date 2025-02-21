@@ -7,7 +7,7 @@
 
 #include "AVein.hpp"
 
-AVein::AVein(std::shared_ptr<IItem> item)
+AVein::AVein(Item item)
     : _ressource(item)
 {
     _isConstructible = true;
