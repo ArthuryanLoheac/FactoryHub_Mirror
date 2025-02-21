@@ -13,6 +13,4 @@ class IItem
     public:
         IItem() = default;
         virtual std::string getName() const = 0;
-    protected:
-        std::string _name;
 };

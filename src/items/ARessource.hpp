@@ -10,6 +10,9 @@
 
 class ARessource : public IItem
 {
+    private:
+        std::string _name;
     protected:
         ARessource(std::string name);
+        std::string getName() const override;
 };

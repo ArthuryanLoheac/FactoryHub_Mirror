@@ -14,7 +14,9 @@ class AAmunition : public IItem
     protected:
         AAmunition(std::string name);
     private:
+        std::string _name;
         size_t _tier;
     public:
         size_t getTier() const;
+        std::string getName() const override;
 };

@@ -16,3 +16,8 @@ size_t AAmunition::getTier() const
 {
     return _tier;
 }
+
+std::string AAmunition::getName() const
+{
+    return _name;
+}

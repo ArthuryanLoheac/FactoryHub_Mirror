@@ -11,3 +11,8 @@ ARessource::ARessource(std::string name)
 {
     _name = name;
 }
+
+std::string ARessource::getName() const
+{
+    return _name;
+}
