@@ -6,9 +6,11 @@
 */
 
 #pragma once
+#include <string>
 
 class IItem
 {
-    protected:
-        IItem();
+    public:
+        IItem() = default;
+        virtual std::string getName() const = 0;
 };

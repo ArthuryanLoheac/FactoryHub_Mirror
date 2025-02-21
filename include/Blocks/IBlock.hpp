@@ -6,6 +6,9 @@
 */
 
 #pragma once
+#include <stdexcept>
+#include <vector>
+#include <memory>
 
 class IBlock
 {
