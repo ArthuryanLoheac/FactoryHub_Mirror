@@ -16,11 +16,10 @@ class IBlock
         virtual float getPosY() const = 0;
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
-        virtual void updtae(float deltaTime) = 0;
+        virtual void update(float deltaTime) = 0;
     private:
         float _posY;
         float _posX;
         bool _isConstructible;
         bool _isBlocking;
 };
-
