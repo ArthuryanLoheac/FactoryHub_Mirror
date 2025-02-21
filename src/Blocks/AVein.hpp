@@ -12,6 +12,19 @@
 class AVein : public IBlock
 {
     protected:
+        float _posY;
+        float _posX;
+        bool _isConstructible;
+        bool _isBlocking;
+    
         Item _ressource;
         AVein(Item item);
+    public:
+        void setPosX(float posX) override;
+        void setPosY(float posY) override;
+        float getPosX() const override;
+        float getPosY() const override;
+        bool getIsConstructible() const override;
+        bool getIsBlocking() const override;
+        virtual void update(float deltaTime) = 0;
 };

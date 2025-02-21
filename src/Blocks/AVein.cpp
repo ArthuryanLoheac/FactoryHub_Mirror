@@ -13,3 +13,33 @@ AVein::AVein(Item item)
     _isConstructible = true;
     _isBlocking = false;
 }
+
+void AVein::setPosX(float posX)
+{
+    _posX = posX;
+}
+
+void AVein::setPosY(float posY)
+{
+    _posY = posY;
+}
+
+float AVein::getPosX() const
+{
+    return _posX;
+}
+
+float AVein::getPosY() const
+{
+    return _posY;
+}
+
+bool AVein::getIsConstructible() const
+{
+    return _isConstructible;
+}
+
+bool AVein::getIsBlocking() const
+{
+    return _isBlocking;
+}

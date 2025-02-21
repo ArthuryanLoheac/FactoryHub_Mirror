@@ -11,17 +11,31 @@
 
 class ABuilds : public IBlock
 {
+
+    public:
+        bool addElement(Item item);
+        bool outElement(std::string name);
+        void setPosX(float posX) override;
+        void setPosY(float posY) override;
+        float getPosX() const override;
+        float getPosY() const override;
+        bool getIsConstructible() const override;
+        bool getIsBlocking() const override;
+        virtual void update(float deltaTime) = 0;
+
+    protected:
+        ABuilds();
+        float _posY;
+        float _posX;
+        bool _isConstructible;
+        bool _isBlocking;
+
     private:
-        std::vector<std::string> _AcceptedItems;
+        std::vector<Item> _AcceptedItems;
         bool _AllItemAccepted;
         std::vector<Item> _Ins;
         std::vector<Item> _Outs;
         size_t _MaxIn;
         size_t _MaxOut;
         bool _noMax;
-    public:
-        bool addElement(Item item);
-        bool outElement(std::string name);
-    protected:
-        ABuilds();
 };

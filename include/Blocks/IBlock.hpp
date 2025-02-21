@@ -20,9 +20,4 @@ class IBlock
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime) = 0;
-    protected:
-        float _posY;
-        float _posX;
-        bool _isConstructible;
-        bool _isBlocking;
 };
