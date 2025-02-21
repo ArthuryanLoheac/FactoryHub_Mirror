@@ -6,6 +6,8 @@
 */
 
 #pragma once
+#include <stdexcept>
+#include <vector>
 
 class IBlock
 {
@@ -17,7 +19,7 @@ class IBlock
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime) = 0;
-    private:
+    protected:
         float _posY;
         float _posX;
         bool _isConstructible;
