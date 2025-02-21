@@ -12,16 +12,16 @@
 class ABuilds : public IBlock
 {
     private:
-        std::vector<IItem> _AcceptedItems;
+        std::vector<std::string> _AcceptedItems;
         bool _AllItemAccepted;
-        std::vector<IItem> _Ins;
-        std::vector<IItem> _Outs;
+        std::vector<std::shared_ptr<IItem>> _Ins;
+        std::vector<std::shared_ptr<IItem>> _Outs;
         size_t _MaxIn;
         size_t _MaxOut;
         bool _noMax;
     public:
-        bool addElement(IItem &item);
-        bool outElement(IItem &item);
+        bool addElement(std::shared_ptr<IItem> item);
+        bool outElement(std::string name);
     protected:
         ABuilds();
 };
