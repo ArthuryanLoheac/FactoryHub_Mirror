@@ -6,9 +6,11 @@
 */
 
 #include <iostream>
+#include "MapGrid.hpp"
+#include "Blocks/Builds/ATapis.hpp"
 
 int main ( void )
 {
-    std::cout << "Hello World\n";
+    MapGrid map(10, 10);
     return 0;
 }

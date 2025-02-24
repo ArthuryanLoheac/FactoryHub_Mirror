@@ -11,28 +11,28 @@
 
 class ABuilds : public IBlock
 {
-
     public:
-        bool addElement(Item item);
-        bool outElement(std::string name);
+        virtual bool addElement(Item item);
+        virtual bool outElement(std::string name);
         void setPosX(float posX) override;
         void setPosY(float posY) override;
         float getPosX() const override;
         float getPosY() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
-        virtual void update(float deltaTime) = 0;
+        virtual void update(float deltaTime, MapGrid map) = 0;
 
     protected:
         ABuilds();
         float _posY;
         float _posX;
+
         bool _isConstructible;
         bool _isBlocking;
-
-    private:
+        
         std::vector<Item> _AcceptedItems;
         bool _AllItemAccepted;
+        
         std::vector<Item> _Ins;
         std::vector<Item> _Outs;
         size_t _MaxIn;

@@ -33,14 +33,14 @@ std::vector<std::shared_ptr<IBlock>> MapGrid::getAllBlocksAtPos(size_t X, size_t
     return _grid[X][Y];
 }
 
-void MapGrid::AddBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
+void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
 {
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
     _grid[X][Y].push_back(block);
 }
 
-void MapGrid::DeleteBlock(size_t X, size_t Y, size_t Z)
+void MapGrid::deleteBlock(size_t X, size_t Y, size_t Z)
 {
     if (X >= _sizeX || Y >= _sizeY || Z >= _grid[X][Y].size())
         throw std::out_of_range("Out of range");
