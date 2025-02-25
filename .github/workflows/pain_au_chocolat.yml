@@ -20,6 +20,8 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
+      - name: Check Git version
+        run: git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
