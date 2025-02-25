@@ -48,7 +48,7 @@ jobs:
     needs: check_coding_style
     runs-on: ubuntu-latest
     container:
-      image: jeanbizeul/fixed-epitest:latest
+      image: epitechcontent/epitest-docker:latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -66,7 +66,7 @@ jobs:
     needs: check_program_compilation
     runs-on: ubuntu-latest
     container:
-      image: jeanbizeul/fixed-epitest:latest
+      image: epitechcontent/epitest-docker:latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
