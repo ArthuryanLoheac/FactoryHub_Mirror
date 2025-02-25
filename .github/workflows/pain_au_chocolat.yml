@@ -20,6 +20,13 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
+      - name: Check if I can install packages as root
+        run: sudo apt-get update && sudo apt-get install -y git
+      - name: Run as root to install Git
+        run: |
+          sudo apt-get update || true
+          sudo apt-get install -y git || true
+          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -50,17 +57,11 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Manually Install Git (if missing)
+      - name: Run as root to install Git
         run: |
-          if ! command -v git &> /dev/null; then
-            echo "Git not found, installing manually..."
-            apt-get update || true  # Ignore failures
-            apt-get install -y wget || true  # Try to install wget
-            wget http://ftp.debian.org/debian/pool/main/g/git/git_2.39.2-1_amd64.deb
-            dpkg -i git_2.39.2-1_amd64.deb
-            rm git_2.39.2-1_amd64.deb
-          fi
-          git --version  # Verify installation
+          sudo apt-get update || true
+          sudo apt-get install -y git || true
+          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -79,17 +80,11 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Manually Install Git (if missing)
+      - name: Run as root to install Git
         run: |
-          if ! command -v git &> /dev/null; then
-            echo "Git not found, installing manually..."
-            apt-get update || true  # Ignore failures
-            apt-get install -y wget || true  # Try to install wget
-            wget http://ftp.debian.org/debian/pool/main/g/git/git_2.39.2-1_amd64.deb
-            dpkg -i git_2.39.2-1_amd64.deb
-            rm git_2.39.2-1_amd64.deb
-          fi
-          git --version  # Verify installation
+          sudo apt-get update || true
+          sudo apt-get install -y git || true
+          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
