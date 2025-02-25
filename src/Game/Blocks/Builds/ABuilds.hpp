@@ -16,6 +16,11 @@ class ABuilds : public IBlock
         virtual bool outElement(std::string name);
         void setPosX(float posX) override;
         void setPosY(float posY) override;
+        int getHp() const;
+        int getHpMax() const;
+        void setHp(int hp);
+        void takeDamage(int dmg);
+
         float getPosX() const override;
         float getPosY() const override;
         bool getIsConstructible() const override;
@@ -26,6 +31,9 @@ class ABuilds : public IBlock
         ABuilds();
         float _posY;
         float _posX;
+
+        int _hp;
+        int _hpMax;
 
         bool _isConstructible;
         bool _isBlocking;

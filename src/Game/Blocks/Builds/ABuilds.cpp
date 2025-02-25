@@ -58,6 +58,27 @@ void ABuilds::setPosY(float posY)
     _posY = posY;
 }
 
+int ABuilds::getHp() const
+{
+    return _hp;
+}
+
+int ABuilds::getHpMax() const
+{
+    return _hpMax;
+}
+
+void ABuilds::setHp(int hp)
+{
+    _hp = hp;
+    _hpMax = hp;
+}
+
+void ABuilds::takeDamage(int dmg)
+{
+    _hp -= dmg;
+}
+
 float ABuilds::getPosX() const
 {
     return _posX;
