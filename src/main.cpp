@@ -23,7 +23,6 @@ int main(void)
 
     generateAll(map);
     std::cout << map;
-    renderer.addSprite(sprite);
 
     while (!renderer.shouldClose())
     {
