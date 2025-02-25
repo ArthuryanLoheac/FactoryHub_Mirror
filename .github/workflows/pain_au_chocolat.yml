@@ -20,13 +20,10 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - name: Check Git version
-        run: git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: recursive
       - name: "Check the coding style"
         run: |
           check.sh "$(pwd)" "$(pwd)"
@@ -53,9 +50,14 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
+      - name: Install Git
+        run: sudo apt-get update && sudo apt-get install -y git
+      - name: Check Git version
+        run: git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
       - name: "Make"
         timeout-minutes: 2
@@ -70,9 +72,14 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
+      - name: Install Git
+        run: sudo apt-get update && sudo apt-get install -y git
+      - name: Check Git version
+        run: git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
       - name: "Make"
         run: ./myBuild.sh
