@@ -9,7 +9,6 @@
 #include <string>
 #include <memory>
 #include "Error.hpp"
-#include "Sprite.hpp"
 #include "Window.hpp"
 #include "Shader.hpp"
 
@@ -22,15 +21,13 @@ namespace sdf {
 
             bool shouldClose(void);
             void clear(void);
-            void draw(void);
+            void swapBuffers(void);
             void pollEvent(void);
 
-            void addSprite(sdf::Sprite &sprite);
-
             GLFWwindow *getWindow(void);
+            sdf::Shader &getShader(const std::string &key);
         private:
             std::unique_ptr<sdf::Window> _window;
-            std::vector<sdf::Sprite> _sprites;
             std::unordered_map<std::string, sdf::Shader> _shaders;
 
             void loadShaders(void);
