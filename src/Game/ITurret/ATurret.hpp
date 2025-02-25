@@ -14,7 +14,7 @@
 class ATurret : public ITurret
 {
     public:
-        void update(float deltaTime) override;
+        void update(float deltaTime, MapGrid map) override;
         void Shoot() override;
         bool IsInRange(IEntity *enenmy) override;
         bool IsInRange(IBlock *block) override;

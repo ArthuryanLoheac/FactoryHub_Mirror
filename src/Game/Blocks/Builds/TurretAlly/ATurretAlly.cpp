@@ -42,5 +42,5 @@ bool ATurretAlly::addElement(Item item)
 
 void ATurretAlly::update(float deltaTime, MapGrid map)
 {
-    _turret->update(deltaTime);
+    _turret->update(deltaTime, map);
 }

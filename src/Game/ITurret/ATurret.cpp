@@ -7,9 +7,10 @@
 #include "ATurret.hpp"
 
 
-void ATurret::update(float deltaTime)
+void ATurret::update(float deltaTime, MapGrid map)
 {
     deltaTime = deltaTime;
+    map = map;
 }
 
 void ATurret::Shoot()

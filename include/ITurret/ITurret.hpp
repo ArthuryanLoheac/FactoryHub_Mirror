@@ -14,7 +14,7 @@ class ITurret
 {
     public:
         ITurret() = default;
-        virtual void update(float deltaTime) = 0;
+        virtual void update(float deltaTime, MapGrid map) = 0;
         virtual void Shoot() = 0;
         virtual bool IsInRange(IEntity *enenmy) = 0;
         virtual bool IsInRange(IBlock *block) = 0;
