@@ -27,7 +27,6 @@ namespace sdf {
 
             void addSprite(sdf::Sprite &sprite);
 
-            unsigned int getShader(const std::string &key);
             GLFWwindow *getWindow(void);
         private:
             std::unique_ptr<sdf::Window> _window;

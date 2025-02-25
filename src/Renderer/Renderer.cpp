@@ -44,7 +44,7 @@ void sdf::Renderer::clear(void)
 
 void sdf::Renderer::draw(void)
 {
-    glUseProgram(_shaders.at("Sprite").use());
+    _shaders.at("Sprite").use();
     for (sdf::Sprite &sprite : _sprites)
         sprite.draw();
     glfwSwapBuffers(_window->get());
@@ -59,11 +59,6 @@ void sdf::Renderer::pollEvent(void)
 void sdf::Renderer::addSprite(sdf::Sprite &sprite)
 {
     _sprites.push_back(sprite);
-}
-
-unsigned int sdf::Renderer::getShader(const std::string &key)
-{
-    return _shaders.at(key).use();
 }
 
 GLFWwindow *sdf::Renderer::getWindow(void)

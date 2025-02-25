@@ -80,7 +80,7 @@ sdf::Shader::Shader(const std::string &vertexPath,
     glDeleteShader(fragmentShader);
 }
 
-unsigned int sdf::Shader::use(void)
+void sdf::Shader::use(void)
 {
-    return _shaderProgram;
+    return glUseProgram(_shaderProgram);
 }

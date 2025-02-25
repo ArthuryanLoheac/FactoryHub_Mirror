@@ -16,7 +16,7 @@ namespace sdf
             Shader(const std::string &vertexPath,
                 const std::string &fragmentPath);
 
-            unsigned int use(void);
+            void use(void);
         private:
             unsigned int _shaderProgram;
     };
