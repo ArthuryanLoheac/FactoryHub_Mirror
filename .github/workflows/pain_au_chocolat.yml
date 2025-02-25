@@ -20,8 +20,6 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - name: Mark repository as safe
-        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -53,8 +51,6 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Mark repository as safe
-        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -72,8 +68,6 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Mark repository as safe
-        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -105,8 +99,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
-      - name: Mark repository as safe
-        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
