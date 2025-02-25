@@ -27,5 +27,5 @@ class AVein : public IBlock
         float getPosY() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
-        virtual void update(float deltaTime, MapGrid map) = 0;
+        virtual void update(float deltaTime, MapGrid map) override;
 };

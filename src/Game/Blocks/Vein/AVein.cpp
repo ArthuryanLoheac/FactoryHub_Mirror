@@ -48,3 +48,9 @@ bool AVein::getIsBlocking() const
 {
     return _isBlocking;
 }
+
+void AVein::update(float deltaTime, MapGrid map)
+{
+    (void)deltaTime;
+    (void)map;
+}
