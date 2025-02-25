@@ -16,7 +16,7 @@
 #include "Eau.hpp"
 
 template <class T>
-void generateZinc(MapGrid &map)
+void generate(MapGrid &map)
 {
     initBruit2D(map.getSizeX(), map.getSizeY(), 8, 6);
 
@@ -32,11 +32,11 @@ void generateZinc(MapGrid &map)
 
 void generateAll(MapGrid &map)
 {
-    generateZinc<Zinc>(map);
-    generateZinc<Cuivre>(map);
-    generateZinc<Eau>(map);
-    generateZinc<Acier>(map);
-    generateZinc<Charbon>(map);
-    generateZinc<Salpetre>(map);
-    generateZinc<Uranium>(map);
+    generate<Zinc>(map);
+    generate<Cuivre>(map);
+    generate<Eau>(map);
+    generate<Acier>(map);
+    generate<Charbon>(map);
+    generate<Salpetre>(map);
+    generate<Uranium>(map);
 }
