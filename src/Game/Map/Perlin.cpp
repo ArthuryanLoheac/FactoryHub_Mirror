@@ -74,6 +74,8 @@ double bruit_coherent1D(double x, double persistance) {
 }
 
 void initBruit2D(int l, int h, int p, int n) {
+    static int called = 0;
+    called++;
     nombre_octaves2D = n;
     if(taille != 0)
         free(valeurs2D);
@@ -85,10 +87,10 @@ void initBruit2D(int l, int h, int p, int n) {
 
     valeurs2D = (double*) malloc(sizeof(double) * longueur_max * hauteur_max);
 
-    srand(time(NULL));
-    int i;
-    for(i = 0; i < longueur_max * hauteur_max; i++)
-        valeurs2D[i] = ((double) rand()) / RAND_MAX;
+    srand(time(NULL) + called);
+    int j;
+    for(j = 0; j < longueur_max * hauteur_max; j++)
+        valeurs2D[j] = ((double) rand()) / RAND_MAX;
 }
 
 void destroyBruit2D() {
