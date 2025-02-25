@@ -10,15 +10,20 @@
 #include "Sdf.hpp"
 #include "Texture.hpp"
 #include "Sprite.hpp"
+#include "Generation.hpp"
 
 void processInputs(GLFWwindow *window);
 
 int main(void)
 {
     sdf::Renderer renderer;
-    MapGrid map(10, 10);
     sdf::Texture texture("Assets/Base.png");
     sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1), texture);
+    MapGrid map(200, 200);
+
+    generateAll(map);
+    std::cout << map;
+    renderer.addSprite(sprite);
 
     while (!renderer.shouldClose())
     {
