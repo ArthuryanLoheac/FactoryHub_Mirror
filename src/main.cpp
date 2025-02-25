@@ -15,7 +15,7 @@ void processInputs(GLFWwindow *window);
 int main(void)
 {
     sdf::Renderer renderer;
-    MapGrid map(80, 80);
+    MapGrid map(200, 200);
     sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1));
 
     generateAll(map);

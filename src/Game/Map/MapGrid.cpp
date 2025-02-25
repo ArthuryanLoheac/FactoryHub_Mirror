@@ -58,9 +58,12 @@ std::ostream &operator<<(std::ostream &os, MapGrid &mapGrid)
 {
     for (size_t x = 0; x < mapGrid.getSizeX(); x++) {
         for (size_t y = 0; y < mapGrid.getSizeY(); y++) {
-            os << mapGrid.getAllBlocksAtPos(x, y).size() << " ";
+            if (mapGrid.getAllBlocksAtPos(x, y).size() == 0)
+                os << " ";
+            else
+                os << "X";
         }
-        os << std::endl;
+        os << "|" << std::endl;
     }
     return os;
 }
