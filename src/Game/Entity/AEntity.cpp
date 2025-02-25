@@ -5,16 +5,17 @@
 ** AEntity
 */
 
-#include "Entity/AEntity.hpp"
+#include "AEntity.hpp"
 
 
 
 AEntity::~AEntity()
 {}
 
-void AEntity::update(float deltaTime)
+void AEntity::update(float deltaTime, MapGrid map)
 {
     deltaTime = deltaTime;
+    map = map;
 }
 
 std::pair<float, float> AEntity::getPositionPixel()
