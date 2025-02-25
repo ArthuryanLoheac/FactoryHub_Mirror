@@ -20,10 +20,13 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: recursive
       - name: "Check the coding style"
         run: |
           check.sh "$(pwd)" "$(pwd)"
@@ -50,8 +53,12 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: "Make"
         timeout-minutes: 2
         run: ./myBuild.sh
@@ -65,8 +72,12 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
+          with:
+            submodules: recursive
       - name: "Make"
         run: ./myBuild.sh
       - name: "Check banned functions"
@@ -94,10 +105,13 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: recursive
       - name: "Mirroring"
         uses: pixta-dev/repository-mirroring-action@v1
         with:
