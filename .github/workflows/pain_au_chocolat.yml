@@ -76,8 +76,8 @@ jobs:
         run: git config --global --add safe.directory /__w/FactoryHub_Mirror/FactoryHub_Mirror
       - name: "Checkout"
         uses: actions/checkout@v4
-          with:
-            submodules: recursive
+        with:
+          submodules: recursive
       - name: "Make"
         run: ./myBuild.sh
       - name: "Check banned functions"
