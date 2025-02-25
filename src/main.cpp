@@ -8,15 +8,18 @@
 #include <iostream>
 #include "MapGrid.hpp"
 #include "Sdf.hpp"
+#include "Generation.hpp"
 
 void processInputs(GLFWwindow *window);
 
 int main(void)
 {
     sdf::Renderer renderer;
-    MapGrid map(10, 10);
+    MapGrid map(200, 200);
     sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1));
 
+    generateAll(map);
+    std::cout << map;
     renderer.addSprite(sprite);
     while (!renderer.shouldClose())
     {
