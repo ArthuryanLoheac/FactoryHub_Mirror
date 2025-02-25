@@ -20,17 +20,6 @@ jobs:
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
-      - name: Check Network Access
-        run: curl -v http://archive.ubuntu.com/ubuntu
-      - name: Check if sudo is available
-        run: which sudo || echo "sudo not available"
-      - name: Check if I can install packages as root
-        run: sudo apt-get update && sudo apt-get install -y git
-      - name: Run as root to install Git
-        run: |
-          sudo apt-get update || true
-          sudo apt-get install -y git || true
-          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -61,11 +50,6 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Run as root to install Git
-        run: |
-          sudo apt-get update || true
-          sudo apt-get install -y git || true
-          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
@@ -84,11 +68,6 @@ jobs:
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
-      - name: Run as root to install Git
-        run: |
-          sudo apt-get update || true
-          sudo apt-get install -y git || true
-          git --version
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
