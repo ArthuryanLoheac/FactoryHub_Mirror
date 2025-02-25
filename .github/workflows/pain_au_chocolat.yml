@@ -16,7 +16,7 @@ env:
 jobs:
   check_coding_style:
     if: github.repository != 'ArthuryanLoheac/FactoryHub'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: ghcr.io/epitech/coding-style-checker:latest
     steps:
@@ -46,7 +46,7 @@ jobs:
           rm "$tmpfile"
   check_program_compilation:
     needs: check_coding_style
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
@@ -68,7 +68,7 @@ jobs:
           find $LIST
   check_banned_function:
     needs: check_program_compilation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
@@ -105,7 +105,7 @@ jobs:
         shell: bash
   push_to_mirror: 
     needs: check_banned_function
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: ${{ github.event_name == 'push' }}
     steps:
       - name: "Checkout"
