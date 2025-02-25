@@ -29,6 +29,10 @@ static std::string getShaderCode(const std::string &path)
     return content;
 }
 
+/**
+ * We have to compile all of the 'subShaders' before compiling our main shaderProgram
+ * This functions reads the content of a file and then compiles the associated shader.
+ */
 static unsigned int compileShader(const std::string &path, unsigned int shaderType)
 {
     unsigned int shader = glCreateShader(shaderType);
@@ -39,6 +43,7 @@ static unsigned int compileShader(const std::string &path, unsigned int shaderTy
 
     glShaderSource(shader, 1, &codeSource, NULL);
     glCompileShader(shader);
+
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
@@ -55,11 +60,12 @@ sdf::Shader::Shader(const std::string &vertexPath,
     unsigned int fragmentShader = compileShader(fragmentPath, GL_FRAGMENT_SHADER);
     int success;
 
+    // This command are the same as Linking .o files between them.
     _shaderProgram = glCreateProgram();
     glAttachShader(_shaderProgram, vertexShader);
-    GLenum error = glGetError();
     glAttachShader(_shaderProgram, fragmentShader);
     glLinkProgram(_shaderProgram);
+
     glGetProgramiv(_shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         int logLenght;
@@ -69,10 +75,9 @@ sdf::Shader::Shader(const std::string &vertexPath,
         throw sdf::Error("sdf::Shader::Shader: Unable to compile the shaderProgram: "
          + std::string(infoLog));
     }
+    // We don't need the compiled shaders anymore (they takes space in memory)
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-    if (error != GL_NO_ERROR)
-        std::cerr << "ShaderError: " << error << std::endl;
 }
 
 unsigned int sdf::Shader::use(void)
