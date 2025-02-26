@@ -17,6 +17,16 @@
 #include "Stone.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
+    : textureBg("Assets/BG.png"),
+      textureZinc("Assets/Zinc.png"),
+      textureCuivre("Assets/Cuivre.png"),
+      textureCharbon("Assets/Charbon.png"),
+      textureAcier("Assets/Acier.png"),
+      textureSalpetre("Assets/Salpetre.png"),
+      textureUranium("Assets/Uranium.png"),
+      textureEau("Assets/Eau.png"),
+      textureStone("Assets/Stone.png")
+    
 {
     initEmptyMap(X, Y);
     _sizeX = X;

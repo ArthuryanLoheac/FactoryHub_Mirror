@@ -11,12 +11,23 @@
 #include <memory>
 #include <random>
 #include "IBlock.hpp"
+#include "Texture.hpp"
 
 class IBlock;
 
 class MapGrid
 {
     public:
+        sdf::Texture textureBg;
+        sdf::Texture textureZinc;
+        sdf::Texture textureCuivre;
+        sdf::Texture textureCharbon;
+        sdf::Texture textureAcier;
+        sdf::Texture textureSalpetre;
+        sdf::Texture textureUranium;
+        sdf::Texture textureEau;
+        sdf::Texture textureStone;
+
         MapGrid(size_t X, size_t Y);
         std::shared_ptr<IBlock> GetIBlockAtPos(size_t X, size_t Y, size_t Z);
         std::vector<std::shared_ptr<IBlock>> getAllBlocksAtPos(size_t X, size_t Y);
