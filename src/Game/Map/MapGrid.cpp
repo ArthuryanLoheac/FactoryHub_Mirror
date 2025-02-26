@@ -14,6 +14,7 @@
 #include "Salpetre.hpp"
 #include "Uranium.hpp"
 #include "Eau.hpp"
+#include "Stone.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
@@ -41,6 +42,21 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
     _grid[X][Y].push_back(block);
+}
+
+void MapGrid::addBorder(void)
+{
+    for (size_t i = 0; i < this->getSizeX(); i++) {
+        for (size_t j = 0; j < this->getSizeY(); j++) {
+            if (i == 0 || i == this->getSizeX() - 1 ||
+                j == 0 || j == this->getSizeY() - 1)
+                this->addBlock(std::make_shared<Stone>(Stone()), i, j);
+            if (i == 1 || i == this->getSizeX() - 2 ||
+                j == 1 || j == this->getSizeY() - 2)
+                if (((rand() % 3) + 1) == 3)
+                    this->addBlock(std::make_shared<Stone>(Stone()), i, j);
+        }
+    }
 }
 
 void MapGrid::deleteBlock(size_t X, size_t Y, size_t Z)
@@ -76,6 +92,7 @@ std::ostream &operator<<(std::ostream &os, MapGrid &mapGrid)
                 else if (dynamic_cast<Salpetre *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "S";
                 else if (dynamic_cast<Uranium *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "U";
                 else if (dynamic_cast<Eau *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "E";
+                else if (dynamic_cast<Stone *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "R";
                 else os << "X";
             }
         }
