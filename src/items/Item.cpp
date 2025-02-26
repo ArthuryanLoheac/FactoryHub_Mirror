@@ -37,6 +37,13 @@ Item::Item(std::string name)
     _tier = -1;
 }
 
+Item::Item()
+{
+    _type = OTHER;
+    _name = "";
+    _tier = -1;
+}
+
 #pragma endregion Constructors
 
 #pragma region Getters
