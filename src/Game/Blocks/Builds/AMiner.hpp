@@ -12,7 +12,7 @@
 class AMiner : public ABuilds
 {
     public:
-        void update(float deltaTime) override;
+        void update(float deltaTime, MapGrid map) override;
         void setMiningItem(Item new_item);
 
     protected:

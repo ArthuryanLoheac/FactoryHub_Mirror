@@ -13,10 +13,10 @@ AMiner::AMiner() : ABuilds()
     _MaxOut = 100;
 }
 
-void AMiner::update(float deltaTime)
+void AMiner::update(float deltaTime, MapGrid map)
 {
+    (void)map;
     _clockMining += deltaTime;
-
     if (_clockMining >= _speedMining) {
         _Outs.push_back(_MiningItem);
         _clockMining -= -_speedMining;
