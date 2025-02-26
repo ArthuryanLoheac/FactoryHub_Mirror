@@ -21,6 +21,7 @@ class Item
         Item(typeItem type, std::string name);
         Item(std::string name, int tier);
         Item(std::string name);
+        Item();
         std::string getName() const;
         typeItem getType() const;
         int getTier() const;
