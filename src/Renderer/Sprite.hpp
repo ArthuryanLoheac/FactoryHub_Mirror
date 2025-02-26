@@ -11,24 +11,29 @@
 #include "Texture.hpp"
 #include "Sdf.hpp"
 
+#define SDF_UP 0
+#define SDF_RIGHT 90
+#define SDF_DOWN 180
+#define SDF_LEFT 270
+
 namespace sdf
 {
     class Sprite
     {
         public:
-            Sprite(const glm::vec2 &position, const glm::vec2 &size,
-                sdf::Texture &texture);
+            Sprite(const glm::vec3 &position,
+                sdf::Texture &texture,
+                float rotation = SDF_UP);
 
             void draw(sdf::Renderer &renderer);
 
-            void setPosition(const glm::vec2 &position);
-            void setSize(const glm::vec2 &size);
+            void setPosition(const glm::vec3 &position);
 
             unsigned int getTexture(void);
         private:
             sdf::Texture _texture;
-            glm::vec2 _position;
-            glm::vec2 _size;
+            glm::vec3 _position;
+            float _direction;
 
             unsigned int _VAO;
             unsigned int _VBO;

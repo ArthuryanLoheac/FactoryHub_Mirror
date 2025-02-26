@@ -11,6 +11,7 @@
 #include "Error.hpp"
 #include "Window.hpp"
 #include "Shader.hpp"
+#include "Camera.hpp"
 
 namespace sdf {
     class Renderer
@@ -20,15 +21,27 @@ namespace sdf {
             ~Renderer(void);
 
             bool shouldClose(void);
-            void clear(void);
+            void clear(glm::vec4 color
+                = glm::vec4(0.2f, 0.4f, 0.6f, 1.0f));
             void swapBuffers(void);
             void pollEvent(void);
 
             GLFWwindow *getWindow(void);
             sdf::Shader &getShader(const std::string &key);
+            sdf::Camera &getCamera(void);
+            double getDeltaTime(void);
+
+            static void scroll_callback(GLFWwindow* window,
+                double xoffset, double yoffset);
         private:
             std::unique_ptr<sdf::Window> _window;
             std::unordered_map<std::string, sdf::Shader> _shaders;
+            sdf::Camera _camera;
+
+            static Renderer *_instance;
+
+            double _lastFrame;
+            double _deltaTime;
 
             void loadShaders(void);
     };

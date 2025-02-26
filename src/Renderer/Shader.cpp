@@ -8,10 +8,9 @@
 #include <fstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "Error.hpp"
 #include "Shader.hpp"
-
-#include <iostream>
 
 static std::string getShaderCode(const std::string &path)
 {
@@ -118,6 +117,24 @@ void sdf::Shader::set(const std::string &name, glm::vec4 value) const
 {
     glUniform4f(glGetUniformLocation(_shaderProgram, name.c_str()),
         value.x, value.y, value.z, value.w);
+}
+
+void sdf::Shader::set(const std::string &name, glm::mat2 value) const
+{
+    glUniformMatrix2fv(glGetUniformLocation(_shaderProgram, name.c_str()),
+        1, GL_FALSE, glm::value_ptr(value));
+}
+
+void sdf::Shader::set(const std::string &name, glm::mat3 value) const
+{
+    glUniformMatrix3fv(glGetUniformLocation(_shaderProgram, name.c_str()),
+        1, GL_FALSE, glm::value_ptr(value));
+}
+
+void sdf::Shader::set(const std::string &name, glm::mat4 value) const
+{
+    glUniformMatrix4fv(glGetUniformLocation(_shaderProgram, name.c_str()),
+        1, GL_FALSE, glm::value_ptr(value));
 }
 
 #pragma endregion Uniform setters
