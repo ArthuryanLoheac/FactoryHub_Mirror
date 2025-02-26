@@ -92,3 +92,8 @@ sdf::Camera &sdf::Renderer::getCamera(void)
 {
     return _camera;
 }
+
+double sdf::Renderer::getDeltaTime(void)
+{
+    return _deltaTime;
+}

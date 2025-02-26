@@ -29,6 +29,7 @@ namespace sdf {
             GLFWwindow *getWindow(void);
             sdf::Shader &getShader(const std::string &key);
             sdf::Camera &getCamera(void);
+            double getDeltaTime(void);
 
             static void scroll_callback(GLFWwindow* window,
                 double xoffset, double yoffset);
