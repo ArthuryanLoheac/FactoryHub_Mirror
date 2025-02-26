@@ -20,7 +20,8 @@ namespace sdf {
             ~Renderer(void);
 
             bool shouldClose(void);
-            void clear(void);
+            void clear(glm::vec4 color
+                = glm::vec4(0.2f, 0.4f, 0.6f, 1.0f));
             void swapBuffers(void);
             void pollEvent(void);
 
