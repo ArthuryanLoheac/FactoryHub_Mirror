@@ -2,7 +2,20 @@ cmake_minimum_required(VERSION 3.17.0)
 
 project(factoryHub)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(
+    PUBLIC include/
+    PUBLIC submodules/glfw/include/
+    PUBLIC submodules/glm/
+)
+
+link_directories(
+    ${CMAKE_BINARY_DIR}/submodules/glfw/src/
+    ${CMAKE_BINARY_DIR}/submodules/glm/
+)
+
+link_libraries(glfw3)
+
+add_subdirectory(submodules/)
 
 add_subdirectory(src/)
 

@@ -52,6 +52,9 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
       - name: "Make"
         timeout-minutes: 2
         run: ./myBuild.sh
@@ -67,6 +70,9 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
       - name: "Make"
         run: ./myBuild.sh
       - name: "Check banned functions"
@@ -98,6 +104,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: recursive
       - name: "Mirroring"
         uses: pixta-dev/repository-mirroring-action@v1
         with:
