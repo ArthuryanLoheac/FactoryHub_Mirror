@@ -29,8 +29,6 @@ class ABuilds : public IBlock
         float _posX;
         bool _isConstructible;
         bool _isBlocking;
-
-    private:
         std::vector<Item> _AcceptedItems;
         bool _AllItemAccepted;
         std::vector<Item> _Ins;
