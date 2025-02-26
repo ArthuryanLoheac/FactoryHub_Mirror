@@ -12,7 +12,7 @@
 #include "Sprite.hpp"
 #include "Generation.hpp"
 
-void processInputs(GLFWwindow *window);
+void processInputs(GLFWwindow *window, sdf::Renderer &renderer);
 
 int main(void)
 {
@@ -31,7 +31,7 @@ int main(void)
 
     while (!renderer.shouldClose())
     {
-        processInputs(renderer.getWindow());
+        processInputs(renderer.getWindow(), renderer);
 
         renderer.clear();
 
@@ -47,7 +47,7 @@ int main(void)
     return 0;
 }
 
-void processInputs(GLFWwindow *window)
+void processInputs(GLFWwindow *window, sdf::Renderer &renderer)
 {
     static unsigned int triangleDisplayFlavor = GL_FILL;
     static bool isPressed = false;

@@ -70,7 +70,7 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, _position);
     model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
-    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 view = renderer.getCamera().getTransformationMatrix();
     glm::mat4 projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, 0.0f, 10.0f);
     // Send them to the shader
     renderer.getShader("Sprite").set("model", model);

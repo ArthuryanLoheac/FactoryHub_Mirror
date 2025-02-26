@@ -11,6 +11,7 @@
 #include "Error.hpp"
 #include "Window.hpp"
 #include "Shader.hpp"
+#include "Camera.hpp"
 
 namespace sdf {
     class Renderer
@@ -27,9 +28,19 @@ namespace sdf {
 
             GLFWwindow *getWindow(void);
             sdf::Shader &getShader(const std::string &key);
+            sdf::Camera &getCamera(void);
+
+            static void scroll_callback(GLFWwindow* window,
+                double xoffset, double yoffset);
         private:
             std::unique_ptr<sdf::Window> _window;
             std::unordered_map<std::string, sdf::Shader> _shaders;
+            sdf::Camera _camera;
+
+            static Renderer *_instance;
+
+            double _lastFrame;
+            double _deltaTime;
 
             void loadShaders(void);
     };
