@@ -10,6 +10,6 @@
 
 class Stone : public ATerrain
 {
-    protected:
+    public:
         Stone();
 };

@@ -14,6 +14,7 @@
 #include "Salpetre.hpp"
 #include "Uranium.hpp"
 #include "Eau.hpp"
+#include "Stone.hpp"
 
 template <class T>
 void generate(MapGrid &map)
@@ -32,6 +33,8 @@ void generate(MapGrid &map)
 
 void generateAll(MapGrid &map)
 {
+    map.addBorder();
+    generate<Stone>(map);
     generate<Zinc>(map);
     generate<Cuivre>(map);
     generate<Eau>(map);
