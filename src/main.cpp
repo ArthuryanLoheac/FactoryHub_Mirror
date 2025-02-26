@@ -17,8 +17,13 @@ void processInputs(GLFWwindow *window);
 int main(void)
 {
     sdf::Renderer renderer;
-    sdf::Texture texture("Assets/Base.png");
-    sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1), texture);
+    sdf::Texture textureBase("Assets/Base.png");
+    sdf::Texture textureBelt("Assets/tapis.png");
+    sdf::Texture textureMine("Assets/Miner.png");
+    sdf::Sprite sprite1(glm::vec3(0.0f, 0.0f, 0.0f), textureBase);
+    sdf::Sprite sprite2(glm::vec3(1.0f, 0.0f, 0.0f), textureBelt, SDF_RIGHT);
+    sdf::Sprite sprite3(glm::vec3(2.0f, 0.0f, 0.0f), textureBelt, SDF_DOWN);
+    sdf::Sprite sprite4(glm::vec3(2.0f, -1.0f, 0.0f), textureMine);
     MapGrid map(200, 200);
 
     generateAll(map);
@@ -30,7 +35,10 @@ int main(void)
 
         renderer.clear();
 
-        sprite.draw(renderer);
+        sprite1.draw(renderer);
+        sprite2.draw(renderer);
+        sprite3.draw(renderer);
+        sprite4.draw(renderer);
 
         renderer.swapBuffers();
 

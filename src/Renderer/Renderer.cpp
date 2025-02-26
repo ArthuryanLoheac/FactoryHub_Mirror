@@ -26,6 +26,7 @@ sdf::Renderer::Renderer(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     _window.reset(new Window);
     loadShaders();
+    glEnable(GL_DEPTH_TEST);
 }
 
 sdf::Renderer::~Renderer(void)
@@ -38,10 +39,10 @@ bool sdf::Renderer::shouldClose(void)
     return glfwWindowShouldClose(_window->get());
 }
 
-void sdf::Renderer::clear(void)
+void sdf::Renderer::clear(glm::vec4 color)
 {
-    glClearColor(0.2f, 0.8f, 0.7f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(color.r, color.g, color.b, color.a);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void sdf::Renderer::swapBuffers(void)

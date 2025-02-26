@@ -9,11 +9,12 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/gtc/matrix_transform.hpp>
 #include "Sprite.hpp"
 
-sdf::Sprite::Sprite(const glm::vec2 &position, const glm::vec2 &size,
-    sdf::Texture &texture)
-    : _position(position), _size(size), _texture(texture)
+sdf::Sprite::Sprite(const glm::vec3 &position, sdf::Texture &texture,
+    float direction)
+    : _position(position), _texture(texture), _direction(direction)
 {
     // Starting vertices for a `square` sprite
     // A vertice is a point in space, here, I ignore the third dimension
@@ -57,23 +58,36 @@ sdf::Sprite::Sprite(const glm::vec2 &position, const glm::vec2 &size,
 
 void sdf::Sprite::draw(sdf::Renderer &renderer)
 {
+    // Bind shader
     renderer.getShader("Sprite").use();
+
+    // Send the texture to the shader
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _texture.get());
     renderer.getShader("Sprite").set("ourTexture", 0);
-    glBindVertexArray(_VAO); // We bind the VAO to restore all of the configuration done during the creation of the sprite
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // We draw 6 vertices as triangles
+
+    // Define matrices used to correctly position the sprites
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, _position);
+    model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, 0.0f, 10.0f);
+    // Send them to the shader
+    renderer.getShader("Sprite").set("model", model);
+    renderer.getShader("Sprite").set("view", view);
+    renderer.getShader("Sprite").set("projection", projection);
+
+    // Bind the VAO to restore all of the configuration done during the creation of the sprite
+    glBindVertexArray(_VAO);
+    // We draw 6 vertices as triangles
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    // Unbind VAO to avoid annoying errors
     glBindVertexArray(0);
 }
 
-void sdf::Sprite::setPosition(const glm::vec2 &position)
+void sdf::Sprite::setPosition(const glm::vec3 &position)
 {
     _position = position;
-}
-
-void sdf::Sprite::setSize(const glm::vec2 &size)
-{
-    _size = size;
 }
 
 unsigned int sdf::Sprite::getTexture(void)
