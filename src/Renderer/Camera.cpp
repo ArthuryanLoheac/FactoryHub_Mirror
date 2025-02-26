@@ -8,6 +8,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Camera.hpp"
 
+#include <iostream>
+
 sdf::Camera::Camera(glm::vec2 position, float zoom, float velocity)
     : _position(position), _zoom(zoom), _velocity(velocity)
 {
@@ -17,14 +19,14 @@ glm::mat4 sdf::Camera::getTransformationMatrix(void)
 {
     glm::mat4 transform = glm::mat4(1.0f);
 
-    transform = glm::translate(transform, glm::vec3(_position, 0.0f));
     transform = glm::scale(transform, glm::vec3(_zoom, _zoom, 1.0f));
+    transform = glm::translate(transform, glm::vec3(_position, 0.0f));
     return transform;
 }
 
 void sdf::Camera::move(sdf::Camera::Direction direction, double deltaTime)
 {
-    float distance = _velocity * deltaTime;
+    float distance = (_velocity * deltaTime) * (1 / _zoom);
 
     switch (direction) {
         case sdf::Camera::Direction::UP:
@@ -65,7 +67,7 @@ void sdf::Camera::setPosition(glm::vec2 position)
 
 void sdf::Camera::setZoom(float zoom)
 {
-    if (zoom >= 0.01f && zoom <= 10.0f)
+    if (zoom >= 0.01f && zoom <= 2.0f)
         _zoom = zoom;
 }
 
