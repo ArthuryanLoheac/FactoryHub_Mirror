@@ -49,18 +49,6 @@ int main(void)
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer)
 {
-    static unsigned int triangleDisplayFlavor = GL_FILL;
-    static bool isPressed = false;
-
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS && !isPressed) {
-        isPressed = true;
-        if (triangleDisplayFlavor == GL_FILL)
-            triangleDisplayFlavor = GL_LINE;
-        else
-            triangleDisplayFlavor = GL_FILL;
-        glPolygonMode(GL_FRONT_AND_BACK, triangleDisplayFlavor);
-    } else if (glfwGetKey(window, GLFW_KEY_L) == GLFW_RELEASE)
-        isPressed = false;
 }
