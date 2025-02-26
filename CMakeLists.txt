@@ -5,12 +5,12 @@ project(factoryHub)
 include_directories(
     PUBLIC include/
     PUBLIC submodules/glfw/include/
-    PUBLIC submodules/glm/glm/
+    PUBLIC submodules/glm/
 )
 
 link_directories(
     ${CMAKE_BINARY_DIR}/submodules/glfw/src/
-    ${CMAKE_BINARY_DIR}/submodules/glm/glm/
+    ${CMAKE_BINARY_DIR}/submodules/glm/
 )
 
 link_libraries(glfw3)

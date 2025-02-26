@@ -8,6 +8,8 @@
 #include <iostream>
 #include "MapGrid.hpp"
 #include "Sdf.hpp"
+#include "Texture.hpp"
+#include "Sprite.hpp"
 #include "Generation.hpp"
 
 void processInputs(GLFWwindow *window);
@@ -15,17 +17,23 @@ void processInputs(GLFWwindow *window);
 int main(void)
 {
     sdf::Renderer renderer;
+    sdf::Texture texture("Assets/Base.png");
+    sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1), texture);
     MapGrid map(200, 200);
-    sdf::Sprite sprite(glm::vec2(0, 0), glm::vec2(1, 1));
 
     generateAll(map);
     std::cout << map;
-    renderer.addSprite(sprite);
+
     while (!renderer.shouldClose())
     {
         processInputs(renderer.getWindow());
+
         renderer.clear();
-        renderer.draw();
+
+        sprite.draw(renderer);
+
+        renderer.swapBuffers();
+
         renderer.pollEvent();
     }
     return 0;

@@ -80,7 +80,44 @@ sdf::Shader::Shader(const std::string &vertexPath,
     glDeleteShader(fragmentShader);
 }
 
-unsigned int sdf::Shader::use(void)
+void sdf::Shader::use(void)
 {
-    return _shaderProgram;
+    return glUseProgram(_shaderProgram);
 }
+
+#pragma region Uniform setters
+
+void sdf::Shader::set(const std::string &name, bool value) const
+{
+    glUniform1i(glGetUniformLocation(_shaderProgram, name.c_str()), (int)value);
+}
+
+void sdf::Shader::set(const std::string &name, int value) const
+{
+    glUniform1i(glGetUniformLocation(_shaderProgram, name.c_str()), value);
+}
+
+void sdf::Shader::set(const std::string &name, float value) const
+{
+    glUniform1f(glGetUniformLocation(_shaderProgram, name.c_str()), value);
+}
+
+void sdf::Shader::set(const std::string &name, glm::vec2 value) const
+{
+    glUniform2f(glGetUniformLocation(_shaderProgram, name.c_str()),
+        value.x, value.y);
+}
+
+void sdf::Shader::set(const std::string &name, glm::vec3 value) const
+{
+    glUniform3f(glGetUniformLocation(_shaderProgram, name.c_str()),
+        value.x, value.y, value.z);
+}
+
+void sdf::Shader::set(const std::string &name, glm::vec4 value) const
+{
+    glUniform4f(glGetUniformLocation(_shaderProgram, name.c_str()),
+        value.x, value.y, value.z, value.w);
+}
+
+#pragma endregion Uniform setters

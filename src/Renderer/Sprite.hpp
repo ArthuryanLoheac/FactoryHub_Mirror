@@ -6,21 +6,27 @@
 */
 
 #pragma once
-#include <glm.hpp>
+#include <glm/glm.hpp>
 #include "Shader.hpp"
+#include "Texture.hpp"
+#include "Sdf.hpp"
 
 namespace sdf
 {
     class Sprite
     {
         public:
-            Sprite(const glm::vec2 &position, const glm::vec2 &size);
+            Sprite(const glm::vec2 &position, const glm::vec2 &size,
+                sdf::Texture &texture);
 
-            void draw(void);
+            void draw(sdf::Renderer &renderer);
 
             void setPosition(const glm::vec2 &position);
             void setSize(const glm::vec2 &size);
+
+            unsigned int getTexture(void);
         private:
+            sdf::Texture _texture;
             glm::vec2 _position;
             glm::vec2 _size;
 

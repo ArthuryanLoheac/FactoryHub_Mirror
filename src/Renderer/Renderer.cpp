@@ -6,8 +6,10 @@
 */
 
 #include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include "Sdf.hpp"
 
 void sdf::Renderer::loadShaders(void)
@@ -42,11 +44,8 @@ void sdf::Renderer::clear(void)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void sdf::Renderer::draw(void)
+void sdf::Renderer::swapBuffers(void)
 {
-    glUseProgram(_shaders.at("Sprite").use());
-    for (sdf::Sprite &sprite : _sprites)
-        sprite.draw();
     glfwSwapBuffers(_window->get());
 }
 
@@ -55,18 +54,12 @@ void sdf::Renderer::pollEvent(void)
     glfwPollEvents();
 }
 
-
-void sdf::Renderer::addSprite(sdf::Sprite &sprite)
-{
-    _sprites.push_back(sprite);
-}
-
-unsigned int sdf::Renderer::getShader(const std::string &key)
-{
-    return _shaders.at(key).use();
-}
-
 GLFWwindow *sdf::Renderer::getWindow(void)
 {
     return _window->get();
+}
+
+sdf::Shader &sdf::Renderer::getShader(const std::string &key)
+{
+    return _shaders.at(key);
 }
