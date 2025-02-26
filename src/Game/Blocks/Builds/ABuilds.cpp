@@ -44,6 +44,8 @@ ABuilds::ABuilds()
     _noMax = false;
     _isConstructible = false;
     _isBlocking = true;
+    sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
 }
 
 #pragma region GettersSetters
@@ -51,11 +53,13 @@ ABuilds::ABuilds()
 void ABuilds::setPosX(float posX)
 {
     _posX = posX;
+    _sprite->setPosition(glm::vec3(_posX, _posY, 0.0f));
 }
 
 void ABuilds::setPosY(float posY)
 {
     _posY = posY;
+    _sprite->setPosition(glm::vec3(_posX, _posY, 0.0f));
 }
 
 int ABuilds::getHp() const
@@ -97,6 +101,11 @@ bool ABuilds::getIsConstructible() const
 bool ABuilds::getIsBlocking() const
 {
     return _isBlocking;
+}
+
+void ABuilds::draw(sdf::Renderer &renderer)
+{
+    _sprite->draw(renderer);
 }
 
 #pragma endregion GettersSetters

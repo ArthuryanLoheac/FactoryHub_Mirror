@@ -8,6 +8,7 @@
 #pragma once
 #include "IBlock.hpp"
 #include "Item.hpp"
+#include "Sprite.hpp"
 
 class AVein : public IBlock
 {
@@ -19,6 +20,7 @@ class AVein : public IBlock
     
         Item _ressource;
         AVein(Item item);
+        sdf::Sprite *_sprite;
     public:
         Item getRessource() const;
         void setPosX(float posX) override;
@@ -28,4 +30,5 @@ class AVein : public IBlock
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) override;
+        void draw(sdf::Renderer &renderer) override;
 };

@@ -17,16 +17,6 @@
 #include "Stone.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
-    : textureBg("Assets/BG.png"),
-      textureZinc("Assets/Zinc.png"),
-      textureCuivre("Assets/Cuivre.png"),
-      textureCharbon("Assets/Charbon.png"),
-      textureAcier("Assets/Acier.png"),
-      textureSalpetre("Assets/Salpetre.png"),
-      textureUranium("Assets/Uranium.png"),
-      textureEau("Assets/Eau.png"),
-      textureStone("Assets/Stone.png")
-    
 {
     initEmptyMap(X, Y);
     _sizeX = X;
@@ -51,6 +41,8 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
 {
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
+    block.get()->setPosX(X);
+    block.get()->setPosY(Y);
     _grid[X][Y].push_back(block);
 }
 
@@ -76,6 +68,17 @@ void MapGrid::deleteBlock(size_t X, size_t Y, size_t Z)
     _grid[X][Y].erase(_grid[X][Y].begin() + Z);
 }
 
+void MapGrid::draw(sdf::Renderer &renderer)
+{
+    for (size_t i = 0; i < _sizeX; i++) {
+        for (size_t j = 0; j < _sizeY; j++) {
+            for (size_t k = 0; k < _grid[i][j].size(); k++) {
+                _grid[i][j][k]->draw(renderer);
+            }
+        }
+    }
+}
+
 void MapGrid::initEmptyMap(size_t X, size_t Y)
 {
     for (size_t i = 0; i < X; i++) {
@@ -86,27 +89,4 @@ void MapGrid::initEmptyMap(size_t X, size_t Y)
         }
         _grid.push_back(tmp);
     }
-}
-
-std::ostream &operator<<(std::ostream &os, MapGrid &mapGrid)
-{
-    for (size_t x = 0; x < mapGrid.getSizeX(); x++) {
-        for (size_t y = 0; y < mapGrid.getSizeY(); y++) {
-            if (mapGrid.getAllBlocksAtPos(x, y).size() == 0)
-                os << " ";
-            else {
-                if (dynamic_cast<Zinc *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "Z";
-                else if (dynamic_cast<Cuivre *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "C";
-                else if (dynamic_cast<Charbon *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "O";
-                else if (dynamic_cast<Acier *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "A";
-                else if (dynamic_cast<Salpetre *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "S";
-                else if (dynamic_cast<Uranium *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "U";
-                else if (dynamic_cast<Eau *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "E";
-                else if (dynamic_cast<Stone *>(mapGrid.GetIBlockAtPos(x, y, 0).get())) os << "R";
-                else os << "X";
-            }
-        }
-        os << "|" << std::endl;
-    }
-    return os;
 }

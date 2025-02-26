@@ -12,22 +12,13 @@
 #include <random>
 #include "IBlock.hpp"
 #include "Texture.hpp"
+#include "Sdf.hpp"
 
 class IBlock;
 
 class MapGrid
 {
     public:
-        sdf::Texture textureBg;
-        sdf::Texture textureZinc;
-        sdf::Texture textureCuivre;
-        sdf::Texture textureCharbon;
-        sdf::Texture textureAcier;
-        sdf::Texture textureSalpetre;
-        sdf::Texture textureUranium;
-        sdf::Texture textureEau;
-        sdf::Texture textureStone;
-
         MapGrid(size_t X, size_t Y);
         std::shared_ptr<IBlock> GetIBlockAtPos(size_t X, size_t Y, size_t Z);
         std::vector<std::shared_ptr<IBlock>> getAllBlocksAtPos(size_t X, size_t Y);
@@ -36,6 +27,7 @@ class MapGrid
         void deleteBlock(size_t X, size_t Y, size_t Z);
         size_t getSizeX() const { return _sizeX; }
         size_t getSizeY() const { return _sizeY; }
+        void draw(sdf::Renderer &renderer);
 
     private:
         void initEmptyMap(size_t X, size_t Y);
@@ -44,6 +36,6 @@ class MapGrid
             std::shared_ptr<IBlock>>>> _grid;
         size_t _sizeX;
         size_t _sizeY;
+        sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
+        sdf::Texture textureZinc = sdf::Texture("Assets/Zinc.png");
 };
-
-std::ostream& operator<<(std::ostream &os, MapGrid &mapGrid);

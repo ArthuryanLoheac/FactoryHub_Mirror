@@ -7,6 +7,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include "Camera.hpp"
+#include <iostream>
 
 sdf::Camera::Camera(glm::vec2 position, float zoom, float velocity)
     : _position(position), _zoom(zoom), _velocity(velocity)

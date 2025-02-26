@@ -18,10 +18,8 @@ int main(void)
 {
     sdf::Renderer renderer;
     MapGrid map(200, 200);
-    sdf::Sprite sprite1(glm::vec3(0.0f, 0.0f, 0.0f), map.textureBg);
 
     generateAll(map);
-    std::cout << map;
 
     while (!renderer.shouldClose())
     {
@@ -29,7 +27,7 @@ int main(void)
 
         renderer.clear();
 
-        sprite1.draw(renderer);
+        map.draw(renderer);
 
         renderer.swapBuffers();
 
