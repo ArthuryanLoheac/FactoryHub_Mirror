@@ -57,7 +57,7 @@ void sdf::Renderer::swapBuffers(void)
 void sdf::Renderer::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     if (_instance)
-        _instance->getCamera().setZoom(_instance->getCamera().getZoom() + yoffset);
+        _instance->getCamera().setZoom(_instance->getCamera().getZoom() + (yoffset / 10));
 }
 
 void sdf::Renderer::pollEvent(void)
