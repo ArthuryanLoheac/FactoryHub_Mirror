@@ -21,3 +21,9 @@ class AMiner : public ABuilds
         float _clockMining = 0;
         Item _MiningItem;
 };
+
+class MinerT1 : public AMiner
+{
+    protected:
+        MinerT1();
+};
