@@ -21,6 +21,7 @@ int main(void)
     sdf::Renderer renderer;
     MapGrid map(200, 200);
 
+    // FOR TEST TO REMOVE
     map.addBlock(std::make_shared<Tapis>(), 10, 10);
     map.addBlock(std::make_shared<Tapis>(), 10, 11);
     map.addBlock(std::make_shared<Tapis>(), 10, 12);
@@ -32,6 +33,7 @@ int main(void)
     generateAll(map);
     while (!renderer.shouldClose()) {
         processInputs(renderer.getWindow(), renderer);
+        map.update(renderer.getDeltaTime());
         renderer.clear();
         map.draw(renderer);
         renderer.swapBuffers();
