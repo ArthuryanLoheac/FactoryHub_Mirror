@@ -37,7 +37,7 @@ bool ATapis::myAddElement(Item item)
 bool ATapis::addElementTapis(Item item)
 {
     if (_itemsTransitting.size() > 0 &&
-        std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) >= _speedPercent)
+        std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) >= _deltaMinPercent)
         return myAddElement(item);
     else if (_itemsTransitting.size() == 0)
         return myAddElement(item);
@@ -131,10 +131,31 @@ void ATapis::addElementFromBehind(ABuilds *block)
         _itemsTransitting.push_back(std::make_tuple(0, *item, _direction));
 }
 
+static float calculerAvancement(float positionActuelle, float _speed, float deltaTime)
+{
+    float vitessePourcentage = 1.0f / _speed;
+    float avanceParFrame = vitessePourcentage * deltaTime;
+
+    positionActuelle += avanceParFrame;
+    if (positionActuelle >= 1.0f)
+        positionActuelle = 1.0f;
+    return positionActuelle;
+}
+
 void ATapis::updateAllItemsTransitting(float deltaTime)
 {
-    for (size_t i = 0; i < _itemsTransitting.size(); i++)
-        std::get<0>(_itemsTransitting[i]) += deltaTime;
+    float previousPercent;
+
+    for (size_t i = 0; i < _itemsTransitting.size(); i++) {
+        std::get<0>(_itemsTransitting[i]) = calculerAvancement(
+            std::get<0>(_itemsTransitting[i]), _speed, deltaTime);
+        if (i == 0)
+            continue;
+        previousPercent = std::get<0>(_itemsTransitting[i - 1]);
+        std::get<0>(_itemsTransitting[i]) =
+            std::min(std::get<0>(_itemsTransitting[i]), previousPercent - _deltaMinPercent);
+    }
+    
 }
 
 void ATapis::updatePushItemFront(MapGrid map)
@@ -171,7 +192,7 @@ void ATapis::updateTakeBehind(MapGrid map)
     if (_itemsTransitting.size() == 0)// Si pas d'element en cours de transit
         addElementFromBehind(block);
         // Sinon check si le dernier element est assez loin pour ajouter un autre
-    else if (std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) >= _speedPercent)
+    else if (std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) >= _deltaMinPercent)
         addElementFromBehind(block);
 }
 
