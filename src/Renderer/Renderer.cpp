@@ -32,6 +32,9 @@ sdf::Renderer::Renderer(void)
     _window.reset(new Window);
     loadShaders();
     glEnable(GL_DEPTH_TEST);
+
+    clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    swapBuffers();
 }
 
 sdf::Renderer::~Renderer(void)

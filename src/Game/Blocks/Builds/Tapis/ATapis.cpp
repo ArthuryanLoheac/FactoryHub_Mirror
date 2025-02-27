@@ -7,6 +7,12 @@
 
 #include "ATapis.hpp"
 
+void ATapis::setDirection(Direction direction)
+{
+    _direction = direction;
+    _sprite->setDirection(direction * 90);
+}
+
 bool ATapis::addElementTapis(Item item, Direction direction)
 {
     if (_itemsTransitting.size() > 0 &&
@@ -87,4 +93,5 @@ void ATapis::update(float deltaTime, MapGrid map)
 ATapis::ATapis()
 {
     _AllItemAccepted = true;
+    _direction = UP;
 }

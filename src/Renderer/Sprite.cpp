@@ -90,6 +90,11 @@ void sdf::Sprite::setPosition(const glm::vec3 &position)
     _position = position;
 }
 
+void sdf::Sprite::setDirection(float direction)
+{
+    _direction = direction;
+}
+
 unsigned int sdf::Sprite::getTexture(void)
 {
     return _texture.get();
