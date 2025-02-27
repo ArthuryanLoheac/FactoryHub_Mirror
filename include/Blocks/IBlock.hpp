@@ -21,6 +21,10 @@ class IBlock
         virtual void setPosY(float posY) = 0;
         virtual float getPosX() const = 0;
         virtual float getPosY() const = 0;
+        virtual void setPosXGrid(size_t posX) = 0;
+        virtual void setPosYGrid(size_t posY) = 0;
+        virtual size_t getPosXGrid() const = 0;
+        virtual size_t getPosYGrid() const = 0;
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime, MapGrid map) = 0;

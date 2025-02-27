@@ -16,6 +16,7 @@ class ABuilds : public IBlock
     public:
         virtual bool addElement(Item item);
         virtual bool outElement(std::string name);
+        virtual Item *outElement();
         void setPosX(float posX) override;
         void setPosY(float posY) override;
         int getHp() const;
@@ -25,6 +26,10 @@ class ABuilds : public IBlock
 
         float getPosX() const override;
         float getPosY() const override;
+        void setPosXGrid(size_t posX) override;
+        void setPosYGrid(size_t posY) override;
+        size_t getPosXGrid() const override;
+        size_t getPosYGrid() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) = 0;
@@ -34,6 +39,8 @@ class ABuilds : public IBlock
         ABuilds();
         float _posY;
         float _posX;
+        size_t posXGrid;
+        size_t posYGrid;
 
         int _hp;
         int _hpMax;

@@ -13,6 +13,8 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 
+class MapGrid;
+
 namespace sdf {
     class Renderer
     {
@@ -24,12 +26,13 @@ namespace sdf {
             void clear(glm::vec4 color
                 = glm::vec4(0.18f, 0.215f, 0.309f, 1.0f));
             void swapBuffers(void);
-            void pollEvent(void);
+            void pollEvent(MapGrid &map);
 
             GLFWwindow *getWindow(void);
             sdf::Shader &getShader(const std::string &key);
             sdf::Camera &getCamera(void);
             double getDeltaTime(void);
+            void resetDeltaTime(void);
 
             static void scroll_callback(GLFWwindow* window,
                 double xoffset, double yoffset);

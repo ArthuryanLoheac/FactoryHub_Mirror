@@ -15,6 +15,7 @@
 #include "Uranium.hpp"
 #include "Eau.hpp"
 #include "Stone.hpp"
+#include <ATapis.hpp>
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
@@ -43,6 +44,8 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
         throw std::out_of_range("Out of range");
     block.get()->setPosX(X);
     block.get()->setPosY(Y);
+    block.get()->setPosXGrid(X);
+    block.get()->setPosYGrid(Y);
     _grid[X][Y].push_back(block);
 }
 
@@ -77,6 +80,19 @@ void MapGrid::draw(sdf::Renderer &renderer)
             }
         }
     }
+}
+
+void MapGrid::update(float deltaTime)
+{
+    for (size_t x = 0; x < _sizeX; x++) {
+        for (size_t y = 0; y < _sizeY; y++) {
+            for (size_t z = 0; z < _grid[x][y].size(); z++) {
+                if (dynamic_cast<ATapis *>(_grid[x][y][z].get()) != nullptr)
+                    _grid[x][y][z]->update(deltaTime, *this);
+            }
+        }
+    }
+    printf("\n");
 }
 
 void MapGrid::initEmptyMap(size_t X, size_t Y)

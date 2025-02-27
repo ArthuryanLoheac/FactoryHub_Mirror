@@ -47,6 +47,26 @@ float ATerrain::getPosY() const
     return _pos.second;
 }
 
+void ATerrain::setPosXGrid(size_t posX)
+{
+    posXGrid = posX;
+}
+
+void ATerrain::setPosYGrid(size_t posY)
+{
+    posYGrid = posY;
+}
+
+size_t ATerrain::getPosXGrid() const
+{
+    return posXGrid;
+}
+
+size_t ATerrain::getPosYGrid() const
+{
+    return posYGrid;
+}
+
 void ATerrain::update(float deltaTime, MapGrid map)
 {
     (void)deltaTime;

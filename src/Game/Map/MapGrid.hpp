@@ -28,6 +28,7 @@ class MapGrid
         size_t getSizeX() const { return _sizeX; }
         size_t getSizeY() const { return _sizeY; }
         void draw(sdf::Renderer &renderer);
+        void update(float deltaTime);
 
     private:
         void initEmptyMap(size_t X, size_t Y);

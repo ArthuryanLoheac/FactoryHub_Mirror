@@ -15,6 +15,8 @@ class AVein : public IBlock
     protected:
         float _posY;
         float _posX;
+        size_t posXGrid;
+        size_t posYGrid;
         bool _isConstructible;
         bool _isBlocking;
     
@@ -27,6 +29,10 @@ class AVein : public IBlock
         void setPosY(float posY) override;
         float getPosX() const override;
         float getPosY() const override;
+        void setPosXGrid(size_t posX) override;
+        void setPosYGrid(size_t posY) override;
+        size_t getPosXGrid() const override;
+        size_t getPosYGrid() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) override;
