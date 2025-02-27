@@ -44,6 +44,8 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
         throw std::out_of_range("Out of range");
     block.get()->setPosX(X);
     block.get()->setPosY(Y);
+    block.get()->setPosXGrid(X);
+    block.get()->setPosYGrid(Y);
     _grid[X][Y].push_back(block);
 }
 
@@ -90,6 +92,7 @@ void MapGrid::update(float deltaTime)
             }
         }
     }
+    printf("\n");
 }
 
 void MapGrid::initEmptyMap(size_t X, size_t Y)

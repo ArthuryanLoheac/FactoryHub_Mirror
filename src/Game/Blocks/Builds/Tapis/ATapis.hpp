@@ -18,13 +18,20 @@ class ATapis : public ABuilds
             LEFT,
             RIGHT
         };
+        bool addElement(Item item) override;
         void setDirection(Direction direction);
-        bool addElementTapis(Item item, Direction direction);
+        bool addElementTapis(Item item);
         bool outElementTapis(std::string name, MapGrid map);
         void update(float deltaTime, MapGrid map) override;
+        void updateTakeBehind(MapGrid map);
+        void addElementFromBehind(ABuilds *block);
+        void updateAllItemsTransitting(float deltaTime);
+        void updatePushItemFront(MapGrid map);
     protected:
         ATapis();
         std::vector<std::tuple<float, Item, Direction>> _itemsTransitting;
         Direction _direction;
         float _speedPercent; // 0.10f = 10 objects max on tapis (1 each 10%)
+    private:
+        bool myAddElement(Item item);
 };

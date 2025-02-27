@@ -43,6 +43,27 @@ float AVein::getPosY() const
     return _posY;
 }
 
+void AVein::setPosXGrid(size_t posX)
+{
+    posXGrid = posX;
+}
+
+void AVein::setPosYGrid(size_t posY)
+{
+    posYGrid = posY;
+}
+
+size_t AVein::getPosXGrid() const
+{
+    return posXGrid;
+}
+
+size_t AVein::getPosYGrid() const
+{
+    return posYGrid;
+}
+
+
 bool AVein::getIsConstructible() const
 {
     return _isConstructible;

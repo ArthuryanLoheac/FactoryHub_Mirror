@@ -24,6 +24,15 @@ bool ABuilds::addElement(Item item)
     return true;
 }
 
+Item *ABuilds::outElement()
+{
+    if (_Outs.size() == 0)
+        return nullptr;
+    Item *item = &_Outs[0];
+    _Outs.erase(_Outs.begin());
+    return item;
+}
+
 bool ABuilds::outElement(std::string name)
 {
     int i = 0;
@@ -91,6 +100,26 @@ float ABuilds::getPosX() const
 float ABuilds::getPosY() const
 {
     return _posY;
+}
+
+void ABuilds::setPosXGrid(size_t posX)
+{
+    posXGrid = posX;
+}
+
+void ABuilds::setPosYGrid(size_t posY)
+{
+    posYGrid = posY;
+}
+
+size_t ABuilds::getPosXGrid() const
+{
+    return posXGrid;
+}
+
+size_t ABuilds::getPosYGrid() const
+{
+    return posYGrid;
 }
 
 bool ABuilds::getIsConstructible() const

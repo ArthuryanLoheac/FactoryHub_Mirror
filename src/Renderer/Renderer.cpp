@@ -101,3 +101,9 @@ double sdf::Renderer::getDeltaTime(void)
 {
     return _deltaTime;
 }
+
+void sdf::Renderer::resetDeltaTime(void)
+{
+    _deltaTime = 0;
+    _lastFrame = glfwGetTime();
+}
