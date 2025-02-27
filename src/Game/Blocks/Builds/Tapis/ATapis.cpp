@@ -131,9 +131,9 @@ void ATapis::addElementFromBehind(ABuilds *block)
         _itemsTransitting.push_back(std::make_tuple(0, *item, _direction));
 }
 
-static float calculerAvancement(float positionActuelle, float _speed, float deltaTime)
+static float calculerAvancement(float positionActuelle, float _travelTime, float deltaTime)
 {
-    float vitessePourcentage = 1.0f / _speed;
+    float vitessePourcentage = 1.0f / _travelTime;
     float avanceParFrame = vitessePourcentage * deltaTime;
 
     positionActuelle += avanceParFrame;
@@ -148,7 +148,7 @@ void ATapis::updateAllItemsTransitting(float deltaTime)
 
     for (size_t i = 0; i < _itemsTransitting.size(); i++) {
         std::get<0>(_itemsTransitting[i]) = calculerAvancement(
-            std::get<0>(_itemsTransitting[i]), _speed, deltaTime);
+            std::get<0>(_itemsTransitting[i]), _travelTime, deltaTime);
         if (i == 0)
             continue;
         previousPercent = std::get<0>(_itemsTransitting[i - 1]);

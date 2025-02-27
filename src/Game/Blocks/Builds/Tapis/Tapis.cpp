@@ -13,5 +13,5 @@ Tapis::Tapis()
     sdf::Texture textureTapis = sdf::Texture("Assets/tapis.png");
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureTapis);
     _deltaMinPercent = 0.12f;
-    _speed = 3.0f;
+    _travelTime = 3.0f;
 }
