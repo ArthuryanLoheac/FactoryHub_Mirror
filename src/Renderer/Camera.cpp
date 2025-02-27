@@ -25,7 +25,7 @@ glm::mat4 sdf::Camera::getTransformationMatrix(void)
     return transform;
 }
 
-void sdf::Camera::move(sdf::Camera::Direction direction, double deltaTime)
+void sdf::Camera::move(sdf::Camera::Direction direction, double deltaTime, float _sizeX, float _sizeY)
 {
     float distance = (_velocity * deltaTime) * (1 / _zoom);
 
@@ -43,6 +43,8 @@ void sdf::Camera::move(sdf::Camera::Direction direction, double deltaTime)
             _position = glm::vec2(_position.x + distance, _position.y);
             break;
     }
+    _position.x = std::max(-_sizeX, std::min(_position.x, 1.f));
+    _position.y = std::max(-_sizeY, std::min(_position.y, 1.f));
 }
 
 glm::vec2 sdf::Camera::getPosition(void)

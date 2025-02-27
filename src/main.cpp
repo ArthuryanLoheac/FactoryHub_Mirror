@@ -31,7 +31,7 @@ int main(void)
 
         renderer.swapBuffers();
 
-        renderer.pollEvent();
+        renderer.pollEvent(map);
     }
     return 0;
 }

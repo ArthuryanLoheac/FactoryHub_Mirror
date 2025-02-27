@@ -23,7 +23,7 @@ namespace sdf
                 float zoom = 1.0f, float velocity = 10.0f);
 
             glm::mat4 getTransformationMatrix(void);
-            void move(sdf::Camera::Direction direction, double deltaTime);
+            void move(sdf::Camera::Direction direction, double deltaTime, float _sizeX, float _sizeY);
 
             glm::vec2 getPosition(void);
             float getZoom(void);

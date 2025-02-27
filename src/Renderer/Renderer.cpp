@@ -11,6 +11,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Sdf.hpp"
+#include <MapGrid.hpp>
 
 sdf::Renderer *sdf::Renderer::_instance = nullptr;
 
@@ -60,7 +61,7 @@ void sdf::Renderer::scroll_callback(GLFWwindow* window, double xoffset, double y
         _instance->getCamera().setZoom(_instance->getCamera().getZoom() + (yoffset / 10));
 }
 
-void sdf::Renderer::pollEvent(void)
+void sdf::Renderer::pollEvent(MapGrid &map)
 {
     double actualTime = glfwGetTime();
     _deltaTime = glfwGetTime() - _lastFrame;
@@ -69,13 +70,13 @@ void sdf::Renderer::pollEvent(void)
     glfwSetScrollCallback(_window->get(), scroll_callback);
     glfwPollEvents();
     if (glfwGetKey(_window->get(), GLFW_KEY_W) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::UP, _deltaTime);
+        _camera.move(sdf::Camera::Direction::UP, _deltaTime, map.getSizeX(), map.getSizeY());
     if (glfwGetKey(_window->get(), GLFW_KEY_S) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::DOWN, _deltaTime);
+        _camera.move(sdf::Camera::Direction::DOWN, _deltaTime, map.getSizeX(), map.getSizeY());
     if (glfwGetKey(_window->get(), GLFW_KEY_D) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::RIGHT, _deltaTime);
+        _camera.move(sdf::Camera::Direction::RIGHT, _deltaTime, map.getSizeX(), map.getSizeY());
     if (glfwGetKey(_window->get(), GLFW_KEY_A) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::LEFT, _deltaTime);
+        _camera.move(sdf::Camera::Direction::LEFT, _deltaTime, map.getSizeX(), map.getSizeY());
 }
 
 GLFWwindow *sdf::Renderer::getWindow(void)
