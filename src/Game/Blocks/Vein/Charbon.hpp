@@ -11,5 +11,8 @@
 class Charbon : public AVein
 {
     public:
-        Charbon() : AVein(Item("Charbon")) {};
+        Charbon() : AVein(Item("Charbon")) {
+            sdf::Texture texture("Assets/Charbon.png");
+            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0), texture);
+        };
 };

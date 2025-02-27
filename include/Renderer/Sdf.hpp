@@ -22,7 +22,7 @@ namespace sdf {
 
             bool shouldClose(void);
             void clear(glm::vec4 color
-                = glm::vec4(0.2f, 0.4f, 0.6f, 1.0f));
+                = glm::vec4(0.18f, 0.215f, 0.309f, 1.0f));
             void swapBuffers(void);
             void pollEvent(void);
 

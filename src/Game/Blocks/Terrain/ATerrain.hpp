@@ -7,6 +7,7 @@
 
 #pragma once
 #include "IBlock.hpp"
+#include "Sprite.hpp"
 
 class ATerrain : public IBlock
 {
@@ -18,9 +19,11 @@ class ATerrain : public IBlock
         float getPosX() const override;
         float getPosY() const override;
         void update(float deltaTime, MapGrid map) override;
+        void draw(sdf::Renderer &renderer) override;
     protected:
         ATerrain();
         bool _isConstructible;
         bool _isBlocking;
         std::pair<float, float> _pos;
+        sdf::Sprite *_sprite;
 };

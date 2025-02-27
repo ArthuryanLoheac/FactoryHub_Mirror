@@ -11,5 +11,8 @@
 class Cuivre : public AVein
 {
     public:
-        Cuivre() : AVein(Item("Cuivre")) {};
+        Cuivre() : AVein(Item("Cuivre")) {
+            sdf::Texture texture("Assets/Cuivre.png");
+            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0), texture);
+        };
 };

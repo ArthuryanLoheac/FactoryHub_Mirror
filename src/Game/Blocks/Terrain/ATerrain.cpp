@@ -11,6 +11,8 @@ ATerrain::ATerrain()
 {
     _isConstructible = false;
     _isBlocking = true;
+    sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
 }
 
 bool ATerrain::getIsConstructible() const
@@ -26,11 +28,13 @@ bool ATerrain::getIsBlocking() const
 void ATerrain::setPosX(float posX)
 {
     _pos.first = posX;
+    _sprite->setPosition(glm::vec3(_pos.first, _pos.second, 0.0f));
 }
 
 void ATerrain::setPosY(float posY)
 {
     _pos.second = posY;
+    _sprite->setPosition(glm::vec3(_pos.first, _pos.second, 0.0f));
 }
 
 float ATerrain::getPosX() const
@@ -47,4 +51,9 @@ void ATerrain::update(float deltaTime, MapGrid map)
 {
     (void)deltaTime;
     (void)map;
+}
+
+void ATerrain::draw(sdf::Renderer &renderer)
+{
+    _sprite->draw(renderer);
 }

@@ -11,5 +11,8 @@
 class Salpetre : public AVein
 {
     public:
-        Salpetre() : AVein(Item("Salpetre")) {};
+        Salpetre() : AVein(Item("Salpetre")) {
+            sdf::Texture texture("Assets/Salpetre.png");
+            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0), texture);
+        };
 };

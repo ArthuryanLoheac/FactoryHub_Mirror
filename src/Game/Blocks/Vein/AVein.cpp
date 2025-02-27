@@ -12,6 +12,8 @@ AVein::AVein(Item item)
 {
     _isConstructible = true;
     _isBlocking = false;
+    sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
 }
 
 Item AVein::getRessource() const
@@ -22,11 +24,13 @@ Item AVein::getRessource() const
 void AVein::setPosX(float posX)
 {
     _posX = posX;
+    _sprite->setPosition(glm::vec3(_posX, _posY, 0.0f));
 }
 
 void AVein::setPosY(float posY)
 {
     _posY = posY;
+    _sprite->setPosition(glm::vec3(_posX, _posY, 0.0f));
 }
 
 float AVein::getPosX() const
@@ -53,4 +57,9 @@ void AVein::update(float deltaTime, MapGrid map)
 {
     (void)deltaTime;
     (void)map;
+}
+
+void AVein::draw(sdf::Renderer &renderer)
+{
+    _sprite->draw(renderer);
 }

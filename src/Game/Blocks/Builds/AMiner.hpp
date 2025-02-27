@@ -8,6 +8,7 @@
 #pragma once
 #include "ABuilds.hpp"
 #include "Item.hpp"
+#include "Sprite.hpp"
 
 class AMiner : public ABuilds
 {

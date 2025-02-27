@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <vector>
 #include <memory>
+#include "Sdf.hpp"
 
 class MapGrid;
 
@@ -23,4 +24,5 @@ class IBlock
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime, MapGrid map) = 0;
+        virtual void draw(sdf::Renderer &renderer) = 0;
 };
