@@ -14,11 +14,6 @@ AMiner::AMiner() : ABuilds()
     _MaxOut = 100;
 }
 
-MinerT1::MinerT1() : AMiner()
-{
-    _speedMining = 0.5;
-}
-
 void AMiner::update(float deltaTime, MapGrid map)
 {
     _clockMining += deltaTime;
