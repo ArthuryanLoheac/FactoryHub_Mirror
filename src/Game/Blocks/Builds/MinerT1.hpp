@@ -10,6 +10,6 @@
 
 class MinerT1 : public AMiner
 {
-    protected:
+    public:
         MinerT1();
 };

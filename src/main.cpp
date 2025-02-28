@@ -13,19 +13,19 @@
 #include "Generation.hpp"
 
 #include "Tapis.hpp"
+#include "MinerT1.hpp"
+#include "Acier.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer);
 
 int main(void)
 {
     sdf::Renderer renderer;
-    MapGrid map(200, 200);
-    int i = 30;
+    MapGrid map(100, 100);
 
     // FOR TEST TO REMOVE
-    std::shared_ptr<Tapis> tapis2 = std::make_shared<Tapis>();
-    tapis2.get()->addElementTapis(Item("Zinc"));
-    map.addBlock(tapis2, 4, 4);
+    map.addBlock(std::make_shared<Acier>(), 4, 4);
+    map.addBlock(std::make_shared<MinerT1>(), 4, 4);
     map.addBlock(std::make_shared<Tapis>(), 4, 5);
     map.addBlock(std::make_shared<Tapis>(), 4, 6);
     map.addBlock(std::make_shared<Tapis>(), 4, 7);
@@ -33,10 +33,19 @@ int main(void)
     map.addBlock(std::make_shared<Tapis>(), 4, 9);
 
     generateAll(map);
+
+    for (int i = 0; i < map.getAllBlocksAtPos(4, 4).size(); i++) {
+        if (dynamic_cast<MinerT1 *>(map.getAllBlocksAtPos(4, 4)[i].get())) {
+            std::cout << "MinerT1" << std::endl;
+        }
+        else if (dynamic_cast<Acier *>(map.getAllBlocksAtPos(4, 4)[i].get())) {
+            std::cout << "Acier" << std::endl;
+        }
+        else
+            std::cout << "else" << std::endl;
+    }
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
-        if (i > 0 && tapis2.get()->addElementTapis(Item("Zinc")))
-            i--;
         processInputs(renderer.getWindow(), renderer);
         map.update(renderer.getDeltaTime());
         renderer.clear();
