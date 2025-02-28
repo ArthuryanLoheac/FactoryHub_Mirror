@@ -8,6 +8,8 @@
 #pragma once
 #include "IBlock.hpp"
 #include "Item.hpp"
+#include "Sprite.hpp"
+#include "Sdf.hpp"
 
 class ABuilds : public IBlock
 {
@@ -46,4 +48,5 @@ class ABuilds : public IBlock
         size_t _MaxIn;
         size_t _MaxOut;
         bool _noMax;
+        sdf::Sprite *_sprite;
 };
