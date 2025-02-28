@@ -42,10 +42,10 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
 {
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
-    block.get()->setPosX(X);
-    block.get()->setPosY(Y);
-    block.get()->setPosXGrid(X);
-    block.get()->setPosYGrid(Y);
+    block->setPosX(X);
+    block->setPosY(Y);
+    block->setPosXGrid(X);
+    block->setPosYGrid(Y);
     _grid[X][Y].push_back(block);
 }
 
@@ -76,7 +76,7 @@ void MapGrid::draw(sdf::Renderer &renderer)
     for (size_t i = 0; i < _sizeX; i++) {
         for (size_t j = 0; j < _sizeY; j++) {
             for (size_t k = 0; k < _grid[i][j].size(); k++) {
-                _grid[i][j][k]->draw(renderer);
+                _grid[i][j][_grid[i][j].size() - 1 - k]->draw(renderer);
             }
         }
     }
