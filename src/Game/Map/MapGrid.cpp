@@ -15,7 +15,8 @@
 #include "Uranium.hpp"
 #include "Eau.hpp"
 #include "Stone.hpp"
-#include <ATapis.hpp>
+#include "ATapis.hpp"
+#include "AMiner.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
@@ -88,6 +89,8 @@ void MapGrid::update(float deltaTime)
         for (size_t y = 0; y < _sizeY; y++) {
             for (size_t z = 0; z < _grid[x][y].size(); z++) {
                 if (dynamic_cast<ATapis *>(_grid[x][y][z].get()) != nullptr)
+                    _grid[x][y][z]->update(deltaTime, *this);
+                if (dynamic_cast<AMiner *>(_grid[x][y][z].get()) != nullptr)
                     _grid[x][y][z]->update(deltaTime, *this);
             }
         }
