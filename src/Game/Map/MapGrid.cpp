@@ -39,7 +39,7 @@ std::vector<std::shared_ptr<IBlock>> MapGrid::getAllBlocksAtPos(size_t X, size_t
     return _grid[X][Y];
 }
 
-void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
+void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, bool update)
 {
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
@@ -48,6 +48,8 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y)
     block->setPosXGrid(X);
     block->setPosYGrid(Y);
     _grid[X][Y].push_back(block);
+    if (update)
+        _blocksUpdated.push_back(block);
 }
 
 void MapGrid::addBorder(void)
@@ -85,16 +87,8 @@ void MapGrid::draw(sdf::Renderer &renderer)
 
 void MapGrid::update(float deltaTime)
 {
-    for (size_t x = 0; x < _sizeX; x++) {
-        for (size_t y = 0; y < _sizeY; y++) {
-            for (size_t z = 0; z < _grid[x][y].size(); z++) {
-                if (dynamic_cast<ATapis *>(_grid[x][y][z].get()) != nullptr)
-                    _grid[x][y][z]->update(deltaTime, *this);
-                if (dynamic_cast<AMiner *>(_grid[x][y][z].get()) != nullptr)
-                    _grid[x][y][z]->update(deltaTime, *this);
-            }
-        }
-    }
+    for (size_t i = 0; i < _blocksUpdated.size(); i++)
+        _blocksUpdated[i]->update(deltaTime, *this);
     printf("\n");
 }
 
