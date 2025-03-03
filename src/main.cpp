@@ -15,12 +15,14 @@
 #include "Tapis.hpp"
 #include "MinerT1.hpp"
 #include "Acier.hpp"
+#include "GetterTextures.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer);
 
 int main(void)
 {
     sdf::Renderer renderer;
+    sdf::GetterTextures getterTextures;
     MapGrid map(100, 100);
 
     // FOR TEST TO REMOVE
