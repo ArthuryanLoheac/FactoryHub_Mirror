@@ -18,8 +18,6 @@ void ATapis::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
-
-
 bool ATapis::myAddElement(Item item)
 {
     if (_AllItemAccepted) {
@@ -183,13 +181,13 @@ void ATapis::updatePosSprite()
 {
     for (size_t i = 0; i < _itemsTransitting.size(); i++) {
         if (_direction == UP)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY - 0.5f + std::get<0>(_itemsTransitting[i])); 
         if (_direction == DOWN)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
-        if (_direction == LEFT)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY + 0.5f - std::get<0>(_itemsTransitting[i]));
         if (_direction == RIGHT)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+            std::get<1>(_itemsTransitting[i]).setPos(_posX - 0.5f + std::get<0>(_itemsTransitting[i]), _posY);
+        if (_direction == LEFT)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX + 0.5f - std::get<0>(_itemsTransitting[i]), _posY);
     }
 }
 
