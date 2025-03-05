@@ -23,8 +23,7 @@ namespace sdf {
             ~Renderer(void);
 
             bool shouldClose(void);
-            void clear(glm::vec4 color
-                = glm::vec4(0.18f, 0.215f, 0.309f, 1.0f));
+            void clear(glm::vec4 color);
             void swapBuffers(void);
             void pollEvent(MapGrid &map);
 

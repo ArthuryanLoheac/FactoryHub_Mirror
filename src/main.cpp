@@ -46,7 +46,7 @@ int main(void)
     while (!renderer.shouldClose()) {
         processInputs(renderer.getWindow(), renderer);
         map.update(renderer.getDeltaTime());
-        renderer.clear();
+        renderer.clear(glm::vec4(0.18f, 0.215f, 0.309f, 1.0f));
         map.draw(renderer);
         renderer.swapBuffers();
         renderer.pollEvent(map);
