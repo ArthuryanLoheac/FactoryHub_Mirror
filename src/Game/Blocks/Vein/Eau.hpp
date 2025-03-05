@@ -11,8 +11,8 @@
 class Eau : public AVein
 {
     public:
-        Eau() : AVein(Item("Eau")) {
+        Eau() : AVein(Item("Water")) {
             _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
-                sdf::GetterTextures::instance->getTexture("Eau"));
+                sdf::GetterTextures::instance->getTexture("Water"));
         };
 };
