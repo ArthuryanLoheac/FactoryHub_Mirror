@@ -32,9 +32,8 @@ sdf::Renderer::Renderer(void)
     _window.reset(new Window);
     loadShaders();
     glEnable(GL_DEPTH_TEST);
-
-    clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-    swapBuffers();
+    glEnable(GL_BLEND); // Enable transparency
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 sdf::Renderer::~Renderer(void)
