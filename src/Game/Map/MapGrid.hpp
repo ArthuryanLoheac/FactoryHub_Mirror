@@ -13,6 +13,7 @@
 #include "IBlock.hpp"
 #include "Texture.hpp"
 #include "Sdf.hpp"
+#include "Direction.hpp"
 
 class IBlock;
 
