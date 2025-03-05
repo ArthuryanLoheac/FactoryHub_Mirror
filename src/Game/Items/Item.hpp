@@ -7,6 +7,8 @@
 
 #pragma once
 #include <string>
+#include "Sprite.hpp"
+#include "GetterTextures.hpp"
 
 class Item
 {
@@ -29,5 +31,6 @@ class Item
     private:
         std::string _name;
         typeItem _type;
+        sdf::Sprite *_sprite;
         int _tier;
 };

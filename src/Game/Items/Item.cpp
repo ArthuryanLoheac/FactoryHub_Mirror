@@ -11,6 +11,8 @@
 
 Item::Item(typeItem type, std::string name, int tier)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
     _tier = tier;
@@ -18,6 +20,8 @@ Item::Item(typeItem type, std::string name, int tier)
 
 Item::Item(typeItem type, std::string name)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
     _tier = -1;
@@ -25,6 +29,8 @@ Item::Item(typeItem type, std::string name)
 
 Item::Item(std::string name, int tier)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
     _tier = tier;
@@ -32,6 +38,8 @@ Item::Item(std::string name, int tier)
 
 Item::Item(std::string name)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
     _tier = -1;
@@ -39,6 +47,7 @@ Item::Item(std::string name)
 
 Item::Item()
 {
+    _sprite = nullptr;
     _type = OTHER;
     _name = "";
     _tier = -1;
