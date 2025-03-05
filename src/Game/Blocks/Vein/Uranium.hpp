@@ -12,7 +12,7 @@ class Uranium : public AVein
 {
     public:
         Uranium() : AVein(Item("Uranium")) {
-            sdf::Texture texture("Assets/Uranium.png");
-            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0), texture);
+            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+                sdf::GetterTextures::instance->getTexture("Uranium"));
         };
 };
