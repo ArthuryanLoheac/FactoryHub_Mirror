@@ -12,14 +12,8 @@
 class ATapis : public ABuilds
 {
     public:
-        enum Direction {
-            UP,
-            DOWN,
-            LEFT,
-            RIGHT
-        };
         bool addElement(Item item) override;
-        void setDirection(Direction direction);
+        void setDirection(Direction direction) override;
         bool addElementTapis(Item item);
         bool outElementTapis(std::string name, MapGrid map);
         void update(float deltaTime, MapGrid map) override;

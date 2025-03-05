@@ -26,13 +26,13 @@ int main(void)
     MapGrid map(100, 100);
 
     // FOR TEST TO REMOVE
-    map.addBlock(std::make_shared<Acier>(), 4, 4);
-    map.addBlock(std::make_shared<MinerT1>(), 4, 4, true);
-    map.addBlock(std::make_shared<Tapis>(), 4, 5, true);
-    map.addBlock(std::make_shared<Tapis>(), 4, 6, true);
-    map.addBlock(std::make_shared<Tapis>(), 4, 7, true);
-    map.addBlock(std::make_shared<Tapis>(), 4, 8, true);
-    map.addBlock(std::make_shared<Tapis>(), 4, 9, true);
+    map.addBlock(std::make_shared<Acier>(), 4, 10);
+    map.addBlock(std::make_shared<MinerT1>(), 4, 10, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 5, true, Direction::DOWN);
+    map.addBlock(std::make_shared<Tapis>(), 4, 6, true, Direction::DOWN);
+    map.addBlock(std::make_shared<Tapis>(), 4, 7, true, Direction::DOWN);
+    map.addBlock(std::make_shared<Tapis>(), 4, 8, true, Direction::DOWN);
+    map.addBlock(std::make_shared<Tapis>(), 4, 9, true, Direction::DOWN);
 
     generateAll(map);
 

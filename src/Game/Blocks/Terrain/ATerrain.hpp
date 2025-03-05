@@ -20,6 +20,7 @@ class ATerrain : public IBlock
         float getPosY() const override;
         void setPosXGrid(size_t posX) override;
         void setPosYGrid(size_t posY) override;
+        virtual void setDirection(Direction direction) override;
         size_t getPosXGrid() const override;
         size_t getPosYGrid() const override;
         void update(float deltaTime, MapGrid map) override;

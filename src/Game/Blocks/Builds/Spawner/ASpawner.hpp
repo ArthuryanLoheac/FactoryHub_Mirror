@@ -16,6 +16,7 @@ class ASpawner : public IBlock
         void update(float deltaTime);
         void NewWave();
         void draw(sdf::Renderer &renderer) override;
+        virtual void setDirection(Direction direction) override;
     protected:
         ASpawner();
         std::vector<float> coolDownWaves;
