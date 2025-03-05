@@ -27,6 +27,8 @@ class Item
         std::string getName() const;
         typeItem getType() const;
         int getTier() const;
+        void setPos(float posX, float posY);
+        void draw(sdf::Renderer &renderer);
     
     private:
         std::string _name;

@@ -11,7 +11,7 @@
 class Cuivre : public AVein
 {
     public:
-        Cuivre() : AVein(Item("Copper")) {
+        Cuivre() : AVein(Item("CopperRaw")) {
             _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
                 sdf::GetterTextures::instance->getTexture("Copper"));
         };

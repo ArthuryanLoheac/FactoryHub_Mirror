@@ -33,7 +33,7 @@ class ABuilds : public IBlock
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) = 0;
-        void draw(sdf::Renderer &renderer) override;
+        virtual void draw(sdf::Renderer &renderer) override;
 
     protected:
         ABuilds();

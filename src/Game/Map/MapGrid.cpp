@@ -89,7 +89,6 @@ void MapGrid::update(float deltaTime)
 {
     for (size_t i = 0; i < _blocksUpdated.size(); i++)
         _blocksUpdated[i]->update(deltaTime, *this);
-    printf("\n");
 }
 
 void MapGrid::initEmptyMap(size_t X, size_t Y)

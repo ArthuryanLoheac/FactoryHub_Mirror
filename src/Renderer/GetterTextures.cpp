@@ -23,7 +23,7 @@ sdf::GetterTextures::GetterTextures()
     textures["Steel"] = new sdf::Texture("Assets/Steel.png");
     textures["SteelRaw"] = new sdf::Texture("Assets/SteelRaw.png");
     textures["Saltpeter"] = new sdf::Texture("Assets/Saltpeter.png");
-    textures["SalpeterRaw"] = new sdf::Texture("Assets/SalpeterRaw.png");
+    textures["SaltpeterRaw"] = new sdf::Texture("Assets/SaltpeterRaw.png");
     textures["Uranium"] = new sdf::Texture("Assets/Uranium.png");
     textures["UraniumRaw"] = new sdf::Texture("Assets/UraniumRaw.png");
     textures["Water"] = new sdf::Texture("Assets/Water.png");
@@ -63,5 +63,9 @@ sdf::GetterTextures::GetterTextures()
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)
 {
-    return *textures.at(name);
+    try {
+        return *textures.at(name);
+    } catch (std::out_of_range &e) {
+        throw std::invalid_argument("Texture not found : " + name);
+    }
 }

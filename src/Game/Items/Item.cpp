@@ -72,4 +72,16 @@ int Item::getTier() const
     return _tier;
 }
 
+void Item::setPos(float posX, float posY)
+{
+    _sprite->setPosition(glm::vec3(posX, posY, 0));
+    _sprite->setDirection(0);
+}
+
+void Item::draw(sdf::Renderer &renderer)
+{
+    _sprite->draw(renderer);
+}
+
+
 #pragma endregion Getters

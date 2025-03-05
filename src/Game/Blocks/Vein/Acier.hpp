@@ -11,7 +11,7 @@
 class Acier : public AVein
 {
     public:
-        Acier() : AVein(Item("Steel")) {
+        Acier() : AVein(Item("SteelRaw")) {
             _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
                 sdf::GetterTextures::instance->getTexture("Steel"));
         };;

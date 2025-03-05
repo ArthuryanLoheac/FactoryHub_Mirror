@@ -27,6 +27,8 @@ class ATapis : public ABuilds
         void addElementFromBehind(ABuilds *block);
         void updateAllItemsTransitting(float deltaTime);
         void updatePushItemFront(MapGrid map);
+        void updatePosSprite();
+        void draw(sdf::Renderer &renderer) override;
     protected:
         ATapis();
         std::vector<std::tuple<float, Item, Direction>> _itemsTransitting;

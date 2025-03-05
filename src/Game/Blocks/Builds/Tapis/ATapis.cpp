@@ -116,10 +116,10 @@ static ATapis::Direction getOppositeDirection(ATapis::Direction direction)
 
 void ATapis::update(float deltaTime, MapGrid map)
 {
-    printf("%d ", _itemsTransitting.size());
     updateTakeBehind(map);
     updateAllItemsTransitting(deltaTime);
     updatePushItemFront(map);
+    updatePosSprite();
 }
 
 void ATapis::addElementFromBehind(ABuilds *block)
@@ -175,6 +175,27 @@ void ATapis::updatePushItemFront(MapGrid map)
             return;
         }
     }
+}
+
+void ATapis::updatePosSprite()
+{
+    for (size_t i = 0; i < _itemsTransitting.size(); i++) {
+        if (_direction == UP)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+        if (_direction == DOWN)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+        if (_direction == LEFT)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+        if (_direction == RIGHT)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY);
+    }
+}
+
+void ATapis::draw(sdf::Renderer &renderer)
+{
+    for (size_t i = 0; i < _itemsTransitting.size(); i++)
+        std::get<1>(_itemsTransitting[i]).draw(renderer);
+    _sprite->draw(renderer);
 }
 
 void ATapis::updateTakeBehind(MapGrid map)
