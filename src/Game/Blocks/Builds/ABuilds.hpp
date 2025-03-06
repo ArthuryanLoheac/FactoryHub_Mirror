@@ -47,6 +47,7 @@ class ABuilds : public IBlock
 
         bool _isConstructible;
         bool _isBlocking;
+        bool _isUnlocked;
         
         std::vector<Item> _AcceptedItems;
         bool _AllItemAccepted;
