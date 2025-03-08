@@ -16,6 +16,7 @@ class AFactory : public ABuilds
                 std::vector<Item> _Ins;
                 std::vector<Item> _Outs;
                 float _timeProd;
+                Recette(std::vector<Item> Ins, std::vector<Item> Outs, float timeProd);
         };
     protected:
         std::vector<Recette> _Recettes;
