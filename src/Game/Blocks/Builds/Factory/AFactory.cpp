@@ -49,3 +49,10 @@ bool AFactory::craftRecette(Recette recette)
         _Outs.push_back(it);
     return true;
 }
+
+AFactory::Recette::Recette(std::vector<Item> Ins, std::vector<Item> Outs, float timeProd)
+{
+    _Ins = Ins;
+    _Outs = Outs;
+    _timeProd = timeProd;
+}
