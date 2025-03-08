@@ -15,35 +15,27 @@
 #include "Tapis.hpp"
 #include "MinerT1.hpp"
 #include "Acier.hpp"
+#include "GetterTextures.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer);
 
 int main(void)
 {
     sdf::Renderer renderer;
+    sdf::GetterTextures getterTextures;
     MapGrid map(100, 100);
 
     // FOR TEST TO REMOVE
     map.addBlock(std::make_shared<Acier>(), 4, 4);
-    map.addBlock(std::make_shared<MinerT1>(), 4, 4);
-    map.addBlock(std::make_shared<Tapis>(), 4, 5);
-    map.addBlock(std::make_shared<Tapis>(), 4, 6);
-    map.addBlock(std::make_shared<Tapis>(), 4, 7);
-    map.addBlock(std::make_shared<Tapis>(), 4, 8);
-    map.addBlock(std::make_shared<Tapis>(), 4, 9);
+    map.addBlock(std::make_shared<MinerT1>(), 4, 4, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 5, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 6, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 7, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 8, true);
+    map.addBlock(std::make_shared<Tapis>(), 4, 9, true);
 
     generateAll(map);
 
-    for (int i = 0; i < map.getAllBlocksAtPos(4, 4).size(); i++) {
-        if (dynamic_cast<MinerT1 *>(map.getAllBlocksAtPos(4, 4)[i].get())) {
-            std::cout << "MinerT1" << std::endl;
-        }
-        else if (dynamic_cast<Acier *>(map.getAllBlocksAtPos(4, 4)[i].get())) {
-            std::cout << "Acier" << std::endl;
-        }
-        else
-            std::cout << "else" << std::endl;
-    }
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
         processInputs(renderer.getWindow(), renderer);

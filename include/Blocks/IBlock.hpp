@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 #include "Sdf.hpp"
+#include "GetterTextures.hpp"
 
 class MapGrid;
 
