@@ -116,7 +116,7 @@ static ATapis::Direction getOppositeDirection(ATapis::Direction direction)
 
 void ATapis::update(float deltaTime, MapGrid map)
 {
-    printf("%d ", _itemsTransitting.size());
+    printf("%ld ", _itemsTransitting.size());
     updateTakeBehind(map);
     updateAllItemsTransitting(deltaTime);
     updatePushItemFront(map);
