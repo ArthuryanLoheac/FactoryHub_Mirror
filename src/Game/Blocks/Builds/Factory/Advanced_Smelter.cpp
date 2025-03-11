@@ -17,7 +17,7 @@ Advanced_Smelter::Advanced_Smelter() : AFactory()
     r_in1.push_back(Item("ZincRaw")); 
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Reinforced_Brass"));
-    Recette reinforced_Brass(r_in1, r_out1, 5.f);
+    Recette r_Reinforced_Brass(r_in1, r_out1, 5.f);
 
-    _Recettes.push_back(reinforced_Brass);
+    _Recettes.push_back(r_Reinforced_Brass);
 }
