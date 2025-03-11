@@ -14,6 +14,7 @@ Cutting_Machine::Cutting_Machine() : AFactory()
     //recette Steel_Darts
     std::vector<Item> r_in1;
     r_in1.push_back(Item("Steel_BAR"));
+    _AcceptedItems.push_back(Item("Steel_BAR"));
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Steel_Darts"));
     Recette r_Steel_Darts(r_in1, r_out1, 2.f);

@@ -15,8 +15,11 @@ Arthuryan_Module::Arthuryan_Module() : AFactory()
     // Recette Condensed_Plasma
     std::vector<Item> r_in1;
     r_in1.push_back(Item("Gunpowder"));
+    _AcceptedItems.push_back(Item("Gunpowder"));
     r_in1.push_back(Item("WaterRaw"));
-    r_in1.push_back(Item("Reinforced_Brass"));  
+    _AcceptedItems.push_back(Item("WaterRaw"));
+    r_in1.push_back(Item("Reinforced_Brass")); 
+    _AcceptedItems.push_back(Item("Reinforced_Brass")); 
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Condensed_Plasma"));
     Recette r_Condensed_Plasma(r_in1, r_out1, 15.f);
@@ -26,8 +29,11 @@ Arthuryan_Module::Arthuryan_Module() : AFactory()
     // Recette High_Power_EMP_Charge
     std::vector<Item> r_in2;
     r_in2.push_back(Item("Energy_Capacitor"));
+    _AcceptedItems.push_back(Item("Energy_Capacitor"));
     r_in2.push_back(Item("WaterRaw"));
+    _AcceptedItems.push_back(Item("WaterRaw"));
     r_in2.push_back(Item("Reinforced_Brass"));
+    _AcceptedItems.push_back(Item("Reinforced_Brass"));
     std::vector<Item> r_out2;
     r_out2.push_back(Item("High_Power_EMP_Charge"));
     Recette r_High_Power_EMP_Charge(r_in2, r_out2, 15.f);
