@@ -31,12 +31,12 @@ Chemical_PlantT1::Chemical_PlantT1() : AFactory()
     _Recettes.push_back(r_gunpowder);
 
     // Recette Rubber
-    std::vector<Item> r_in2;
-    r_in2.push_back(Item("CoalRaw"));
-    r_in2.push_back(Item("WaterRaw"));
-    std::vector<Item> r_out2;
-    r_out2.push_back(Item("Rubber"));
-    Recette r_Rubber(r_in2, r_out2, 5.f);
+    std::vector<Item> r_in3;
+    r_in3.push_back(Item("CoalRaw"));
+    r_in3.push_back(Item("WaterRaw"));
+    std::vector<Item> r_out3;
+    r_out3.push_back(Item("Rubber"));
+    Recette r_Rubber(r_in3, r_out3, 5.f);
 
     _Recettes.push_back(r_Rubber);
 }
