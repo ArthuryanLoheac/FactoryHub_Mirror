@@ -13,6 +13,7 @@ Chemical_PlantT1::Chemical_PlantT1() : AFactory()
 
     std::vector<Item> r_in1;
     r_in1.push_back(Item("SaltpeterRaw"));
+    _AcceptedItems.push_back(Item("SaltpeterRaw"));
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Black_Powder"));
     Recette r_black_powder(r_in1, r_out1, 2.f);

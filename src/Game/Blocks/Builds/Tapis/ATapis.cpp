@@ -155,7 +155,6 @@ void ATapis::updateAllItemsTransitting(float deltaTime)
         std::get<0>(_itemsTransitting[i]) =
             std::min(std::get<0>(_itemsTransitting[i]), previousPercent - _deltaMinPercent);
     }
-    
 }
 
 void ATapis::updatePushItemFront(MapGrid map)

@@ -24,4 +24,5 @@ class AFactory : public ABuilds
         AFactory();
         bool isRecetteCraftable(Recette recette);
         bool craftRecette(Recette recette);
+        void update(float deltaTime, MapGrid map) override;
 };

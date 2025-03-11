@@ -50,6 +50,11 @@ bool AFactory::craftRecette(Recette recette)
     return true;
 }
 
+void AFactory::update(float deltaTime, MapGrid map)
+{
+    printf("%d %d\n", _Ins.size(), _Outs.size());
+}
+
 AFactory::Recette::Recette(std::vector<Item> Ins, std::vector<Item> Outs, float timeProd)
 {
     _Ins = Ins;
