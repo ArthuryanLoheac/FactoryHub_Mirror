@@ -12,6 +12,7 @@ Assembly_Workshop::Assembly_Workshop() : AFactory()
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("Assembly_Workshop"), 0.0f);
 
+    // Recette ArmorPiercing_Ammo
     std::vector<Item> r_in1;
     r_in1.push_back(Item("Perforating_Projectile"));
     r_in1.push_back(Item("Reinforced_Socket"));
@@ -20,4 +21,14 @@ Assembly_Workshop::Assembly_Workshop() : AFactory()
     Recette r_ArmorPiercing_Ammo(r_in1, r_out1, 5.f);
 
     _Recettes.push_back(r_ArmorPiercing_Ammo);
+
+    // Recette Electric_Pulse_Ammo
+    std::vector<Item> r_in2;
+    r_in2.push_back(Item("Energy_Capacitor"));
+    r_in2.push_back(Item("Reinforced_Socket"));
+    std::vector<Item> r_out2;
+    r_out2.push_back(Item("Electric_Pulse_Ammo"));
+    Recette r_Electric_Pulse_Ammo(r_in2, r_out2, 5.f);
+
+    _Recettes.push_back(r_Electric_Pulse_Ammo);
 }
