@@ -8,14 +8,25 @@
 
 Chemical_PlantT1::Chemical_PlantT1() : AFactory()
 {
-    sdf::Texture textureChemical = sdf::Texture("Assets/Chemical_Plant.png");
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureChemical);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture("Chemical_Plant"), 0.0f);
 
+    // Recette black_powder
     std::vector<Item> r_in1;
     r_in1.push_back(Item("SaltpeterRaw"));
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Black_Powder"));
     Recette r_black_powder(r_in1, r_out1, 2.f);
-
+ 
     _Recettes.push_back(r_black_powder);
+
+    // Recette Gunpowder
+    std::vector<Item> r_in2;
+    r_in2.push_back(Item("SaltpeterRaw"));
+    r_in2.push_back(Item("CoalRaw"));
+    std::vector<Item> r_out2;
+    r_out2.push_back(Item("Gunpowder"));
+    Recette r_gunpowder(r_in2, r_out2, 5.f);
+
+    _Recettes.push_back(r_gunpowder);
 }
