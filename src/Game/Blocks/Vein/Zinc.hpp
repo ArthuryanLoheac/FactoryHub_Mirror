@@ -11,7 +11,7 @@
 class Zinc : public AVein
 {
     public:
-        Zinc() : AVein(Item("Zinc")) {
+        Zinc() : AVein(Item("ZincRaw")) {
             _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
                 sdf::GetterTextures::instance->getTexture("Zinc"));
         };

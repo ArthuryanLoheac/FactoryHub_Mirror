@@ -45,7 +45,7 @@ bool ATapis::addElementTapis(Item item)
 }
 
 static bool outElementToTapis(ATapis *tapis,
-    std::vector<std::tuple<float, Item, ATapis::Direction>> &_itemsTransitting)
+    std::vector<std::tuple<float, Item, Direction>> &_itemsTransitting)
 {
     if (tapis->addElementTapis(std::get<1>(_itemsTransitting[0]))) {
         _itemsTransitting.erase(_itemsTransitting.begin());
@@ -55,7 +55,7 @@ static bool outElementToTapis(ATapis *tapis,
 }
 
 static bool outElementToABuilds(ABuilds *block,
-    std::vector<std::tuple<float, Item, ATapis::Direction>> &_itemsTransitting)
+    std::vector<std::tuple<float, Item, Direction>> &_itemsTransitting)
 {
     if (block->addElement(std::get<1>(_itemsTransitting[0]))) {
         _itemsTransitting.erase(_itemsTransitting.begin());
@@ -88,38 +88,38 @@ bool ATapis::outElementTapis(std::string name, MapGrid map)
     }
 }
 
-static std::vector<std::shared_ptr<IBlock>> getIBlockAtModPos(MapGrid map, int X, int Y, ATapis::Direction direction)
+static std::vector<std::shared_ptr<IBlock>> getIBlockAtModPos(MapGrid map, int X, int Y, Direction direction)
 {
-    if (direction == ATapis::UP)
+    if (direction == Direction::UP)
         return map.getAllBlocksAtPos(X, Y + 1);
-    if (direction == ATapis::DOWN)
+    if (direction == Direction::DOWN)
         return map.getAllBlocksAtPos(X, Y - 1);
-    if (direction == ATapis::LEFT)
+    if (direction == Direction::LEFT)
         return map.getAllBlocksAtPos(X - 1, Y);
-    if (direction == ATapis::RIGHT)
+    if (direction == Direction::RIGHT)
         return map.getAllBlocksAtPos(X + 1, Y);
     throw std::out_of_range("Direction not found");
 }
 
-static ATapis::Direction getOppositeDirection(ATapis::Direction direction)
+static Direction getOppositeDirection(Direction direction)
 {
-    if (direction == ATapis::Direction::UP)
-        return ATapis::Direction::DOWN;
-    if (direction == ATapis::Direction::DOWN)
-        return ATapis::Direction::UP;
-    if (direction == ATapis::Direction::LEFT)
-        return ATapis::Direction::RIGHT;
-    if (direction == ATapis::Direction::RIGHT)
-        return ATapis::Direction::LEFT;
+    if (direction == Direction::UP)
+        return Direction::DOWN;
+    if (direction == Direction::DOWN)
+        return Direction::UP;
+    if (direction == Direction::LEFT)
+        return Direction::RIGHT;
+    if (direction == Direction::RIGHT)
+        return Direction::LEFT;
     throw std::out_of_range("Direction not found");
 }
 
 void ATapis::update(float deltaTime, MapGrid map)
 {
-    printf("%ld ", _itemsTransitting.size());
     updateTakeBehind(map);
     updateAllItemsTransitting(deltaTime);
     updatePushItemFront(map);
+    updatePosSprite();
 }
 
 void ATapis::addElementFromBehind(ABuilds *block)
@@ -175,6 +175,27 @@ void ATapis::updatePushItemFront(MapGrid map)
             return;
         }
     }
+}
+
+void ATapis::updatePosSprite()
+{
+    for (size_t i = 0; i < _itemsTransitting.size(); i++) {
+        if (_direction == UP)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY - 0.5f + std::get<0>(_itemsTransitting[i])); 
+        if (_direction == DOWN)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY + 0.5f - std::get<0>(_itemsTransitting[i]));
+        if (_direction == RIGHT)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX - 0.5f + std::get<0>(_itemsTransitting[i]), _posY);
+        if (_direction == LEFT)
+            std::get<1>(_itemsTransitting[i]).setPos(_posX + 0.5f - std::get<0>(_itemsTransitting[i]), _posY);
+    }
+}
+
+void ATapis::draw(sdf::Renderer &renderer)
+{
+    for (size_t i = 0; i < _itemsTransitting.size(); i++)
+        std::get<1>(_itemsTransitting[i]).draw(renderer);
+    _sprite->draw(renderer);
 }
 
 void ATapis::updateTakeBehind(MapGrid map)

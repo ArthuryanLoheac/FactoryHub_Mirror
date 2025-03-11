@@ -12,14 +12,8 @@
 class ATapis : public ABuilds
 {
     public:
-        enum Direction {
-            UP,
-            DOWN,
-            LEFT,
-            RIGHT
-        };
         bool addElement(Item item) override;
-        void setDirection(Direction direction);
+        void setDirection(Direction direction) override;
         bool addElementTapis(Item item);
         bool outElementTapis(std::string name, MapGrid map);
         void update(float deltaTime, MapGrid map) override;
@@ -27,6 +21,8 @@ class ATapis : public ABuilds
         void addElementFromBehind(ABuilds *block);
         void updateAllItemsTransitting(float deltaTime);
         void updatePushItemFront(MapGrid map);
+        void updatePosSprite();
+        void draw(sdf::Renderer &renderer) override;
     protected:
         ATapis();
         std::vector<std::tuple<float, Item, Direction>> _itemsTransitting;

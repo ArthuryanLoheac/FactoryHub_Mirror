@@ -97,6 +97,11 @@ float ABuilds::getPosX() const
     return _posX;
 }
 
+void ABuilds::setDirection(Direction direction)
+{
+    _sprite->setDirection(direction * 90);
+}
+
 float ABuilds::getPosY() const
 {
     return _posY;

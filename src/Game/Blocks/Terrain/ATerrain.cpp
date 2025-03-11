@@ -57,6 +57,11 @@ void ATerrain::setPosYGrid(size_t posY)
     posYGrid = posY;
 }
 
+void ATerrain::setDirection(Direction direction)
+{
+    _sprite->setDirection(direction * 90);
+}
+
 size_t ATerrain::getPosXGrid() const
 {
     return posXGrid;

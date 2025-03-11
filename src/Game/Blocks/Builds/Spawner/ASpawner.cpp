@@ -26,6 +26,11 @@ void ASpawner::draw(sdf::Renderer &renderer)
     _sprite->draw(renderer);
 }
 
+void ASpawner::setDirection(Direction direction)
+{
+    _sprite->setDirection(direction * 90);
+}
+
 ASpawner::ASpawner()
 {
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");

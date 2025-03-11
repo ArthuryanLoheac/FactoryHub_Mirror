@@ -11,6 +11,8 @@
 
 Item::Item(typeItem type, std::string name, int tier)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
     _tier = tier;
@@ -18,6 +20,8 @@ Item::Item(typeItem type, std::string name, int tier)
 
 Item::Item(typeItem type, std::string name)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
     _tier = -1;
@@ -25,6 +29,8 @@ Item::Item(typeItem type, std::string name)
 
 Item::Item(std::string name, int tier)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
     _tier = tier;
@@ -32,6 +38,8 @@ Item::Item(std::string name, int tier)
 
 Item::Item(std::string name)
 {
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+        sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
     _tier = -1;
@@ -39,6 +47,7 @@ Item::Item(std::string name)
 
 Item::Item()
 {
+    _sprite = nullptr;
     _type = OTHER;
     _name = "";
     _tier = -1;
@@ -62,5 +71,17 @@ int Item::getTier() const
 {
     return _tier;
 }
+
+void Item::setPos(float posX, float posY)
+{
+    _sprite->setPosition(glm::vec3(posX, posY, 0));
+    _sprite->setDirection(0);
+}
+
+void Item::draw(sdf::Renderer &renderer)
+{
+    _sprite->draw(renderer);
+}
+
 
 #pragma endregion Getters

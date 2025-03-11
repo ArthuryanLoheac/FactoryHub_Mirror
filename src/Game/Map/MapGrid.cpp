@@ -39,7 +39,8 @@ std::vector<std::shared_ptr<IBlock>> MapGrid::getAllBlocksAtPos(size_t X, size_t
     return _grid[X][Y];
 }
 
-void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, bool update)
+void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, bool update
+    , Direction direction)
 {
     if (X >= _sizeX || Y >= _sizeY)
         throw std::out_of_range("Out of range");
@@ -47,6 +48,7 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, bool u
     block->setPosY(Y);
     block->setPosXGrid(X);
     block->setPosYGrid(Y);
+    block->setDirection(direction);
     _grid[X][Y].push_back(block);
     if (update)
         _blocksUpdated.push_back(block);
@@ -89,7 +91,6 @@ void MapGrid::update(float deltaTime)
 {
     for (size_t i = 0; i < _blocksUpdated.size(); i++)
         _blocksUpdated[i]->update(deltaTime, *this);
-    printf("\n");
 }
 
 void MapGrid::initEmptyMap(size_t X, size_t Y)
