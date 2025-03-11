@@ -29,4 +29,13 @@ Molding_WorkshopT1::Molding_WorkshopT1() : AFactory()
     Recette r_black_powder_ammo(r_in2, r_out2, 2.f);
 
     _Recettes.push_back(r_black_powder_ammo);
+
+    //recette Perforating_Projectile
+    std::vector<Item> r_in3;
+    r_in3.push_back(Item("Steel_BAR"));
+    std::vector<Item> r_out3;
+    r_out3.push_back(Item("Perforating_Projectile"));
+    Recette r_Perforating_Projectile(r_in3, r_out3, 2.f);
+
+    _Recettes.push_back(r_Perforating_Projectile);
 }
