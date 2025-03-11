@@ -30,6 +30,7 @@ int main(void)
     map.addBlock(std::make_shared<Salpetre>(), 10, 4);
     map.addBlock(std::make_shared<MinerT1>(), 10, 4, true);
     map.addBlock(std::make_shared<Tapis>(), 10, 5, true, Direction::UP);
+    map.addBlock(std::make_shared<Tapis>(), 10, 7, true, Direction::UP);
     map.addBlock(std::make_shared<Chemical_PlantT1>(), 10, 6, true);
 
     generateAll(map);
