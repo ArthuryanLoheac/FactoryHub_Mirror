@@ -20,8 +20,13 @@ class AFactory : public ABuilds
         };
     protected:
         std::vector<Recette> _Recettes;
+        float _timeProd;
+        std::shared_ptr<Recette> _prod;
     
         AFactory();
         bool isRecetteCraftable(Recette recette);
         bool craftRecette(Recette recette);
+        void checkCraftNewReceipe();
+        bool addProdLastReceipe();
+        void update(float deltaTime, MapGrid map) override;
 };

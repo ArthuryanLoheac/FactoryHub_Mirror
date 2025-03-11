@@ -13,8 +13,9 @@
 #include "Generation.hpp"
 
 #include "Tapis.hpp"
+#include "Chemical_Plant.hpp"
 #include "MinerT1.hpp"
-#include "Acier.hpp"
+#include "Salpetre.hpp"
 #include "GetterTextures.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer);
@@ -26,19 +27,11 @@ int main(void)
     MapGrid map(100, 100);
 
     // FOR TEST TO REMOVE
-    map.addBlock(std::make_shared<Acier>(), 10, 10);
-    map.addBlock(std::make_shared<MinerT1>(), 10, 10, true);
-    map.addBlock(std::make_shared<Tapis>(), 5, 10, true, Direction::LEFT);
-    map.addBlock(std::make_shared<Tapis>(), 6, 10, true, Direction::LEFT);
-    map.addBlock(std::make_shared<Tapis>(), 7, 10, true, Direction::LEFT);
-    map.addBlock(std::make_shared<Tapis>(), 8, 10, true, Direction::LEFT);
-    map.addBlock(std::make_shared<Tapis>(), 9, 10, true, Direction::LEFT);
-    
-    map.addBlock(std::make_shared<Tapis>(), 10, 5, true, Direction::DOWN);
-    map.addBlock(std::make_shared<Tapis>(), 10, 6, true, Direction::DOWN);
-    map.addBlock(std::make_shared<Tapis>(), 10, 7, true, Direction::DOWN);
-    map.addBlock(std::make_shared<Tapis>(), 10, 8, true, Direction::DOWN);
-    map.addBlock(std::make_shared<Tapis>(), 10, 9, true, Direction::DOWN);
+    map.addBlock(std::make_shared<Salpetre>(), 10, 4);
+    map.addBlock(std::make_shared<MinerT1>(), 10, 4, true);
+    map.addBlock(std::make_shared<Tapis>(), 10, 5, true, Direction::UP);
+    map.addBlock(std::make_shared<Tapis>(), 10, 7, true, Direction::UP);
+    map.addBlock(std::make_shared<Chemical_PlantT1>(), 10, 6, true);
 
     generateAll(map);
 
