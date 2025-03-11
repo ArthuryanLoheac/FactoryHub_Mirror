@@ -31,4 +31,14 @@ Assembly_Workshop::Assembly_Workshop() : AFactory()
     Recette r_Electric_Pulse_Ammo(r_in2, r_out2, 5.f);
 
     _Recettes.push_back(r_Electric_Pulse_Ammo);
+
+    // Recette Rubber_Balls
+    std::vector<Item> r_in3;
+    r_in3.push_back(Item("Rubber"));
+    r_in3.push_back(Item("Reinforced_Socket"));
+    std::vector<Item> r_out3;
+    r_out3.push_back(Item("Rubber_Balls"));
+    Recette r_Rubber_Balls(r_in3, r_out3, 5.f);
+
+    _Recettes.push_back(r_Rubber_Balls);
 }
