@@ -13,6 +13,7 @@ FoundryT1::FoundryT1() : AFactory()
 
     std::vector<Item> r_in1;
     r_in1.push_back(Item("SteelRaw"));
+    _AcceptedItems.push_back(Item("SteelRaw"));
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Steel_BAR"));
     Recette r_steel_bar(r_in1, r_out1, 2.f);
