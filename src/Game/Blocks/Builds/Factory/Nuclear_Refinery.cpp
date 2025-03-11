@@ -18,7 +18,7 @@ Nuclear_Refinery::Nuclear_Refinery() : AFactory()
     r_in1.push_back(Item("Steel_BAR"));
     std::vector<Item> r_out1;
     r_out1.push_back(Item("Stabilized_Radioactive_Mater"));
-    Recette r_Stabilized_Radioactive_Mater(r_in1, r_out1, 5.f);
+    Recette r_Stabilized_Radioactive_Mater(r_in1, r_out1, 15.f);
 
     _Recettes.push_back(r_Stabilized_Radioactive_Mater);
 }
