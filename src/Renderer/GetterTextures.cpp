@@ -15,6 +15,7 @@ sdf::GetterTextures::GetterTextures()
         instance = this;
     else
         return;
+    textures["BuildGhost"] = new sdf::Texture("Assets/BuildGhost.png");
     // Load textures materials
     textures["Copper"] = new sdf::Texture("Assets/Copper.png");
     textures["CopperRaw"] = new sdf::Texture("Assets/CopperRaw.png");
