@@ -1,4 +1,5 @@
 #include "BuilderManager.hpp"
+#include <Tapis.hpp>
 /*
 ** EPITECH PROJECT, 2025
 ** FactoryHub
@@ -36,17 +37,21 @@ static bool isMouseClicked(GLFWwindow *window, int key, int lastKeyState)
     return glfwGetMouseButton(window, key) == GLFW_RELEASE && lastKeyState == GLFW_PRESS;
 }
 
-void BuilderManager::updateKeyState(GLFWwindow *window)
+void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
         set_isBuilding(!get_isBuilding());
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
         set_isBuilding(false);
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding)
+        map.addBlock(blockBuilding, 2, 2); // A FAIRE : récuperer position de la souris
 
     _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
         window, _lastKeyStates[GLFW_KEY_B]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
         window, _lastKeyStates[GLFW_MOUSE_BUTTON_2]);
+    _lastKeyStates[GLFW_MOUSE_BUTTON_1] = updateLastMouseState(GLFW_MOUSE_BUTTON_1,
+        window, _lastKeyStates[GLFW_MOUSE_BUTTON_1]);
 }
 
 BuilderManager::BuilderManager()
@@ -55,6 +60,8 @@ BuilderManager::BuilderManager()
         instance = this;
     _lastKeyStates[GLFW_KEY_B] = GLFW_RELEASE;
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_MOUSE_BUTTON_1] = GLFW_RELEASE;
+    blockBuilding = std::make_shared<Tapis>();
 }
 
 bool BuilderManager::get_isBuilding() const
