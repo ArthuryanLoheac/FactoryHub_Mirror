@@ -4,13 +4,13 @@
 ** File description:
 ** Smelter
 */
-#include "Arthuryan_Module.hpp"
+#include "High_Voltage_Generator.hpp"
 #include "GetterTextures.hpp"
 
-Arthuryan_Module::Arthuryan_Module() : AFactory()
+High_Voltage_Generator::High_Voltage_Generator() : AFactory()
 {
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Arthuryan_Module"), 0.0f);
+        sdf::GetterTextures::instance->getTexture("High_Voltage_Generator"), 0.0f);
 
     // Recette Condensed_Plasma
     std::vector<Item> r_in1;
