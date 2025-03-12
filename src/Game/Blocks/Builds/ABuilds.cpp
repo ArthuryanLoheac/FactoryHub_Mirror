@@ -53,7 +53,7 @@ ABuilds::ABuilds()
     _noMax = false;
     _isConstructible = false;
     _isBlocking = true;
-    sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
+    sdf::Texture textureStone = sdf::Texture("Assets/Error.png");
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
 }
 

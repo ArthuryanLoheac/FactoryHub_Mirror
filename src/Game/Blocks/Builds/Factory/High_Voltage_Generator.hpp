@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2025
 ** FactoryHub
 ** File description:
-** Arthuryan_Module
+** High_Voltage_Generator
 */
 
 #pragma once
 #include "AFactory.hpp"
 
-class Arthuryan_Module : public AFactory
+class High_Voltage_Generator : public AFactory
 {
     public:
-        Arthuryan_Module();
+        High_Voltage_Generator();
 };
