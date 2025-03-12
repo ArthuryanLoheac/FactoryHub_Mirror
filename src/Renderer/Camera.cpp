@@ -11,9 +11,13 @@
 
 #include <iostream>
 
+sdf::Camera *sdf::Camera::instance = nullptr;
+
 sdf::Camera::Camera(glm::vec2 position, float zoom, float velocity)
     : _position(position), _zoom(zoom), _velocity(velocity)
 {
+    if (instance == nullptr)
+        instance = this;
 }
 
 glm::mat4 sdf::Camera::getTransformationMatrix(void)

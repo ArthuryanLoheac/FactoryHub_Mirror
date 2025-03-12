@@ -13,6 +13,8 @@ namespace sdf
     class Camera
     {
         public:
+            static Camera *instance;
+
             enum Direction {
                 UP,
                 RIGHT,

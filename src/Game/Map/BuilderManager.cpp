@@ -43,9 +43,14 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
         set_isBuilding(!get_isBuilding());
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
         set_isBuilding(false);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding)
-        map.addBlock(blockBuilding, 2, 2); // A FAIRE : récuperer position de la souris
-
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding){
+        double xpos, ypos;
+        glfwGetCursorPos(window, &xpos, &ypos);
+        xpos = (int)-sdf::Camera::instance->getPosition().x;
+        ypos = (int)-sdf::Camera::instance->getPosition().y;
+        blockBuilding = std::make_shared<Tapis>();
+        map.addBlock(blockBuilding, (int)xpos, (int)ypos);
+    }
     _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
         window, _lastKeyStates[GLFW_KEY_B]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
