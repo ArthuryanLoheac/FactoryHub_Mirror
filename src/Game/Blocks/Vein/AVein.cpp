@@ -59,6 +59,11 @@ void AVein::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+Direction AVein::getDirection() const
+{
+    return Direction::UP;
+}
+
 size_t AVein::getPosXGrid() const
 {
     return posXGrid;

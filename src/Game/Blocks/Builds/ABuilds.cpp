@@ -123,6 +123,11 @@ size_t ABuilds::getPosXGrid() const
     return posXGrid;
 }
 
+Direction ABuilds::getDirection() const
+{
+    return Direction::UP;
+}
+
 size_t ABuilds::getPosYGrid() const
 {
     return posYGrid;

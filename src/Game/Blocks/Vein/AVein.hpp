@@ -33,6 +33,7 @@ class AVein : public IBlock
         void setPosXGrid(size_t posX) override;
         void setPosYGrid(size_t posY) override;
         virtual void setDirection(Direction direction) override;
+        virtual Direction getDirection() const override;
         size_t getPosXGrid() const override;
         size_t getPosYGrid() const override;
         bool getIsConstructible() const override;

@@ -63,6 +63,11 @@ void ATerrain::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+Direction ATerrain::getDirection() const
+{
+    return Direction::UP;
+}
+
 size_t ATerrain::getPosXGrid() const
 {
     return posXGrid;
