@@ -71,20 +71,24 @@ bool BuilderManager::get_isBuilding() const
 void BuilderManager::set_isBuilding(bool isBuilding)
 {
     _isBuilding = isBuilding;
-    printf("Building is %d\n", _isBuilding);
 }
 
 void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
 {
     double xpos, ypos;
     int x, y;
+    int height, width;
     std::vector<std::shared_ptr<IBlock>> blocks;
 
     glfwGetCursorPos(window, &xpos, &ypos);
-    x = (int)-sdf::Camera::instance->getPosition().x;
-    y = (int)-sdf::Camera::instance->getPosition().y;
-    x = std::max(0, (int)std::min((int)map.getSizeX() - 1, x));
-    y = std::max(0, (int)std::min((int)map.getSizeY() - 1, y));
+    glfwGetWindowSize(window, &width, &height);
+    glm::vec2 vec = sdf::Camera::instance->getPosition();
+    xpos = std::round((width / 2) - xpos) / (50 * sdf::Camera::instance->getZoom());
+    ypos = std::round((height / 2) - ypos) / (50 * sdf::Camera::instance->getZoom());    
+    x = -vec.x - (xpos - 0.5f);
+    y = -vec.y + (ypos + 0.5f);
+    printf("x: %d, y: %d, vec: %f, vec: %f, xpos: %f, ypos: %f; \n", x, y, vec.x, vec.y, xpos, ypos);
+
     try {
         blocks = map.getAllBlocksAtPos(x, y);
         if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
