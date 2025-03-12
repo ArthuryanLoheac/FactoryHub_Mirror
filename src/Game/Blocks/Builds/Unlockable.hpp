@@ -8,6 +8,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <algorithm>
 
 class Unlockable
 {
@@ -15,32 +16,34 @@ class Unlockable
         Unlockable();
         ~Unlockable();
 
-        void unlock_Advanced_Assembly_Workshop();
-        void unlock_Advanced_Smelter();
-        void unlock_Assembly_Workshop();
-        void unlock_Capacitor_Factory();
-        void unlock_Chemical_Plant();
-        void unlock_Cutting_Machine();
-        void unlock_Foundry();
-        void unlock_High_Voltage_Generator();
-        void unlock_Molding_Workshop();
-        void unlock_Nuclear_Refinery();
-        void unlock_Smelter();
-        void unlock_Wiring_Factory();
+        bool isUnlocked(std::string building);
 
-        void unlock_Auto_Turret();
-        void unlock_Pump_Turret();
-        void unlock_Gatling_Turret();
-        void unlock_Explosive_Turret();
-        void unlock_Eclipse_Turret();
-        void unlock_Burst_Turret();
-        void unlock_Sniper_Turret();
+        void unlockAdvanced_Assembly_Workshop();
+        void unlockAdvanced_Smelter();
+        void unlockAssembly_Workshop();
+        void unlockCapacitor_Factory();
+        void unlockChemical_Plant();
+        void unlockCutting_Machine();
+        void unlockFoundry();
+        void unlockHigh_Voltage_Generator();
+        void unlockMolding_Workshop();
+        void unlockNuclear_Refinery();
+        void unlockSmelter();
+        void unlockWiring_Factory();
 
-        void unlock_Treadmill_T2();
-        void unlock_Treadmill_T3();
+        void unlockAuto_Turret();
+        void unlockPump_Turret();
+        void unlockGatling_Turret();
+        void unlockExplosive_Turret();
+        void unlockEclipse_Turret();
+        void unlockBurst_Turret();
+        void unlockSniper_Turret();
 
-        void unlock_Miner_T2();
-        void unlock_Miner_T3();
+        void unlockTreadmill_T2();
+        void unlockTreadmill_T3();
+
+        void unlockMiner_T2();
+        void unlockMiner_T3();
 
         static Unlockable *instance;
     private:
@@ -64,7 +67,7 @@ class Unlockable
 //Chemical_Plant
 //Cutting_Machine
 //Foundry
-//High_Voltage_Generator
+//High_Voltage_Generator or Arthuryan_Module
 //Molding_Workshop
 //Nuclear_Refinery
 //Smelter
