@@ -43,14 +43,8 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
         set_isBuilding(!get_isBuilding());
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
         set_isBuilding(false);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding){
-        double xpos, ypos;
-        glfwGetCursorPos(window, &xpos, &ypos);
-        xpos = (int)-sdf::Camera::instance->getPosition().x;
-        ypos = (int)-sdf::Camera::instance->getPosition().y;
-        blockBuilding = std::make_shared<Tapis>();
-        map.addBlock(blockBuilding, (int)xpos, (int)ypos);
-    }
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding)
+        buildBlock(window, map);
     _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
         window, _lastKeyStates[GLFW_KEY_B]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
@@ -78,4 +72,24 @@ void BuilderManager::set_isBuilding(bool isBuilding)
 {
     _isBuilding = isBuilding;
     printf("Building is %d\n", _isBuilding);
+}
+
+void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
+{
+    double xpos, ypos;
+    int x, y;
+    std::vector<std::shared_ptr<IBlock>> blocks;
+
+    glfwGetCursorPos(window, &xpos, &ypos);
+    x = (int)-sdf::Camera::instance->getPosition().x;
+    y = (int)-sdf::Camera::instance->getPosition().y;
+    x = std::max(0, (int)std::min((int)map.getSizeX() - 1, x));
+    y = std::max(0, (int)std::min((int)map.getSizeY() - 1, y));
+    try {
+        blocks = map.getAllBlocksAtPos(x, y);
+        if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
+            return;
+        blockBuilding = std::make_shared<Tapis>();
+        map.addBlock(blockBuilding, x, y);
+    } catch (std::exception &e) {}
 }

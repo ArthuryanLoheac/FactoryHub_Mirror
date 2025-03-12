@@ -24,4 +24,5 @@ class BuilderManager
         BuilderManager();
         bool get_isBuilding() const;
         void set_isBuilding(bool isBuilding);
+        void buildBlock(GLFWwindow *window, MapGrid &map);
 };
