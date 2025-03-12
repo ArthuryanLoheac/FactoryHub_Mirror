@@ -11,8 +11,7 @@
 class BuilderManager
 {
     private:
-        int lastKeyStateB = GLFW_RELEASE;
-        int lastKeyStateMouse1 = GLFW_RELEASE;
+        std::map<int, int> _lastKeyStates;
         bool _isBuilding = false;
         IBlock *blockBuilding;
 

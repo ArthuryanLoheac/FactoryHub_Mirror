@@ -38,18 +38,23 @@ static bool isMouseClicked(GLFWwindow *window, int key, int lastKeyState)
 
 void BuilderManager::updateKeyState(GLFWwindow *window)
 {
-    if (isKeyClicked(window, GLFW_KEY_B, lastKeyStateB))
+    if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
         set_isBuilding(!get_isBuilding());
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, lastKeyStateMouse1) && _isBuilding)
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
         set_isBuilding(false);
-    lastKeyStateB = updateLastKeyState(GLFW_KEY_B, window, lastKeyStateB);
-    lastKeyStateMouse1 = updateLastMouseState(GLFW_MOUSE_BUTTON_2, window, lastKeyStateMouse1);
+
+    _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
+        window, _lastKeyStates[GLFW_KEY_B]);
+    _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
+        window, _lastKeyStates[GLFW_MOUSE_BUTTON_2]);
 }
 
 BuilderManager::BuilderManager()
 {
     if (instance == nullptr)
         instance = this;
+    _lastKeyStates[GLFW_KEY_B] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_MOUSE_BUTTON_2] = GLFW_RELEASE;
 }
 
 bool BuilderManager::get_isBuilding() const
