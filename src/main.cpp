@@ -42,6 +42,7 @@ int main(void)
         processInputs(renderer.getWindow(), renderer, map);
         map.update(renderer.getDeltaTime());
         renderer.clear();
+        builderManager.draw(renderer);
         map.draw(renderer);
         renderer.swapBuffers();
         renderer.pollEvent(map);

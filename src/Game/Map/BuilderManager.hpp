@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include "ABuilds.hpp"
 #include "MapGrid.hpp"
 
 class BuilderManager
@@ -15,6 +16,7 @@ class BuilderManager
         bool _isBuilding = false;
         std::shared_ptr<IBlock> blockBuilding;
         Direction _direction = Direction::UP;
+        sdf::Sprite *_sprite;
 
     public:
         static BuilderManager *instance;
@@ -27,6 +29,8 @@ class BuilderManager
         bool get_isBuilding() const;
         void set_isBuilding(bool isBuilding);
         void buildBlock(GLFWwindow *window, MapGrid &map);
-        
+        void draw(sdf::Renderer &renderer);
+        glm::vec2 getMousePos(GLFWwindow *window);
+
         std::shared_ptr<IBlock> getCopyBlockBuilding();
 };
