@@ -9,6 +9,7 @@
 
 ATerrain::ATerrain()
 {
+    _updatable = false;
     _isConstructible = false;
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
@@ -62,6 +63,11 @@ void ATerrain::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+Direction ATerrain::getDirection() const
+{
+    return Direction::UP;
+}
+
 size_t ATerrain::getPosXGrid() const
 {
     return posXGrid;
@@ -81,4 +87,9 @@ void ATerrain::update(float deltaTime, MapGrid map)
 void ATerrain::draw(sdf::Renderer &renderer)
 {
     _sprite->draw(renderer);
+}
+
+bool ATerrain::isUpdatable()
+{
+    return _updatable;
 }

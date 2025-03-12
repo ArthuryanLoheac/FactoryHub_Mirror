@@ -21,10 +21,12 @@ class ATerrain : public IBlock
         void setPosXGrid(size_t posX) override;
         void setPosYGrid(size_t posY) override;
         virtual void setDirection(Direction direction) override;
+        Direction getDirection() const override;
         size_t getPosXGrid() const override;
         size_t getPosYGrid() const override;
         void update(float deltaTime, MapGrid map) override;
         void draw(sdf::Renderer &renderer) override;
+        bool isUpdatable() override;
     protected:
         ATerrain();
         bool _isConstructible;
@@ -33,4 +35,5 @@ class ATerrain : public IBlock
         size_t posXGrid;
         size_t posYGrid;
         sdf::Sprite *_sprite;
+        bool _updatable;
 };

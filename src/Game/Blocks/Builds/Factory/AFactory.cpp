@@ -11,6 +11,7 @@ AFactory::AFactory()
 {
     _MaxIn = 50;
     _MaxOut = 50;
+    _updatable = true;
 }
 
 static int getNbItem(std::vector<Item> items, std::string name)
@@ -65,8 +66,10 @@ bool AFactory::addProdLastReceipe()
 {
     if (_prod.get() != nullptr) {
         if (_Outs.size() + _prod.get()->_Outs.size() <= _MaxOut) {
-            for (Item &it : _prod.get()->_Outs)
-                _Outs.push_back(it);
+            for (Item &it : _prod.get()->_Outs){
+                Item cpy = Item(it.getName());
+                _Outs.push_back(cpy);
+            }
         } else
             return false;
     }

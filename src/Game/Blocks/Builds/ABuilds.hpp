@@ -29,15 +29,18 @@ class ABuilds : public IBlock
         void setPosXGrid(size_t posX) override;
         void setPosYGrid(size_t posY) override;
         virtual void setDirection(Direction direction) override;
+        virtual Direction getDirection() const override;
         size_t getPosXGrid() const override;
         size_t getPosYGrid() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) = 0;
         virtual void draw(sdf::Renderer &renderer) override;
+        bool isUpdatable() override;
 
     protected:
         ABuilds();
+        bool _updatable;
         float _posY;
         float _posX;
         size_t posXGrid;

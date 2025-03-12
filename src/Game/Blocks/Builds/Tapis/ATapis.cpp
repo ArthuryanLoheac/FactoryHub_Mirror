@@ -160,6 +160,7 @@ void ATapis::updateAllItemsTransitting(float deltaTime)
 void ATapis::updatePushItemFront(MapGrid map)
 {
     ABuilds *block;
+    ATapis *tapis;
     std::vector<std::shared_ptr<IBlock>> blocksBehind;
 
     for (size_t i = 0; i < _itemsTransitting.size(); i++) {
@@ -169,6 +170,8 @@ void ATapis::updatePushItemFront(MapGrid map)
         if (blocksBehind.size() == 0) return;
         block = dynamic_cast<ABuilds *>(blocksBehind[blocksBehind.size() - 1].get());
         if (block == nullptr) return;
+        tapis = dynamic_cast<ATapis *>(block);
+        if (tapis != nullptr && tapis->getDirection() == (_direction + 2) % 4) return;
         if (block->addElement(std::get<1>(_itemsTransitting[i])) == true) {
             _itemsTransitting.erase(_itemsTransitting.begin() + i);
             return;
@@ -192,9 +195,14 @@ void ATapis::updatePosSprite()
 
 void ATapis::draw(sdf::Renderer &renderer)
 {
-    for (size_t i = 0; i < _itemsTransitting.size(); i++)
+    for (int i = _itemsTransitting.size() - 1; i >= 0; i--)
         std::get<1>(_itemsTransitting[i]).draw(renderer);
     _sprite->draw(renderer);
+}
+
+Direction ATapis::getDirection() const
+{
+    return _direction;
 }
 
 void ATapis::updateTakeBehind(MapGrid map)
@@ -218,6 +226,7 @@ void ATapis::updateTakeBehind(MapGrid map)
 
 ATapis::ATapis()
 {
+    _updatable = true;
     _AllItemAccepted = true;
     _direction = UP;
 }

@@ -26,10 +26,12 @@ class IBlock
         virtual void setPosXGrid(size_t posX) = 0;
         virtual void setPosYGrid(size_t posY) = 0;
         virtual void setDirection(Direction direction) = 0;
+        virtual Direction getDirection() const = 0;
         virtual size_t getPosXGrid() const = 0;
         virtual size_t getPosYGrid() const = 0;
         virtual bool getIsConstructible() const = 0;
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime, MapGrid map) = 0;
         virtual void draw(sdf::Renderer &renderer) = 0;
+        virtual bool isUpdatable() = 0;
 };

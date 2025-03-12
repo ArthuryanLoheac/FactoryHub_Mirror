@@ -15,6 +15,7 @@ sdf::GetterTextures::GetterTextures()
         instance = this;
     else
         return;
+    textures["BuildGhost"] = new sdf::Texture("Assets/BuildGhost.png");
     // Load textures materials
     textures["Copper"] = new sdf::Texture("Assets/Copper.png");
     textures["CopperRaw"] = new sdf::Texture("Assets/CopperRaw.png");
@@ -45,6 +46,7 @@ sdf::GetterTextures::GetterTextures()
     textures["Condensed_Plasma"] = new sdf::Texture("Assets/Condensed_Plasma.png");
     textures["High_Power_EMP_Charge"] = new sdf::Texture("Assets/High_Power_EMP_Charge.png");
     textures["Conductive_Socket"] = new sdf::Texture("Assets/Conductive_Socket.png");
+    textures["Chemical_Plant"] = new sdf::Texture("Assets/Chemical_Plant.png");
     // Load textures ammunitions
     textures["Perforating_Projectile"] = new sdf::Texture("Assets/Perforating_Projectile.png");
     textures["Black_Powder_Ammo"] = new sdf::Texture("Assets/Black_Powder_Ammo.png");

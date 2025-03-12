@@ -23,6 +23,7 @@ class ATapis : public ABuilds
         void updatePushItemFront(MapGrid map);
         void updatePosSprite();
         void draw(sdf::Renderer &renderer) override;
+        Direction getDirection() const;
     protected:
         ATapis();
         std::vector<std::tuple<float, Item, Direction>> _itemsTransitting;

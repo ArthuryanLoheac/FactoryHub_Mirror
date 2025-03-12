@@ -51,6 +51,7 @@ ABuilds::ABuilds()
 {
     _AllItemAccepted = false;
     _noMax = false;
+    _updatable = false;
     _isConstructible = false;
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Error.png");
@@ -122,6 +123,11 @@ size_t ABuilds::getPosXGrid() const
     return posXGrid;
 }
 
+Direction ABuilds::getDirection() const
+{
+    return Direction::UP;
+}
+
 size_t ABuilds::getPosYGrid() const
 {
     return posYGrid;
@@ -140,6 +146,11 @@ bool ABuilds::getIsBlocking() const
 void ABuilds::draw(sdf::Renderer &renderer)
 {
     _sprite->draw(renderer);
+}
+
+bool ABuilds::isUpdatable()
+{
+    return _updatable;
 }
 
 #pragma endregion GettersSetters
