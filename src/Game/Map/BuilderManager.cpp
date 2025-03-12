@@ -8,21 +8,43 @@
 
 BuilderManager *BuilderManager::instance = nullptr;
 
-int BuilderManager::getLastKeyState() const
+int BuilderManager::updateLastKeyState(int Key, GLFWwindow *window, int lastKey)
 {
-    return lastKeyState;
+    if (glfwGetKey(window, Key) == GLFW_RELEASE)
+        return GLFW_RELEASE;
+    if (glfwGetKey(window, Key) == GLFW_PRESS)
+        return GLFW_PRESS;
+    return lastKey;
+}
+
+int BuilderManager::updateLastMouseState(int Key, GLFWwindow *window, int lastKey)
+{
+    if (glfwGetMouseButton(window, Key) == GLFW_RELEASE)
+        return GLFW_RELEASE;
+    if (glfwGetMouseButton(window, Key) == GLFW_PRESS)
+        return GLFW_PRESS;
+    return lastKey;
+}
+
+static bool isKeyClicked(GLFWwindow *window, int key, int lastKeyState)
+{
+    return glfwGetKey(window, key) == GLFW_RELEASE && lastKeyState == GLFW_PRESS;
+}
+
+static bool isMouseClicked(GLFWwindow *window, int key, int lastKeyState)
+{
+    return glfwGetMouseButton(window, key) == GLFW_RELEASE && lastKeyState == GLFW_PRESS;
 }
 
 void BuilderManager::updateKeyState(GLFWwindow *window)
 {
-    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE && lastKeyState == GLFW_PRESS)
+    if (isKeyClicked(window, GLFW_KEY_B, lastKeyStateB))
         set_isBuilding(!get_isBuilding());
-    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
-        lastKeyState = GLFW_RELEASE;
-    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
-        lastKeyState = GLFW_PRESS;
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, lastKeyStateMouse1) && _isBuilding)
+        set_isBuilding(false);
+    lastKeyStateB = updateLastKeyState(GLFW_KEY_B, window, lastKeyStateB);
+    lastKeyStateMouse1 = updateLastMouseState(GLFW_MOUSE_BUTTON_2, window, lastKeyStateMouse1);
 }
-
 
 BuilderManager::BuilderManager()
 {

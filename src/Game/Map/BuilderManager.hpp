@@ -11,14 +11,16 @@
 class BuilderManager
 {
     private:
-        int lastKeyState = GLFW_RELEASE;
+        int lastKeyStateB = GLFW_RELEASE;
+        int lastKeyStateMouse1 = GLFW_RELEASE;
         bool _isBuilding = false;
         IBlock *blockBuilding;
 
     public:
         static BuilderManager *instance;
 
-        int getLastKeyState() const;
+        int updateLastKeyState(int Key, GLFWwindow *window, int lastKey);
+        int updateLastMouseState(int Key, GLFWwindow *window, int lastKey);
         void updateKeyState(GLFWwindow *window);
         BuilderManager();
         bool get_isBuilding() const;
