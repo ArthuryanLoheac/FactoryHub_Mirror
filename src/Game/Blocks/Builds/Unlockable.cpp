@@ -7,12 +7,18 @@
 
 #include "Unlockable.hpp"
 
+Unlockable *Unlockable::instance = nullptr;
+
 Unlockable::Unlockable(/* args */)
 {
-    _unlockedList.push_back("treadmill");
-    _unlockedList.push_back("MinerT1");
-    _unlockedList.push_back("Turret");
-    _unlockedList.push_back("Base");
+    if (instance == nullptr)
+        instance = this;
+    else
+        return;
+    _unlockedBuild.push_back("treadmill");
+    _unlockedBuild.push_back("MinerT1");
+    _unlockedBuild.push_back("Turret");
+    _unlockedBuild.push_back("Base");
 }
 
 Unlockable::~Unlockable()
