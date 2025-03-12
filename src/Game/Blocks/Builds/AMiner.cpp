@@ -10,6 +10,7 @@
 
 AMiner::AMiner() : ABuilds()
 {
+    _updatable = true;
     _MaxIn = 0;
     _MaxOut = 100;
 }

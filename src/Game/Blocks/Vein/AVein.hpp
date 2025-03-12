@@ -19,6 +19,7 @@ class AVein : public IBlock
         size_t posYGrid;
         bool _isConstructible;
         bool _isBlocking;
+        bool _updatable;
     
         Item _ressource;
         AVein(Item item);
@@ -38,4 +39,5 @@ class AVein : public IBlock
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) override;
         void draw(sdf::Renderer &renderer) override;
+        bool isUpdatable() override;
 };

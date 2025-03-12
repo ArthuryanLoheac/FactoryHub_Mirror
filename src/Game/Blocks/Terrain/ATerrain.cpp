@@ -9,6 +9,7 @@
 
 ATerrain::ATerrain()
 {
+    _updatable = false;
     _isConstructible = false;
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
@@ -81,4 +82,9 @@ void ATerrain::update(float deltaTime, MapGrid map)
 void ATerrain::draw(sdf::Renderer &renderer)
 {
     _sprite->draw(renderer);
+}
+
+bool ATerrain::isUpdatable()
+{
+    return _updatable;
 }

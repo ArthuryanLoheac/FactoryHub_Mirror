@@ -35,9 +35,11 @@ class ABuilds : public IBlock
         bool getIsBlocking() const override;
         virtual void update(float deltaTime, MapGrid map) = 0;
         virtual void draw(sdf::Renderer &renderer) override;
+        bool isUpdatable() override;
 
     protected:
         ABuilds();
+        bool _updatable;
         float _posY;
         float _posX;
         size_t posXGrid;

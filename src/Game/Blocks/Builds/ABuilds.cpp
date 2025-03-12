@@ -51,6 +51,7 @@ ABuilds::ABuilds()
 {
     _AllItemAccepted = false;
     _noMax = false;
+    _updatable = false;
     _isConstructible = false;
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
@@ -140,6 +141,11 @@ bool ABuilds::getIsBlocking() const
 void ABuilds::draw(sdf::Renderer &renderer)
 {
     _sprite->draw(renderer);
+}
+
+bool ABuilds::isUpdatable()
+{
+    return _updatable;
 }
 
 #pragma endregion GettersSetters

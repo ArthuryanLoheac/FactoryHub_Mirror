@@ -14,6 +14,7 @@ AVein::AVein(Item item)
     _isBlocking = false;
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
+    _updatable = false;
 }
 
 Item AVein::getRessource() const
@@ -88,4 +89,9 @@ void AVein::update(float deltaTime, MapGrid map)
 void AVein::draw(sdf::Renderer &renderer)
 {
     _sprite->draw(renderer);
+}
+
+bool AVein::isUpdatable()
+{
+    return _updatable;
 }

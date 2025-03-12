@@ -32,4 +32,5 @@ class IBlock
         virtual bool getIsBlocking() const = 0;
         virtual void update(float deltaTime, MapGrid map) = 0;
         virtual void draw(sdf::Renderer &renderer) = 0;
+        virtual bool isUpdatable() = 0;
 };

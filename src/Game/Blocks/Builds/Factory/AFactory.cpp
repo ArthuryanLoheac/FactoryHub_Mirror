@@ -11,6 +11,7 @@ AFactory::AFactory()
 {
     _MaxIn = 50;
     _MaxOut = 50;
+    _updatable = true;
 }
 
 static int getNbItem(std::vector<Item> items, std::string name)

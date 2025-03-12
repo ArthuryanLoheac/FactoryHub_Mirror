@@ -218,6 +218,7 @@ void ATapis::updateTakeBehind(MapGrid map)
 
 ATapis::ATapis()
 {
+    _updatable = true;
     _AllItemAccepted = true;
     _direction = UP;
 }
