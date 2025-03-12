@@ -22,10 +22,10 @@ void AMiner::update(float deltaTime, MapGrid map)
         int y = getPosY();
         std::shared_ptr<IBlock> block = map.GetIBlockAtPos(x, y, 0);
         std::shared_ptr<AVein> vein = std::dynamic_pointer_cast<AVein>(block);
-        if (vein) {
+        if (vein)
             setMiningItem(vein->getRessource());
-        }
-        _Outs.push_back(_MiningItem);
+        Item item = Item(_MiningItem.getName());
+        _Outs.push_back(item);
         _clockMining -= _speedMining;
     }
 }
