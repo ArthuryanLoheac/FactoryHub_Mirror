@@ -64,6 +64,8 @@ AEnemy::AEnemy(std::shared_ptr<ITurret> turret, float speed, float health)
     _speed = speed;
     _health = health;
     _maxHealth = health;
+    sdf::Texture textureError = sdf::Texture("Assets/Error.png");
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureError);
 }
 
 AEnemy::AEnemy()

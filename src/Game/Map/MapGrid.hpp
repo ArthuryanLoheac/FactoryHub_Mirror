@@ -24,6 +24,7 @@ class MapGrid
         std::shared_ptr<IBlock> GetIBlockAtPos(size_t X, size_t Y, size_t Z);
         std::vector<std::shared_ptr<IBlock>> getAllBlocksAtPos(size_t X, size_t Y);
         void addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, Direction direction = Direction::UP);
+        void addEnemy(std::shared_ptr<AEnemy> enemy, size_t X, size_t Y, Direction direction = Direction::UP);
         void addBorder(void);
         void deleteBlock(size_t X, size_t Y, size_t Z);
         size_t getSizeX() const { return _sizeX; }

@@ -53,6 +53,18 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, Direct
         _blocksUpdated.push_back(block);
 }
 
+void addEnemy(std::shared_ptr<AEnemy> enemy, size_t X, size_t Y, Direction direction)
+{
+    if (X >= _sizeX || Y >= _sizeY)
+        throw std::out_of_range("Out of range");
+    enemy->setPosX(X);
+    enemy->setPosY(Y);
+    enemy->setPosXGrid(X);
+    enemy->setPosYGrid(Y);
+    enemy->setDirection(direction);
+    _grid[X][Y].push_back(enemy);
+}
+
 void MapGrid::addBorder(void)
 {
     for (size_t i = 0; i < this->getSizeX(); i++) {

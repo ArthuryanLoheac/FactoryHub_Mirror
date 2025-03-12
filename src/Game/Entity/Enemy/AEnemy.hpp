@@ -8,6 +8,8 @@
 #include "AEntity.hpp"
 #include "ITurret.hpp"
 #include <memory>
+#include "Sprite.hpp"
+#include "Sdf.hpp"
 
 class AEnemy : public AEntity
 {
@@ -22,11 +24,12 @@ class AEnemy : public AEntity
         void setMaxHealth(float maxHealth);
         void setSpeed(float speed);
         float getSpeed() const;
-    private:
+    protected:
         std::shared_ptr<ITurret> _turret;
         float _speed;
         float _health;
         float _maxHealth;
+        sdf::Sprite *_sprite;
         AEnemy(std::shared_ptr<ITurret> turret, float speed, float health);
         AEnemy();
 };
