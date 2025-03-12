@@ -41,12 +41,16 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
         set_isBuilding(!get_isBuilding());
+    if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R]))
+        _direction = (Direction)((_direction + 3) % 4);
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
         set_isBuilding(false);
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding)
         buildBlock(window, map);
     _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
         window, _lastKeyStates[GLFW_KEY_B]);
+    _lastKeyStates[GLFW_KEY_R] = updateLastKeyState(GLFW_KEY_R,
+        window, _lastKeyStates[GLFW_KEY_R]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
         window, _lastKeyStates[GLFW_MOUSE_BUTTON_2]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_1] = updateLastMouseState(GLFW_MOUSE_BUTTON_1,
@@ -58,6 +62,7 @@ BuilderManager::BuilderManager()
     if (instance == nullptr)
         instance = this;
     _lastKeyStates[GLFW_KEY_B] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_R] = GLFW_RELEASE;
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = GLFW_RELEASE;
     _lastKeyStates[GLFW_MOUSE_BUTTON_1] = GLFW_RELEASE;
     blockBuilding = std::make_shared<Tapis>();
@@ -71,6 +76,7 @@ bool BuilderManager::get_isBuilding() const
 void BuilderManager::set_isBuilding(bool isBuilding)
 {
     _isBuilding = isBuilding;
+    _direction = Direction::UP;
 }
 
 void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
@@ -87,13 +93,24 @@ void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
     ypos = std::round((height / 2) - ypos) / (50 * sdf::Camera::instance->getZoom());    
     x = -vec.x - (xpos - 0.5f);
     y = -vec.y + (ypos + 0.5f);
-    printf("x: %d, y: %d, vec: %f, vec: %f, xpos: %f, ypos: %f; \n", x, y, vec.x, vec.y, xpos, ypos);
 
     try {
         blocks = map.getAllBlocksAtPos(x, y);
         if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
             return;
-        blockBuilding = std::make_shared<Tapis>();
-        map.addBlock(blockBuilding, x, y);
+        std::shared_ptr<IBlock> block = getCopyBlockBuilding();
+        map.addBlock(block, x, y, _direction);
     } catch (std::exception &e) {}
+}
+
+std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
+{
+    if (dynamic_cast<Tapis *>(blockBuilding.get()))
+        return std::make_shared<Tapis>();
+    return blockBuilding;
+}
+
+void BuilderManager::setBlockBuilding(std::shared_ptr<IBlock> block)
+{
+    blockBuilding = block;
 }
