@@ -17,6 +17,8 @@ class ASpawner : public IBlock
         void NewWave();
         void draw(sdf::Renderer &renderer) override;
         virtual void setDirection(Direction direction) override;
+        void setDestroy() override;
+        bool getDestroy() const override;
     protected:
         ASpawner();
         std::vector<float> coolDownWaves;
@@ -24,6 +26,7 @@ class ASpawner : public IBlock
         size_t waveIndex;
         size_t nbWave;
         sdf::Sprite *_sprite;
+        bool _isDestroy = false;
 
 };
 

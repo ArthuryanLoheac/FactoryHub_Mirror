@@ -29,6 +29,8 @@ class ABuilds : public IBlock
         void setPosXGrid(size_t posX) override;
         void setPosYGrid(size_t posY) override;
         virtual void setDirection(Direction direction) override;
+        void setDestroy() override;
+        bool getDestroy() const override;
         virtual Direction getDirection() const override;
         size_t getPosXGrid() const override;
         size_t getPosYGrid() const override;
@@ -51,6 +53,8 @@ class ABuilds : public IBlock
 
         bool _isConstructible;
         bool _isBlocking;
+
+        bool _isDestroy = false;
         
         std::vector<Item> _AcceptedItems;
         bool _AllItemAccepted;

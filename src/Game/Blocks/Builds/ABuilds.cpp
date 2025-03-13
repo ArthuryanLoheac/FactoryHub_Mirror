@@ -103,6 +103,16 @@ void ABuilds::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+void ABuilds::setDestroy()
+{
+    _isDestroy = true;
+}
+
+bool ABuilds::getDestroy() const
+{
+    return _isDestroy;
+}
+
 float ABuilds::getPosY() const
 {
     return _posY;

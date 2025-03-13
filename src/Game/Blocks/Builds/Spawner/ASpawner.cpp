@@ -31,6 +31,16 @@ void ASpawner::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+void ASpawner::setDestroy()
+{
+    _isDestroy = true;
+}
+
+bool ASpawner::getDestroy() const
+{
+    return _isDestroy;
+}
+
 ASpawner::ASpawner()
 {
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
