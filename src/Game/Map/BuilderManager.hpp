@@ -11,12 +11,19 @@
 
 class BuilderManager
 {
+    public:
+        enum typeBuild {
+            NONE,
+            BUILD,
+            DESTROY
+        };
     private:
         std::map<int, int> _lastKeyStates;
-        bool _isBuilding = false;
+        typeBuild _isBuilding = NONE;
         std::shared_ptr<IBlock> blockBuilding;
         Direction _direction = Direction::UP;
-        sdf::Sprite *_sprite;
+        sdf::Sprite *_spriteBuild;
+        sdf::Sprite *_spriteDestroy;
 
     public:
         static BuilderManager *instance;
@@ -27,8 +34,9 @@ class BuilderManager
         void setBlockBuilding(std::shared_ptr<IBlock> block);
         BuilderManager();
         bool get_isBuilding() const;
-        void set_isBuilding(bool isBuilding);
+        void set_isBuilding(typeBuild isBuilding);
         void buildBlock(GLFWwindow *window, MapGrid &map);
+        void destroyBlock(GLFWwindow *window, MapGrid &map);
         void draw(sdf::Renderer &renderer);
         glm::vec2 getMousePos(GLFWwindow *window);
 

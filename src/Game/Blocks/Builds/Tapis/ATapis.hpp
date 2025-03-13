@@ -28,6 +28,7 @@ class ATapis : public ABuilds
         ATapis();
         std::vector<std::tuple<float, Item, Direction>> _itemsTransitting;
         Direction _direction;
+        bool _isDestroy = false;
         float _deltaMinPercent; // 0.10f = 10 objects max on tapis (1 each 10%)
         float _travelTime; // duree pour un objet de parcourir le tapis
     private:

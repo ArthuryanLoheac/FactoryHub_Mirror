@@ -26,6 +26,8 @@ class IBlock
         virtual void setPosXGrid(size_t posX) = 0;
         virtual void setPosYGrid(size_t posY) = 0;
         virtual void setDirection(Direction direction) = 0;
+        virtual void setDestroy() = 0;
+        virtual bool getDestroy() const = 0;
         virtual Direction getDirection() const = 0;
         virtual size_t getPosXGrid() const = 0;
         virtual size_t getPosYGrid() const = 0;

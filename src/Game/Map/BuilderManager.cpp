@@ -40,34 +40,45 @@ static bool isMouseClicked(GLFWwindow *window, int key, int lastKeyState)
 void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
-        set_isBuilding(!get_isBuilding());
-    if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R])){
+        set_isBuilding((_isBuilding == BUILD) ? NONE : BUILD);
+    if (isKeyClicked(window, GLFW_KEY_V, _lastKeyStates[GLFW_KEY_V]))
+        set_isBuilding((_isBuilding == DESTROY) ? NONE : DESTROY);
+    if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R]) && _isBuilding == BUILD) {
         _direction = (Direction)((_direction + 3) % 4);
-        _sprite->setDirection(_direction * 90);
+        _spriteBuild->setDirection(_direction * 90);
     }
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding)
-        set_isBuilding(false);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding)
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding != NONE)
+        set_isBuilding(NONE);
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD)
         buildBlock(window, map);
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == DESTROY)
+        destroyBlock(window, map);
     _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
         window, _lastKeyStates[GLFW_KEY_B]);
+    _lastKeyStates[GLFW_KEY_V] = updateLastKeyState(GLFW_KEY_V,
+        window, _lastKeyStates[GLFW_KEY_V]);
     _lastKeyStates[GLFW_KEY_R] = updateLastKeyState(GLFW_KEY_R,
         window, _lastKeyStates[GLFW_KEY_R]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
         window, _lastKeyStates[GLFW_MOUSE_BUTTON_2]);
     _lastKeyStates[GLFW_MOUSE_BUTTON_1] = updateLastMouseState(GLFW_MOUSE_BUTTON_1,
         window, _lastKeyStates[GLFW_MOUSE_BUTTON_1]);
-    if (_isBuilding)
-        _sprite->setPosition(glm::vec3(getMousePos(window), 0.0f));
+    if (_isBuilding == BUILD)
+        _spriteBuild->setPosition(glm::vec3(getMousePos(window), 0.0f));
+    if (_isBuilding == DESTROY)
+        _spriteDestroy->setPosition(glm::vec3(getMousePos(window), 0.0f));
 }
 
 BuilderManager::BuilderManager()
 {
     if (instance == nullptr)
         instance = this;
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+    _spriteBuild = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("BuildGhost"), 0.0f);
+    _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture("DestroyGhost"), 0.0f);
     _lastKeyStates[GLFW_KEY_B] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_V] = GLFW_RELEASE;
     _lastKeyStates[GLFW_KEY_R] = GLFW_RELEASE;
     _lastKeyStates[GLFW_MOUSE_BUTTON_2] = GLFW_RELEASE;
     _lastKeyStates[GLFW_MOUSE_BUTTON_1] = GLFW_RELEASE;
@@ -79,7 +90,7 @@ bool BuilderManager::get_isBuilding() const
     return _isBuilding;
 }
 
-void BuilderManager::set_isBuilding(bool isBuilding)
+void BuilderManager::set_isBuilding(typeBuild isBuilding)
 {
     _isBuilding = isBuilding;
     _direction = Direction::UP;
@@ -99,10 +110,25 @@ void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
     } catch (std::exception &e) {}
 }
 
+void BuilderManager::destroyBlock(GLFWwindow *window, MapGrid &map)
+{
+    glm::vec2 pos = getMousePos(window);
+    std::vector<std::shared_ptr<IBlock>> blocks;
+
+    try {
+        blocks = map.getAllBlocksAtPos(pos.x, pos.y);
+        if (blocks.size() == 0 || dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get()) == nullptr)
+            return;
+        map.deleteBlock(pos.x, pos.y, blocks.size() - 1);
+    } catch (std::exception &e) {}
+}
+
 void BuilderManager::draw(sdf::Renderer &renderer)
 {
-    if (_isBuilding)
-        _sprite->draw(renderer);
+    if (_isBuilding == BUILD)
+        _spriteBuild->draw(renderer);
+    if (_isBuilding == DESTROY)
+        _spriteDestroy->draw(renderer);
 }
 
 glm::vec2 BuilderManager::getMousePos(GLFWwindow *window)
