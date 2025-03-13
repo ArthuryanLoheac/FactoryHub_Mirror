@@ -30,7 +30,7 @@ void WindowsManager::update(MapGrid map, sdf::Renderer &renderer)
     (this->*std::get<1>(_functs[_state]))(map, renderer);
 }
 
-void WindowsManager::processInputs(GLFWwindow *window, MapGrid &map)
+void WindowsManager::processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map)
 {
-    (this->*std::get<2>(_functs[_state]))(window, map);
+    (this->*std::get<2>(_functs[_state]))(window, renderer, map);
 }

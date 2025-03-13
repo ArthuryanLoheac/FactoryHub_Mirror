@@ -24,11 +24,11 @@ class WindowsManager
         WindowsManager();
         void draw(MapGrid map, sdf::Renderer &renderer);
         void update(MapGrid map, sdf::Renderer &renderer);
-        void processInputs(GLFWwindow *window, MapGrid &map);
+        void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
         std::map<State, std::tuple< void(WindowsManager::*)(MapGrid map, sdf::Renderer &renderer),// Draw
                                     void(WindowsManager::*)(MapGrid map, sdf::Renderer &renderer),// Update
-                                    void(WindowsManager::*)(GLFWwindow *window, MapGrid &map) // ProcessInputs
+                                    void(WindowsManager::*)(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map) // ProcessInputs
                                 >> _functs;
     private:
         State _state;
@@ -36,10 +36,10 @@ class WindowsManager
 
         void drawGame(MapGrid map, sdf::Renderer &renderer);
         void updateGame(MapGrid map, sdf::Renderer &renderer);
-        void processInputsGame(GLFWwindow *window, MapGrid &map);
+        void processInputsGame(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
         void drawMenu(MapGrid map, sdf::Renderer &renderer);
         void updateMenu(MapGrid map, sdf::Renderer &renderer);
-        void processInputsMenu(GLFWwindow *window, MapGrid &map);
+        void processInputsMenu(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 };
 

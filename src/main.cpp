@@ -31,12 +31,10 @@ int main(void)
     WindowsManager windowsManager;
 
     generateAll(map);
-    sdf::Camera::instance->setPosition(glm::vec2(-((float)map.getSizeX() / 2), -((float)map.getSizeY() / 2)));
-    sdf::Camera::instance->setZoom(0.1f);
 
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
-        windowsManager.processInputs(renderer.getWindow(), map);
+        windowsManager.processInputs(renderer.getWindow(), renderer, map);
         windowsManager.update(map, renderer);
         renderer.clear();
         windowsManager.draw(map, renderer);

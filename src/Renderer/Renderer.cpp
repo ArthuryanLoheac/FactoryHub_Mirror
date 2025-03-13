@@ -72,16 +72,7 @@ void sdf::Renderer::pollEvent(MapGrid &map)
     _deltaTime = glfwGetTime() - _lastFrame;
     _lastFrame = glfwGetTime();
 
-    glfwSetScrollCallback(_window->get(), scroll_callback);
     glfwPollEvents();
-    if (glfwGetKey(_window->get(), GLFW_KEY_W) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::UP, _deltaTime, map.getSizeX(), map.getSizeY());
-    if (glfwGetKey(_window->get(), GLFW_KEY_S) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::DOWN, _deltaTime, map.getSizeX(), map.getSizeY());
-    if (glfwGetKey(_window->get(), GLFW_KEY_D) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::RIGHT, _deltaTime, map.getSizeX(), map.getSizeY());
-    if (glfwGetKey(_window->get(), GLFW_KEY_A) == GLFW_PRESS)
-        _camera.move(sdf::Camera::Direction::LEFT, _deltaTime, map.getSizeX(), map.getSizeY());
 }
 
 GLFWwindow *sdf::Renderer::getWindow(void)

@@ -16,7 +16,7 @@ void WindowsManager::updateMenu(MapGrid map, sdf::Renderer &renderer)
 {
 }
 
-void WindowsManager::processInputsMenu(GLFWwindow *window, MapGrid &map)
+void WindowsManager::processInputsMenu(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
