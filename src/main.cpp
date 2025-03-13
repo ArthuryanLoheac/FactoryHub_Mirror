@@ -18,6 +18,7 @@
 #include "Salpetre.hpp"
 #include "GetterTextures.hpp"
 #include "BuilderManager.hpp"
+#include "WindowsManager.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
@@ -27,6 +28,7 @@ int main(void)
     sdf::GetterTextures getterTextures;
     BuilderManager builderManager;
     MapGrid map(100, 100);
+    WindowsManager windowsManager;
 
     generateAll(map);
     sdf::Camera::instance->setPosition(glm::vec2(-((float)map.getSizeX() / 2), -((float)map.getSizeY() / 2)));
@@ -34,11 +36,10 @@ int main(void)
 
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
-        processInputs(renderer.getWindow(), renderer, map);
-        map.update(renderer.getDeltaTime());
+        windowsManager.processInputs(renderer.getWindow(), map);
+        windowsManager.update(map, renderer);
         renderer.clear();
-        builderManager.draw(renderer);
-        map.draw(renderer);
+        windowsManager.draw(map, renderer);
         renderer.swapBuffers();
         renderer.pollEvent(map);
     }
