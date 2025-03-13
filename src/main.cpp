@@ -28,14 +28,9 @@ int main(void)
     BuilderManager builderManager;
     MapGrid map(100, 100);
 
-    // FOR TEST TO REMOVE
-    map.addBlock(std::make_shared<Salpetre>(), 10, 4);
-    map.addBlock(std::make_shared<MinerT1>(), 10, 4);
-    map.addBlock(std::make_shared<Tapis>(), 10, 5, Direction::UP);
-    map.addBlock(std::make_shared<Tapis>(), 10, 7, Direction::UP);
-    map.addBlock(std::make_shared<Chemical_PlantT1>(), 10, 6);
-
     generateAll(map);
+    sdf::Camera::instance->setPosition(glm::vec2(-((float)map.getSizeX() / 2), -((float)map.getSizeY() / 2)));
+    sdf::Camera::instance->setZoom(0.1f);
 
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
