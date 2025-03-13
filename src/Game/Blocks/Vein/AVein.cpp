@@ -59,6 +59,16 @@ void AVein::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+void AVein::setDestroy()
+{
+    _isDestroy = true;
+}
+
+bool AVein::getDestroy() const
+{
+    return _isDestroy;
+}
+
 Direction AVein::getDirection() const
 {
     return Direction::UP;

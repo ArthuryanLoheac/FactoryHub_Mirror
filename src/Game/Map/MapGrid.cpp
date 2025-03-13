@@ -84,7 +84,14 @@ void MapGrid::deleteBlock(size_t X, size_t Y, size_t Z)
 {
     if (X >= _sizeX || Y >= _sizeY || Z >= _grid[X][Y].size())
         throw std::out_of_range("Out of range");
+    _grid[X][Y][Z]->setDestroy();
     _grid[X][Y].erase(_grid[X][Y].begin() + Z);
+    for (int i = 0; i < _blocksUpdated.size(); i++) {
+        if (_blocksUpdated[i].get()->getDestroy() == true){
+            _blocksUpdated.erase(_blocksUpdated.begin() + i);
+            return;
+        }
+    }
 }
 
 void MapGrid::draw(sdf::Renderer &renderer)

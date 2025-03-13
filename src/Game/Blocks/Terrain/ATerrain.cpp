@@ -63,6 +63,16 @@ void ATerrain::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
+void ATerrain::setDestroy()
+{
+    _isDestroy = true;
+}
+
+bool ATerrain::getDestroy() const
+{
+    return _isDestroy;
+}
+
 Direction ATerrain::getDirection() const
 {
     return Direction::UP;
