@@ -9,6 +9,8 @@
 
 WindowsManager::WindowsManager()
 {
+    _startMenu = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture("StartMenu"));
     _state = State::MENU;
     _functs[State::GAME] = std::make_tuple( &WindowsManager::drawGame,
                                             &WindowsManager::updateGame,

@@ -11,6 +11,7 @@
 #include <map>
 #include "MapGrid.hpp"
 #include "BuilderManager.hpp"
+#include "GetterTextures.hpp"
 
 class WindowsManager
 {
@@ -31,11 +32,12 @@ class WindowsManager
                                 >> _functs;
     private:
         State _state;
+        sdf::Sprite *_startMenu;
 
         void drawGame(MapGrid map, sdf::Renderer &renderer);
         void updateGame(MapGrid map, sdf::Renderer &renderer);
         void processInputsGame(GLFWwindow *window, MapGrid &map);
-    
+
         void drawMenu(MapGrid map, sdf::Renderer &renderer);
         void updateMenu(MapGrid map, sdf::Renderer &renderer);
         void processInputsMenu(GLFWwindow *window, MapGrid &map);

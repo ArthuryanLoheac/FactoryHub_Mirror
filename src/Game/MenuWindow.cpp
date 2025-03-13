@@ -9,6 +9,7 @@
 
 void WindowsManager::drawMenu(MapGrid map, sdf::Renderer &renderer)
 {
+    _startMenu->draw(renderer);
 }
 
 void WindowsManager::updateMenu(MapGrid map, sdf::Renderer &renderer)
