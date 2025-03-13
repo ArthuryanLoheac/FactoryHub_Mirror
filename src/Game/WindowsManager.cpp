@@ -9,10 +9,13 @@
 
 WindowsManager::WindowsManager()
 {
-    _state = State::GAME;
+    _state = State::MENU;
     _functs[State::GAME] = std::make_tuple( &WindowsManager::drawGame,
                                             &WindowsManager::updateGame,
                                             &WindowsManager::processInputsGame);
+    _functs[State::MENU] = std::make_tuple( &WindowsManager::drawMenu,
+                                            &WindowsManager::updateMenu,
+                                            &WindowsManager::processInputsMenu);
 }
 
 void WindowsManager::draw(MapGrid map, sdf::Renderer &renderer)

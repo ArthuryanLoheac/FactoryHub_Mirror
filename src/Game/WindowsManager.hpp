@@ -35,5 +35,9 @@ class WindowsManager
         void drawGame(MapGrid map, sdf::Renderer &renderer);
         void updateGame(MapGrid map, sdf::Renderer &renderer);
         void processInputsGame(GLFWwindow *window, MapGrid &map);
+    
+        void drawMenu(MapGrid map, sdf::Renderer &renderer);
+        void updateMenu(MapGrid map, sdf::Renderer &renderer);
+        void processInputsMenu(GLFWwindow *window, MapGrid &map);
 };
 
