@@ -18,6 +18,8 @@ class BuilderManager
             DESTROY
         };
     private:
+        bool _isBase = true;
+
         std::map<int, int> _lastKeyStates;
         typeBuild _isBuilding = NONE;
         std::shared_ptr<IBlock> blockBuilding;
@@ -25,14 +27,25 @@ class BuilderManager
         sdf::Sprite *_spriteBuild;
         sdf::Sprite *_spriteDestroy;
 
+        std::vector<int> _keys;
+        std::vector<int> _mouseKeys;
+
     public:
         static BuilderManager *instance;
+        BuilderManager();
 
         int updateLastKeyState(int Key, GLFWwindow *window, int lastKey);
         int updateLastMouseState(int Key, GLFWwindow *window, int lastKey);
         void updateKeyState(GLFWwindow *window, MapGrid &map);
-        void setBlockBuilding(std::shared_ptr<IBlock> block);
-        BuilderManager();
+
+        void updateSprite(GLFWwindow *window);
+        void updateBuildKeys(GLFWwindow *window, MapGrid &map);
+        void updateDestroyKeys(GLFWwindow *window, MapGrid &map);
+        void updateRotateKeys(GLFWwindow *window, MapGrid &map);
+        void updateCancelKeys(GLFWwindow *window, MapGrid &map);
+
+        void setBlockBuilding(std::shared_ptr<IBlock> block, bool isBase = false);
+        void setIsBase(bool isBase);
         bool get_isBuilding() const;
         void set_isBuilding(typeBuild isBuilding);
         void buildBlock(GLFWwindow *window, MapGrid &map);

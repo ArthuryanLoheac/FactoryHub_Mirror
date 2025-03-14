@@ -7,12 +7,15 @@
 
 #include "WindowsManager.hpp"
 #include "Generation.hpp"
+#include "Base.hpp"
 
 void WindowsManager::initGame(MapGrid &map)
 {   
     generateAll(map);
     sdf::Camera::instance->setZoom(0.5f);
     sdf::Camera::instance->setPosition(glm::vec2((-(float)map.getSizeX() / 2), (-(float)map.getSizeY()) / 2));
+    BuilderManager::instance->setBlockBuilding(std::make_shared<Base>(), true);
+    BuilderManager::instance->set_isBuilding(BuilderManager::typeBuild::BUILD);
 }
 
 void WindowsManager::drawGame(MapGrid map, sdf::Renderer &renderer)
@@ -35,9 +38,9 @@ void WindowsManager::processInputsGame(GLFWwindow *window, sdf::Renderer &render
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         sdf::Camera::instance->move(sdf::Camera::Direction::DOWN, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        sdf::Camera::instance->move(sdf::Camera::Direction::RIGHT, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         sdf::Camera::instance->move(sdf::Camera::Direction::LEFT, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        sdf::Camera::instance->move(sdf::Camera::Direction::RIGHT, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
      glfwSetScrollCallback(window, sdf::Renderer::scroll_callback);
     BuilderManager::instance->updateKeyState(window, map);
 }
