@@ -30,12 +30,10 @@ int main(void)
     MapGrid map(100, 100);
     WindowsManager windowsManager;
 
-    generateAll(map);
-
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
         windowsManager.processInputs(renderer.getWindow(), renderer, map);
-        windowsManager.update(map, renderer);
+        windowsManager.update(map, renderer.getDeltaTime());
         renderer.clear();
         windowsManager.draw(map, renderer);
         renderer.swapBuffers();

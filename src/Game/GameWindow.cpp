@@ -6,6 +6,12 @@
 */
 
 #include "WindowsManager.hpp"
+#include "Generation.hpp"
+
+void WindowsManager::initGame(MapGrid map)
+{
+    generateAll(map);
+}
 
 void WindowsManager::drawGame(MapGrid map, sdf::Renderer &renderer)
 {
@@ -13,9 +19,9 @@ void WindowsManager::drawGame(MapGrid map, sdf::Renderer &renderer)
     map.draw(renderer);
 }
 
-void WindowsManager::updateGame(MapGrid map, sdf::Renderer &renderer)
+void WindowsManager::updateGame(MapGrid map, float deltaTime)
 {
-    map.update(renderer.getDeltaTime());
+    map.update(deltaTime);
 }
 
 void WindowsManager::processInputsGame(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map)
