@@ -158,6 +158,8 @@ void BuilderManager::destroyBlock(GLFWwindow *window, MapGrid &map)
         blocks = map.getAllBlocksAtPos(pos.x, pos.y);
         if (blocks.size() == 0 || dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get()) == nullptr)
             return;
+        if (dynamic_cast<Base *>(blocks[blocks.size() - 1].get()) != nullptr)
+            return;
         map.deleteBlock(pos.x, pos.y, blocks.size() - 1);
     } catch (std::exception &e) {}
 }
