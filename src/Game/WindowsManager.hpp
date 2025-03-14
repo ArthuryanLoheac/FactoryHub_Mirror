@@ -22,12 +22,12 @@ class WindowsManager
         };
     
         WindowsManager();
-        void init(MapGrid map);
+        void init(MapGrid &map);
         void draw(MapGrid map, sdf::Renderer &renderer);
         void update(MapGrid map, float deltaTime);
         void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
-        std::map<State, std::tuple< void(WindowsManager::*)(MapGrid map),// Init
+        std::map<State, std::tuple< void(WindowsManager::*)(MapGrid &map),// Init
                                     void(WindowsManager::*)(MapGrid map, sdf::Renderer &renderer),// Draw
                                     void(WindowsManager::*)(MapGrid map, float deltaTime),// Update
                                     void(WindowsManager::*)(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map) // ProcessInputs
@@ -36,12 +36,12 @@ class WindowsManager
         State _state;
         sdf::Sprite *_startMenu;
 
-        void initGame(MapGrid map);
+        void initGame(MapGrid &map);
         void drawGame(MapGrid map, sdf::Renderer &renderer);
         void updateGame(MapGrid map, float deltaTime);
         void processInputsGame(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
-        void initMenu(MapGrid map);
+        void initMenu(MapGrid &map);
         void drawMenu(MapGrid map, sdf::Renderer &renderer);
         void updateMenu(MapGrid map, float deltaTime);
         void processInputsMenu(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);

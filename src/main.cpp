@@ -27,9 +27,10 @@ int main(void)
     sdf::Renderer renderer;
     sdf::GetterTextures getterTextures;
     BuilderManager builderManager;
-    MapGrid map(100, 100);
     WindowsManager windowsManager;
+    MapGrid map(100, 100);
 
+    windowsManager.init(map);
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
         windowsManager.processInputs(renderer.getWindow(), renderer, map);

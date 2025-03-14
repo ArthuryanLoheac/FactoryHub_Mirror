@@ -78,6 +78,11 @@ void sdf::Camera::setZoom(float zoom)
         _zoom = zoom;
 }
 
+void sdf::Camera::setRawZoom(float zoom)
+{
+    _zoom = zoom;
+}
+
 void sdf::Camera::setVelocity(float velocity)
 {
     if (velocity >= 0.0f)

@@ -18,10 +18,9 @@ WindowsManager::WindowsManager()
                                             &WindowsManager::drawMenu,
                                             &WindowsManager::updateMenu,
                                             &WindowsManager::processInputsMenu);
-    init(MapGrid(0, 0));
 }
 
-void WindowsManager::init(MapGrid map)
+void WindowsManager::init(MapGrid &map)
 {
     (this->*std::get<0>(_functs[_state]))(map);
 }
