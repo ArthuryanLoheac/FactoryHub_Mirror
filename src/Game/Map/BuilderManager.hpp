@@ -18,7 +18,7 @@ class BuilderManager
             DESTROY
         };
     private:
-        bool _canCancel = true;
+        bool _isBase = true;
 
         std::map<int, int> _lastKeyStates;
         typeBuild _isBuilding = NONE;
@@ -26,6 +26,7 @@ class BuilderManager
         Direction _direction = Direction::UP;
         sdf::Sprite *_spriteBuild;
         sdf::Sprite *_spriteDestroy;
+        sdf::Sprite *_TextBaseGuide;
 
         std::vector<int> _keys;
         std::vector<int> _mouseKeys;
@@ -44,8 +45,8 @@ class BuilderManager
         void updateRotateKeys(GLFWwindow *window, MapGrid &map);
         void updateCancelKeys(GLFWwindow *window, MapGrid &map);
 
-        void setBlockBuilding(std::shared_ptr<IBlock> block, bool canCancel = true);
-        void setCanCancel(bool canCancel);
+        void setBlockBuilding(std::shared_ptr<IBlock> block, bool isBase = false);
+        void setIsBase(bool isBase);
         bool get_isBuilding() const;
         void set_isBuilding(typeBuild isBuilding);
         void buildBlock(GLFWwindow *window, MapGrid &map);

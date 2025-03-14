@@ -54,15 +54,15 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B])) {
-        if (_canCancel == false && _isBuilding == BUILD)
+        if (_isBase == true && _isBuilding == BUILD)
             return;
         set_isBuilding((_isBuilding == BUILD) ? NONE : BUILD);
     }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
         buildBlock(window, map);
-        if (_canCancel == false) {
+        if (_isBase == true) {
             set_isBuilding(NONE);
-            _canCancel = true;
+            _isBase = false;
             blockBuilding = std::make_shared<Tapis>();
         }
     }
@@ -88,7 +88,7 @@ void BuilderManager::updateCancelKeys(GLFWwindow *window, MapGrid &map)
 {
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2])
         && _isBuilding != NONE) {
-        if (_canCancel == false && _isBuilding == BUILD)
+        if (_isBase == true && _isBuilding == BUILD)
             return;
         set_isBuilding(NONE);
     }
@@ -102,9 +102,9 @@ void BuilderManager::updateSprite(GLFWwindow *window)
         _spriteDestroy->setPosition(glm::vec3(getMousePos(window), 0.0f));
 }
 
-void BuilderManager::setCanCancel(bool canCancel)
+void BuilderManager::setIsBase(bool isBase)
 {
-    _canCancel = canCancel;
+    _isBase = isBase;
 }
 
 BuilderManager::BuilderManager()
@@ -117,6 +117,8 @@ BuilderManager::BuilderManager()
         sdf::GetterTextures::instance->getTexture("BuildGhost"), 0.0f);
     _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("DestroyGhost"), 0.0f);
+    _TextBaseGuide = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture("TextBaseGuide"), 0.0f);
     for (int key : _keys)
         _lastKeyStates[key] = GLFW_RELEASE;
     for (int key : _mouseKeys)
@@ -170,6 +172,8 @@ void BuilderManager::draw(sdf::Renderer &renderer)
         _spriteBuild->draw(renderer);
     if (_isBuilding == DESTROY)
         _spriteDestroy->draw(renderer);
+    if (_isBase)
+        _TextBaseGuide->draw(renderer);
 }
 
 glm::vec2 BuilderManager::getMousePos(GLFWwindow *window)
@@ -197,8 +201,8 @@ std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
     return blockBuilding;
 }
 
-void BuilderManager::setBlockBuilding(std::shared_ptr<IBlock> block, bool canCancel)
+void BuilderManager::setBlockBuilding(std::shared_ptr<IBlock> block, bool isBase)
 {
     blockBuilding = block;
-    _canCancel = canCancel;
+    _isBase = isBase;
 }
