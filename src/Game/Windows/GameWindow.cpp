@@ -7,12 +7,14 @@
 
 #include "WindowsManager.hpp"
 #include "Generation.hpp"
+#include "Base.hpp"
 
 void WindowsManager::initGame(MapGrid &map)
 {   
     generateAll(map);
     sdf::Camera::instance->setZoom(0.5f);
     sdf::Camera::instance->setPosition(glm::vec2((-(float)map.getSizeX() / 2), (-(float)map.getSizeY()) / 2));
+    BuilderManager::instance->setBlockBuilding(std::make_shared<Base>());
 }
 
 void WindowsManager::drawGame(MapGrid map, sdf::Renderer &renderer)

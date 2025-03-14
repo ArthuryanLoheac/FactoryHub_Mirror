@@ -36,7 +36,7 @@ class ABuilds : public IBlock
         size_t getPosYGrid() const override;
         bool getIsConstructible() const override;
         bool getIsBlocking() const override;
-        virtual void update(float deltaTime, MapGrid map) = 0;
+        virtual void update(float deltaTime, MapGrid map) {};
         virtual void draw(sdf::Renderer &renderer) override;
         bool isUpdatable() override;
 

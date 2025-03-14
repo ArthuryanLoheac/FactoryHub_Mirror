@@ -39,49 +39,68 @@ static bool isMouseClicked(GLFWwindow *window, int key, int lastKeyState)
 
 void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 {
+    updateBuildKeys(window, map);
+    updateDestroyKeys(window, map);
+    updateRotateKeys(window, map);
+    for (int key : _keys)
+        _lastKeyStates[key] = updateLastKeyState(key, window, _lastKeyStates[key]);
+    for (int key : _mouseKeys)
+        _lastKeyStates[key] = updateLastMouseState(key, window, _lastKeyStates[key]);
+    updateSprite(window);
+}
+
+void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
+{
     if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
         set_isBuilding((_isBuilding == BUILD) ? NONE : BUILD);
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD)
+        buildBlock(window, map);
+}
+
+void BuilderManager::updateDestroyKeys(GLFWwindow *window, MapGrid &map)
+{
     if (isKeyClicked(window, GLFW_KEY_V, _lastKeyStates[GLFW_KEY_V]))
         set_isBuilding((_isBuilding == DESTROY) ? NONE : DESTROY);
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == DESTROY)
+        destroyBlock(window, map);
+}
+void BuilderManager::updateRotateKeys(GLFWwindow *window, MapGrid &map)
+{
     if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R]) && _isBuilding == BUILD) {
         _direction = (Direction)((_direction + 3) % 4);
         _spriteBuild->setDirection(_direction * 90);
     }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding != NONE)
         set_isBuilding(NONE);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD)
-        buildBlock(window, map);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == DESTROY)
-        destroyBlock(window, map);
-    _lastKeyStates[GLFW_KEY_B] = updateLastKeyState(GLFW_KEY_B,
-        window, _lastKeyStates[GLFW_KEY_B]);
-    _lastKeyStates[GLFW_KEY_V] = updateLastKeyState(GLFW_KEY_V,
-        window, _lastKeyStates[GLFW_KEY_V]);
-    _lastKeyStates[GLFW_KEY_R] = updateLastKeyState(GLFW_KEY_R,
-        window, _lastKeyStates[GLFW_KEY_R]);
-    _lastKeyStates[GLFW_MOUSE_BUTTON_2] = updateLastMouseState(GLFW_MOUSE_BUTTON_2,
-        window, _lastKeyStates[GLFW_MOUSE_BUTTON_2]);
-    _lastKeyStates[GLFW_MOUSE_BUTTON_1] = updateLastMouseState(GLFW_MOUSE_BUTTON_1,
-        window, _lastKeyStates[GLFW_MOUSE_BUTTON_1]);
+}
+
+void BuilderManager::updateSprite(GLFWwindow *window)
+{
     if (_isBuilding == BUILD)
         _spriteBuild->setPosition(glm::vec3(getMousePos(window), 0.0f));
     if (_isBuilding == DESTROY)
         _spriteDestroy->setPosition(glm::vec3(getMousePos(window), 0.0f));
 }
 
+void BuilderManager::setCanCancel(bool canCancel)
+{
+    _canCancel = canCancel;
+}
+
 BuilderManager::BuilderManager()
 {
+    _keys = {GLFW_KEY_B, GLFW_KEY_V, GLFW_KEY_R};
+    _mouseKeys = {GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_2};
     if (instance == nullptr)
         instance = this;
     _spriteBuild = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("BuildGhost"), 0.0f);
     _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("DestroyGhost"), 0.0f);
-    _lastKeyStates[GLFW_KEY_B] = GLFW_RELEASE;
-    _lastKeyStates[GLFW_KEY_V] = GLFW_RELEASE;
-    _lastKeyStates[GLFW_KEY_R] = GLFW_RELEASE;
-    _lastKeyStates[GLFW_MOUSE_BUTTON_2] = GLFW_RELEASE;
-    _lastKeyStates[GLFW_MOUSE_BUTTON_1] = GLFW_RELEASE;
+    for (int key : _keys)
+        _lastKeyStates[key] = GLFW_RELEASE;
+    for (int key : _mouseKeys)
+        _lastKeyStates[key] = GLFW_RELEASE;
     blockBuilding = std::make_shared<Tapis>();
 }
 
@@ -154,7 +173,8 @@ std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
     return blockBuilding;
 }
 
-void BuilderManager::setBlockBuilding(std::shared_ptr<IBlock> block)
+void BuilderManager::setBlockBuilding(std::shared_ptr<IBlock> block, bool canCancel)
 {
     blockBuilding = block;
+    _canCancel = canCancel;
 }
