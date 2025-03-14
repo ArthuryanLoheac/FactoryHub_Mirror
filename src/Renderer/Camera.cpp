@@ -24,7 +24,7 @@ glm::mat4 sdf::Camera::getTransformationMatrix(void)
 {
     glm::mat4 transform = glm::mat4(1.0f);
 
-    transform = glm::scale(transform, glm::vec3(_zoom, _zoom, 1.0f));
+    transform = glm::scale(transform, glm::vec3(-_zoom, _zoom, 1.0f));
     transform = glm::translate(transform, glm::vec3(_position, 0.0f));
     return transform;
 }
