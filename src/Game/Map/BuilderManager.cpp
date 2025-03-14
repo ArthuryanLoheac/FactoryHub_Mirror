@@ -117,8 +117,6 @@ BuilderManager::BuilderManager()
         sdf::GetterTextures::instance->getTexture("BuildGhost"), 0.0f);
     _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("DestroyGhost"), 0.0f);
-    _TextBaseGuide = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("TextBaseGuide"), 0.0f);
     for (int key : _keys)
         _lastKeyStates[key] = GLFW_RELEASE;
     for (int key : _mouseKeys)
@@ -172,8 +170,6 @@ void BuilderManager::draw(sdf::Renderer &renderer)
         _spriteBuild->draw(renderer);
     if (_isBuilding == DESTROY)
         _spriteDestroy->draw(renderer);
-    if (_isBase)
-        _TextBaseGuide->draw(renderer);
 }
 
 glm::vec2 BuilderManager::getMousePos(GLFWwindow *window)

@@ -26,7 +26,6 @@ class BuilderManager
         Direction _direction = Direction::UP;
         sdf::Sprite *_spriteBuild;
         sdf::Sprite *_spriteDestroy;
-        sdf::Sprite *_TextBaseGuide;
 
         std::vector<int> _keys;
         std::vector<int> _mouseKeys;
