@@ -1,11 +1,12 @@
-#include "BuilderManager.hpp"
-#include <Tapis.hpp>
 /*
 ** EPITECH PROJECT, 2025
 ** FactoryHub
 ** File description:
 ** BuilderManager
 */
+#include "BuilderManager.hpp"
+#include "Tapis.hpp"
+#include "Base.hpp"
 
 BuilderManager *BuilderManager::instance = nullptr;
 
@@ -170,6 +171,8 @@ std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
 {
     if (dynamic_cast<Tapis *>(blockBuilding.get()))
         return std::make_shared<Tapis>();
+    if (dynamic_cast<Base *>(blockBuilding.get()))
+        return std::make_shared<Base>();
     return blockBuilding;
 }
 
