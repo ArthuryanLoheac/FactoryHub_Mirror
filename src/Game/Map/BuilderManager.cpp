@@ -43,6 +43,7 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
     updateBuildKeys(window, map);
     updateDestroyKeys(window, map);
     updateRotateKeys(window, map);
+    updateCancelKeys(window, map);
     for (int key : _keys)
         _lastKeyStates[key] = updateLastKeyState(key, window, _lastKeyStates[key]);
     for (int key : _mouseKeys)
@@ -52,10 +53,19 @@ void BuilderManager::updateKeyState(GLFWwindow *window, MapGrid &map)
 
 void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
 {
-    if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B]))
+    if (isKeyClicked(window, GLFW_KEY_B, _lastKeyStates[GLFW_KEY_B])) {
+        if (_canCancel == false && _isBuilding == BUILD)
+            return;
         set_isBuilding((_isBuilding == BUILD) ? NONE : BUILD);
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD)
+    }
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
         buildBlock(window, map);
+        if (_canCancel == false) {
+            set_isBuilding(NONE);
+            _canCancel = true;
+            blockBuilding = std::make_shared<Tapis>();
+        }
+    }
 }
 
 void BuilderManager::updateDestroyKeys(GLFWwindow *window, MapGrid &map)
@@ -65,14 +75,23 @@ void BuilderManager::updateDestroyKeys(GLFWwindow *window, MapGrid &map)
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == DESTROY)
         destroyBlock(window, map);
 }
+
 void BuilderManager::updateRotateKeys(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R]) && _isBuilding == BUILD) {
         _direction = (Direction)((_direction + 3) % 4);
         _spriteBuild->setDirection(_direction * 90);
     }
-    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2]) && _isBuilding != NONE)
+}
+
+void BuilderManager::updateCancelKeys(GLFWwindow *window, MapGrid &map)
+{
+    if (isMouseClicked(window, GLFW_MOUSE_BUTTON_2, _lastKeyStates[GLFW_MOUSE_BUTTON_2])
+        && _isBuilding != NONE) {
+        if (_canCancel == false && _isBuilding == BUILD)
+            return;
         set_isBuilding(NONE);
+    }
 }
 
 void BuilderManager::updateSprite(GLFWwindow *window)

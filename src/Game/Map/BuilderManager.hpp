@@ -42,6 +42,7 @@ class BuilderManager
         void updateBuildKeys(GLFWwindow *window, MapGrid &map);
         void updateDestroyKeys(GLFWwindow *window, MapGrid &map);
         void updateRotateKeys(GLFWwindow *window, MapGrid &map);
+        void updateCancelKeys(GLFWwindow *window, MapGrid &map);
 
         void setBlockBuilding(std::shared_ptr<IBlock> block, bool canCancel = true);
         void setCanCancel(bool canCancel);
