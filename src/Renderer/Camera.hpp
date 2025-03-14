@@ -33,6 +33,7 @@ namespace sdf
 
             void setPosition(glm::vec2 position);
             void setZoom(float zoom);
+            void setRawZoom(float zoom);
             void setVelocity(float velocity);
 
         private:

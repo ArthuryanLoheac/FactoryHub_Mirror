@@ -18,6 +18,7 @@
 #include "Salpetre.hpp"
 #include "GetterTextures.hpp"
 #include "BuilderManager.hpp"
+#include "WindowsManager.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
@@ -26,24 +27,16 @@ int main(void)
     sdf::Renderer renderer;
     sdf::GetterTextures getterTextures;
     BuilderManager builderManager;
+    WindowsManager windowsManager;
     MapGrid map(100, 100);
 
-    // FOR TEST TO REMOVE
-    map.addBlock(std::make_shared<Salpetre>(), 10, 4);
-    map.addBlock(std::make_shared<MinerT1>(), 10, 4);
-    map.addBlock(std::make_shared<Tapis>(), 10, 5, Direction::UP);
-    map.addBlock(std::make_shared<Tapis>(), 10, 7, Direction::UP);
-    map.addBlock(std::make_shared<Chemical_PlantT1>(), 10, 6);
-
-    generateAll(map);
-
+    windowsManager.init(map);
     renderer.resetDeltaTime();
     while (!renderer.shouldClose()) {
-        processInputs(renderer.getWindow(), renderer, map);
-        map.update(renderer.getDeltaTime());
+        windowsManager.processInputs(renderer.getWindow(), renderer, map);
+        windowsManager.update(map, renderer.getDeltaTime());
         renderer.clear();
-        builderManager.draw(renderer);
-        map.draw(renderer);
+        windowsManager.draw(map, renderer);
         renderer.swapBuffers();
         renderer.pollEvent(map);
     }
