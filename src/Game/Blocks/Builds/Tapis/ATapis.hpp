@@ -31,6 +31,8 @@ class ATapis : public ABuilds
         bool _isDestroy = false;
         float _deltaMinPercent; // 0.10f = 10 objects max on tapis (1 each 10%)
         float _travelTime; // duree pour un objet de parcourir le tapis
+
+        int nbUpdate = 0;
     private:
         bool myAddElement(Item item);
 };

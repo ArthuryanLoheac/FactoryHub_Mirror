@@ -116,10 +116,17 @@ static Direction getOppositeDirection(Direction direction)
 
 void ATapis::update(float deltaTime, MapGrid map)
 {
-    updateTakeBehind(map);
-    updateAllItemsTransitting(deltaTime);
-    updatePushItemFront(map);
-    updatePosSprite();
+    nbUpdate++;
+    if (nbUpdate > 10) {
+        nbUpdate = 0;
+        updateTakeBehind(map);
+        updateAllItemsTransitting(deltaTime);
+        updatePushItemFront(map);
+        updatePosSprite();
+    } else {
+        updateAllItemsTransitting(deltaTime);
+        updatePosSprite();
+    }
 }
 
 void ATapis::addElementFromBehind(ABuilds *block)
