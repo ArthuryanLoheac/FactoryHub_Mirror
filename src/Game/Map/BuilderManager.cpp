@@ -6,7 +6,9 @@
 */
 #include "BuilderManager.hpp"
 #include "Tapis.hpp"
+#include "MinerT1.hpp"
 #include "Base.hpp"
+#include <AVein.hpp>
 
 BuilderManager *BuilderManager::instance = nullptr;
 
@@ -58,11 +60,23 @@ void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
             return;
         set_isBuilding((_isBuilding == BUILD) ? NONE : BUILD);
     }
+    if (isKeyClicked(window, GLFW_KEY_T, _lastKeyStates[GLFW_KEY_T]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Tapis>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_M, _lastKeyStates[GLFW_KEY_M]) && !_isBase){
+        _placementType = VEIN_ONLY;
+        blockBuilding = std::make_shared<MinerT1>();
+    }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
-        buildBlock(window, map);
+        if (_placementType == VEIN_ONLY)
+            buildBlockVein(window, map);
+        else
+            buildBlockFree(window, map); 
         if (_isBase == true) {
             set_isBuilding(NONE);
             _isBase = false;
+            _placementType = FREE;
             blockBuilding = std::make_shared<Tapis>();
         }
     }
@@ -109,7 +123,7 @@ void BuilderManager::setIsBase(bool isBase)
 
 BuilderManager::BuilderManager()
 {
-    _keys = {GLFW_KEY_B, GLFW_KEY_V, GLFW_KEY_R};
+    _keys = {GLFW_KEY_B, GLFW_KEY_V, GLFW_KEY_R, GLFW_KEY_T, GLFW_KEY_M};
     _mouseKeys = {GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_2};
     if (instance == nullptr)
         instance = this;
@@ -122,6 +136,7 @@ BuilderManager::BuilderManager()
     for (int key : _mouseKeys)
         _lastKeyStates[key] = GLFW_RELEASE;
     blockBuilding = std::make_shared<Tapis>();
+    _placementType = FREE;
 }
 
 bool BuilderManager::get_isBuilding() const
@@ -135,7 +150,7 @@ void BuilderManager::set_isBuilding(typeBuild isBuilding)
     _direction = Direction::UP;
 }
 
-void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
+void BuilderManager::buildBlockFree(GLFWwindow *window, MapGrid &map)
 {
     glm::vec2 pos = getMousePos(window);
     std::vector<std::shared_ptr<IBlock>> blocks;
@@ -143,6 +158,22 @@ void BuilderManager::buildBlock(GLFWwindow *window, MapGrid &map)
     try {
         blocks = map.getAllBlocksAtPos(pos.x, pos.y);
         if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
+            return;
+        std::shared_ptr<IBlock> block = getCopyBlockBuilding();
+        map.addBlock(block, pos.x, pos.y, _direction);
+    } catch (std::exception &e) {}
+}
+
+void BuilderManager::buildBlockVein(GLFWwindow *window, MapGrid &map)
+{
+    glm::vec2 pos = getMousePos(window);
+    std::vector<std::shared_ptr<IBlock>> blocks;
+
+    try {
+        blocks = map.getAllBlocksAtPos(pos.x, pos.y);
+        if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
+            return;
+        if (blocks.size() == 0 || dynamic_cast<AVein *>(blocks[blocks.size() - 1].get()) == nullptr)
             return;
         std::shared_ptr<IBlock> block = getCopyBlockBuilding();
         map.addBlock(block, pos.x, pos.y, _direction);
@@ -192,6 +223,8 @@ std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
 {
     if (dynamic_cast<Tapis *>(blockBuilding.get()))
         return std::make_shared<Tapis>();
+    if (dynamic_cast<MinerT1 *>(blockBuilding.get()))
+        return std::make_shared<MinerT1>();
     if (dynamic_cast<Base *>(blockBuilding.get()))
         return std::make_shared<Base>();
     return blockBuilding;

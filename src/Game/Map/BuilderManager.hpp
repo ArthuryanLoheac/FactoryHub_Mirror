@@ -17,6 +17,10 @@ class BuilderManager
             BUILD,
             DESTROY
         };
+        enum placementType {
+            FREE,
+            VEIN_ONLY,
+        };
     private:
         bool _isBase = true;
 
@@ -30,6 +34,7 @@ class BuilderManager
         std::vector<int> _keys;
         std::vector<int> _mouseKeys;
 
+        placementType _placementType = FREE;
     public:
         static BuilderManager *instance;
         BuilderManager();
@@ -48,7 +53,8 @@ class BuilderManager
         void setIsBase(bool isBase);
         bool get_isBuilding() const;
         void set_isBuilding(typeBuild isBuilding);
-        void buildBlock(GLFWwindow *window, MapGrid &map);
+        void buildBlockFree(GLFWwindow *window, MapGrid &map);
+        void buildBlockVein(GLFWwindow *window, MapGrid &map);
         void destroyBlock(GLFWwindow *window, MapGrid &map);
         void draw(sdf::Renderer &renderer);
         glm::vec2 getMousePos(GLFWwindow *window);
