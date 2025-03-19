@@ -13,7 +13,7 @@ AVein::AVein(Item item)
     _isConstructible = true;
     _isBlocking = false;
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 1.0f), textureStone);
     _updatable = false;
 }
 

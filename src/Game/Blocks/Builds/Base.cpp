@@ -9,7 +9,7 @@
 
 Base::Base()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
         sdf::GetterTextures::instance->getTexture("Base"), 0.0f);
     _AllItemAccepted = true;
     _noMax = true;

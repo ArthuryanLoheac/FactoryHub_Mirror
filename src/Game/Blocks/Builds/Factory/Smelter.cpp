@@ -9,7 +9,7 @@
 SmelterT1::SmelterT1() : AFactory()
 {
     sdf::Texture textureSmelter = sdf::Texture("Assets/Smelter.png");
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureSmelter);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureSmelter);
 
     std::vector<Item> r_in1;
     r_in1.push_back(Item("CopperRaw"));

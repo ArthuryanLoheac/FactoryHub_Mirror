@@ -9,8 +9,8 @@
 
 Nuclear_Refinery::Nuclear_Refinery() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Nuclear_Refinery"), 0.0f);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Nuclear_Refinery"));
 
     std::vector<Item> r_in1;
     r_in1.push_back(Item("UraniunRaw"));

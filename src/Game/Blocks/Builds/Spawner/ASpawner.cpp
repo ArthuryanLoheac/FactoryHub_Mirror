@@ -44,5 +44,5 @@ bool ASpawner::getDestroy() const
 ASpawner::ASpawner()
 {
     sdf::Texture textureStone = sdf::Texture("Assets/Stone.png");
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureStone);
 }

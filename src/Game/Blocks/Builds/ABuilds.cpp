@@ -55,7 +55,7 @@ ABuilds::ABuilds()
     _isConstructible = false;
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Error.png");
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureStone);
 }
 
 #pragma region GettersSetters
