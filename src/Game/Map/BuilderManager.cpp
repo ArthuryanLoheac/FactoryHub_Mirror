@@ -111,9 +111,9 @@ void BuilderManager::updateCancelKeys(GLFWwindow *window, MapGrid &map)
 void BuilderManager::updateSprite(GLFWwindow *window)
 {
     if (_isBuilding == BUILD)
-        _spriteBuild->setPosition(glm::vec3(getMousePos(window), 0.0f));
+        _spriteBuild->setPosition(glm::vec2(getMousePos(window)));
     if (_isBuilding == DESTROY)
-        _spriteDestroy->setPosition(glm::vec3(getMousePos(window), 0.0f));
+        _spriteDestroy->setPosition(glm::vec2(getMousePos(window)));
 }
 
 void BuilderManager::setIsBase(bool isBase)
@@ -127,9 +127,9 @@ BuilderManager::BuilderManager()
     _mouseKeys = {GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_2};
     if (instance == nullptr)
         instance = this;
-    _spriteBuild = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+    _spriteBuild = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 80.0f),
         sdf::GetterTextures::instance->getTexture("BuildGhost"), 0.0f);
-    _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+    _spriteDestroy = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 80.0f),
         sdf::GetterTextures::instance->getTexture("DestroyGhost"), 0.0f);
     for (int key : _keys)
         _lastKeyStates[key] = GLFW_RELEASE;

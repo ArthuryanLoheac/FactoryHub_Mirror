@@ -8,8 +8,8 @@
 
 Wiring_Factory::Wiring_Factory() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Wiring_Factory"), 0.0f);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Wiring_Factory"));
 
     // Recette Conductive_Socket
     std::vector<Item> r_in1;

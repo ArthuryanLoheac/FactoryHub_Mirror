@@ -9,8 +9,8 @@
 
 Advanced_Smelter::Advanced_Smelter() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Advanced_Smelter"), 0.0f);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Advanced_Smelter"));
 
     std::vector<Item> r_in1;
     r_in1.push_back(Item("CopperRaw"));

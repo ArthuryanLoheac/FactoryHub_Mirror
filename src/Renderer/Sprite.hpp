@@ -27,7 +27,8 @@ namespace sdf
 
             void draw(sdf::Renderer &renderer);
 
-            void setPosition(const glm::vec3 &position);
+            void setPosition(const glm::vec2 &position);
+            void setLayer(float layer);
             void setDirection(float direction);
             unsigned int getTexture(void);
         private:

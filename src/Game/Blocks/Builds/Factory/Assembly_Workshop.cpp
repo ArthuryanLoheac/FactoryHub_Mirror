@@ -9,8 +9,8 @@
 
 Assembly_Workshop::Assembly_Workshop() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Assembly_Workshop"), 0.0f);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Assembly_Workshop"));
 
     // Recette ArmorPiercing_Ammo
     std::vector<Item> r_in1;

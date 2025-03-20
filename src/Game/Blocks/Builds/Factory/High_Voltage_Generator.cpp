@@ -9,8 +9,8 @@
 
 High_Voltage_Generator::High_Voltage_Generator() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("High_Voltage_Generator"), 0.0f);
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("High_Voltage_Generator"));
 
     // Recette Condensed_Plasma
     std::vector<Item> r_in1;
