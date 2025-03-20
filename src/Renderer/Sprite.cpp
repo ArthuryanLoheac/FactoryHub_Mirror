@@ -14,7 +14,7 @@
 
 sdf::Sprite::Sprite(const glm::vec3 &position, sdf::Texture &texture,
     float direction)
-    : _position(position), _texture(texture), _direction(direction)
+    : _position(position), _texture(texture), _direction(direction), _isUI(false)
 {
     // Starting vertices for a `square` sprite
     // A vertice is a point in space, here, I ignore the third dimension
@@ -70,8 +70,16 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, _position);
     model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
-    glm::mat4 view = renderer.getCamera().getTransformationMatrix();
-    glm::mat4 projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+    glm::mat4 view;
+    if (_isUI)
+        view = renderer.getUICamera().getTransformationMatrix();
+    else
+        view = renderer.getGameCamera().getTransformationMatrix();
+    glm::mat4 projection;
+    if (_isUI)
+        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+    else
+        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
     // Send them to the shader
     renderer.getShader("Sprite").set("model", model);
     renderer.getShader("Sprite").set("view", view);

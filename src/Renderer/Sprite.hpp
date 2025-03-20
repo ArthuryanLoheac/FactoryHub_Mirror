@@ -31,6 +31,8 @@ namespace sdf
             void setLayer(float layer);
             void setDirection(float direction);
             unsigned int getTexture(void);
+        protected:
+            bool _isUI;
         private:
             sdf::Texture _texture;
             glm::vec3 _position;
