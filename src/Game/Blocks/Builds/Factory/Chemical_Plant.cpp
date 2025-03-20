@@ -10,6 +10,7 @@ Chemical_PlantT1::Chemical_PlantT1() : AFactory()
 {
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("Chemical_Plant"), 0.0f);
+    _cost = {{"SaltpeterRaw", 25}, {"WaterRaw", 20}};
 
     // Recette black_powder
     std::vector<Item> r_in1;

@@ -11,6 +11,7 @@ Assembly_Workshop::Assembly_Workshop() : AFactory()
 {
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
         sdf::GetterTextures::instance->getTexture("Assembly_Workshop"), 0.0f);
+    _cost = {{"Steel_BAR", 60}, {"Copper_Wire", 15}};
 
     // Recette ArmorPiercing_Ammo
     std::vector<Item> r_in1;
