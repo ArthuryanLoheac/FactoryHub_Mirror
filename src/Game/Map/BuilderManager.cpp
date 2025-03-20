@@ -72,13 +72,7 @@ void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
         if (_placementType == VEIN_ONLY)
             buildBlockVein(window, map);
         else
-            buildBlockFree(window, map); 
-        if (_isBase == true) {
-            set_isBuilding(NONE);
-            _isBase = false;
-            _placementType = FREE;
-            blockBuilding = std::make_shared<Tapis>();
-        }
+            buildBlockFree(window, map);
     }
 }
 
@@ -180,6 +174,12 @@ void BuilderManager::buildBlockFree(GLFWwindow *window, MapGrid &map)
         if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
             return;
         BuildBlock(pos, map);
+        if (_isBase == true) {
+            set_isBuilding(NONE);
+            _isBase = false;
+            _placementType = FREE;
+            blockBuilding = std::make_shared<Tapis>();
+        }
     } catch (std::exception &e) {}
 }
 
