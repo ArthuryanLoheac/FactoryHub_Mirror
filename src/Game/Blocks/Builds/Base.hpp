@@ -12,6 +12,7 @@ class Base : public ABuilds
 {
     public:
         Base();
+        void update(float deltaTime, MapGrid map) override;
         bool addElement(Item item) override;
     
     private:
