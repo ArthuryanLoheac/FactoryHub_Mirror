@@ -12,4 +12,8 @@ class Base : public ABuilds
 {
     public:
         Base();
+        bool addElement(Item item) override;
+    
+    private:
+        std::map<std::string, int> _items;
 };

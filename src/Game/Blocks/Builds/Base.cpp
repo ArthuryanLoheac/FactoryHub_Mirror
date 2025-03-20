@@ -15,3 +15,11 @@ Base::Base()
     _noMax = true;
     setHp(1000);
 }
+
+bool Base::addElement(Item item)
+{
+    if (_items.find(item.getName()) == _items.end())
+        _items[item.getName()] = 0;
+    _items[item.getName()] += 1;
+    return true;
+}
