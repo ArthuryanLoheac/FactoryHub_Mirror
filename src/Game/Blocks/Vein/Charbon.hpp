@@ -12,7 +12,7 @@ class Charbon : public AVein
 {
     public:
         Charbon() : AVein(Item("CoalRaw")) {
-            _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+            _sprite = new sdf::Sprite(glm::vec3(0, 0, 1),
                 sdf::GetterTextures::instance->getTexture("Coal"));
         };
 };

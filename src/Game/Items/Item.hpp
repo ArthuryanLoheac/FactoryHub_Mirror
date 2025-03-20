@@ -28,6 +28,7 @@ class Item
         typeItem getType() const;
         int getTier() const;
         void setPos(float posX, float posY);
+        void setLayer(float layer);
         void draw(sdf::Renderer &renderer);
     
     private:

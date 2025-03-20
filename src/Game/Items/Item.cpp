@@ -11,7 +11,7 @@
 
 Item::Item(typeItem type, std::string name, int tier)
 {
-    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 20),
         sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
@@ -20,7 +20,7 @@ Item::Item(typeItem type, std::string name, int tier)
 
 Item::Item(typeItem type, std::string name)
 {
-    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 20),
         sdf::GetterTextures::instance->getTexture(name));
     _type = type;
     _name = name;
@@ -29,7 +29,7 @@ Item::Item(typeItem type, std::string name)
 
 Item::Item(std::string name, int tier)
 {
-    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 20),
         sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
@@ -38,7 +38,7 @@ Item::Item(std::string name, int tier)
 
 Item::Item(std::string name)
 {
-    _sprite = new sdf::Sprite(glm::vec3(0, 0, 0),
+    _sprite = new sdf::Sprite(glm::vec3(0, 0, 20),
         sdf::GetterTextures::instance->getTexture(name));
     _type = OTHER;
     _name = name;
@@ -74,8 +74,13 @@ int Item::getTier() const
 
 void Item::setPos(float posX, float posY)
 {
-    _sprite->setPosition(glm::vec3(posX, posY, 0));
+    _sprite->setPosition(glm::vec2(posX, posY));
     _sprite->setDirection(0);
+}
+
+void Item::setLayer(float layer)
+{
+    _sprite->setLayer(layer);
 }
 
 void Item::draw(sdf::Renderer &renderer)

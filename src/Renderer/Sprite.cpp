@@ -71,7 +71,7 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
     model = glm::translate(model, _position);
     model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4 view = renderer.getCamera().getTransformationMatrix();
-    glm::mat4 projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, 0.0f, 10.0f);
+    glm::mat4 projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
     // Send them to the shader
     renderer.getShader("Sprite").set("model", model);
     renderer.getShader("Sprite").set("view", view);
@@ -85,9 +85,14 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
     glBindVertexArray(0);
 }
 
-void sdf::Sprite::setPosition(const glm::vec3 &position)
+void sdf::Sprite::setPosition(const glm::vec2 &position)
 {
-    _position = position;
+    _position = {position.x, position.y, _position.z};
+}
+
+void sdf::Sprite::setLayer(float layer)
+{
+    _position = {_position.x, _position.y, layer};
 }
 
 void sdf::Sprite::setDirection(float direction)

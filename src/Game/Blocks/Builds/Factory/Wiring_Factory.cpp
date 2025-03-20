@@ -8,9 +8,9 @@
 
 Wiring_Factory::Wiring_Factory() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Wiring_Factory"), 0.0f);
     _cost = {{"Copper_Wire", 60}, {"Steel_BAR", 40}, {"Zinc_Plate", 25}};
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Wiring_Factory"));
 
     // Recette Conductive_Socket
     std::vector<Item> r_in1;

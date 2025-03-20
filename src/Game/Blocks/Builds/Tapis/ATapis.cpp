@@ -202,8 +202,10 @@ void ATapis::updatePosSprite()
 
 void ATapis::draw(sdf::Renderer &renderer)
 {
-    for (int i = _itemsTransitting.size() - 1; i >= 0; i--)
+    for (int i = _itemsTransitting.size() - 1; i >= 0; i--) {
+        std::get<1>(_itemsTransitting[i]).setLayer(i * 9 / 100 + 20);
         std::get<1>(_itemsTransitting[i]).draw(renderer);
+    }
     _sprite->draw(renderer);
 }
 

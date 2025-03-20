@@ -8,10 +8,10 @@
 
 FoundryT1::FoundryT1() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Foundry"), 0.0f);
     _cost = {{"SteelRaw", 20}, {"CoalRaw", 10}};
-
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Foundry"));
+ 
     // Recette steel_bar
     std::vector<Item> r_in1;
     r_in1.push_back(Item("SteelRaw"));

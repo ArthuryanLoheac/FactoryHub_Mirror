@@ -9,9 +9,9 @@
 
 Advanced_Assembly_Workshop::Advanced_Assembly_Workshop() : AFactory()
 {
-    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Advanced_Assembly_Workshop"), 0.0f);
     _cost = {{"Steel_BAR", 80}, {"Reinforced_Socket", 40}, {"Copper_Balls", 30}};
+    _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
+        sdf::GetterTextures::instance->getTexture("Advanced_Assembly_Workshop"));
 
     // Recette Radioactive_Ammo
     std::vector<Item> r_in1;
