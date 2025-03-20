@@ -9,6 +9,7 @@
 
 Assembly_Workshop::Assembly_Workshop() : AFactory()
 {
+    _cost = {{"Steel_BAR", 60}, {"Copper_Wire", 15}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
         sdf::GetterTextures::instance->getTexture("Assembly_Workshop"));
 

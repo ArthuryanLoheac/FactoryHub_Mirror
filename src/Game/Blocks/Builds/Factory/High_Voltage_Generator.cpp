@@ -9,6 +9,7 @@
 
 High_Voltage_Generator::High_Voltage_Generator() : AFactory()
 {
+    _cost = {{"Energy_Capacitor", 75}, {"Copper_Wire", 50}, {"Rubber", 200}, {"Zinc_Plate", 100}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
         sdf::GetterTextures::instance->getTexture("High_Voltage_Generator"));
 

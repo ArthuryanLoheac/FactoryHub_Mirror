@@ -9,6 +9,7 @@
 SmelterT1::SmelterT1() : AFactory()
 {
     sdf::Texture textureSmelter = sdf::Texture("Assets/Smelter.png");
+    _cost = {{"CopperRaw", 20}, {"CoalRaw", 15}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureSmelter);
 
     std::vector<Item> r_in1;

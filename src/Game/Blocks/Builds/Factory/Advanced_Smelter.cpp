@@ -9,6 +9,7 @@
 
 Advanced_Smelter::Advanced_Smelter() : AFactory()
 {
+    _cost = {{"Steel_BAR", 100}, {"CoalRaw", 15}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
         sdf::GetterTextures::instance->getTexture("Advanced_Smelter"));
 

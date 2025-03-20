@@ -30,8 +30,10 @@ class MapGrid
         size_t getSizeY() const { return _sizeY; }
         void draw(sdf::Renderer &renderer);
         void update(float deltaTime);
+        IBlock *getBase();
 
     private:
+        IBlock *base;
         void initEmptyMap(size_t X, size_t Y);
 
         std::vector<std::vector<std::vector<

@@ -55,6 +55,7 @@ class BuilderManager
         void set_isBuilding(typeBuild isBuilding);
         void buildBlockFree(GLFWwindow *window, MapGrid &map);
         void buildBlockVein(GLFWwindow *window, MapGrid &map);
+        void BuildBlock(glm::vec2 pos, MapGrid &map);
         void destroyBlock(GLFWwindow *window, MapGrid &map);
         void draw(sdf::Renderer &renderer);
         glm::vec2 getMousePos(GLFWwindow *window);

@@ -9,6 +9,7 @@
 
 Capacitor_Factory::Capacitor_Factory() : AFactory()
 {
+    _cost = {{"Copper_Wire", 40}, {"Zinc_Plate", 50}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),
         sdf::GetterTextures::instance->getTexture("Capacitor_Factory"));
 

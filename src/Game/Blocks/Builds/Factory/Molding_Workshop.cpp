@@ -9,6 +9,7 @@
 Molding_WorkshopT1::Molding_WorkshopT1() : AFactory()
 {
     sdf::Texture textureMolding = sdf::Texture("Assets/Molding_Workshop.png");
+    _cost = {{"ZincRaw", 15}, {"CopperRaw", 15}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureMolding);
 
     //recette copper balls

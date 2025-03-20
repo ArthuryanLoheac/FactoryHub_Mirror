@@ -40,6 +40,7 @@ class ABuilds : public IBlock
         virtual void draw(sdf::Renderer &renderer) override;
         bool isUpdatable() override;
 
+        virtual std::vector<std::pair<std::string, int>> getCost();
     protected:
         ABuilds();
         bool _updatable;
@@ -47,6 +48,7 @@ class ABuilds : public IBlock
         float _posX;
         size_t posXGrid;
         size_t posYGrid;
+        std::vector<std::pair<std::string, int>> _cost;
 
         int _hp;
         int _hpMax;

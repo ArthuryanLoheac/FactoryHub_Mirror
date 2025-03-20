@@ -9,6 +9,7 @@
 Cutting_Machine::Cutting_Machine() : AFactory()
 {
     sdf::Texture textureMolding = sdf::Texture("Assets/Cutting_Machine.png");
+    _cost = {{"CopperRaw", 40}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f), textureMolding);
 
     //recette Steel_Darts
