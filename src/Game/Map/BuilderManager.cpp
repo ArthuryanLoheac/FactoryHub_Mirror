@@ -87,7 +87,7 @@ void BuilderManager::updateDestroyKeys(GLFWwindow *window, MapGrid &map)
 void BuilderManager::updateRotateKeys(GLFWwindow *window, MapGrid &map)
 {
     if (isKeyClicked(window, GLFW_KEY_R, _lastKeyStates[GLFW_KEY_R]) && _isBuilding == BUILD) {
-        _direction = (Direction)((_direction + 3) % 4);
+        _direction = (Direction)((_direction + 1) % 4);
         _spriteBuild->setDirection(_direction * 90);
     }
 }
@@ -142,6 +142,7 @@ void BuilderManager::set_isBuilding(typeBuild isBuilding)
 {
     _isBuilding = isBuilding;
     _direction = Direction::UP;
+    _spriteBuild->setDirection(_direction * 90);
 }
 
 void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
