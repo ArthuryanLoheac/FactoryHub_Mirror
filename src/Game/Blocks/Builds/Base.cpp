@@ -14,6 +14,8 @@ Base::Base()
     _AllItemAccepted = true;
     _noMax = true;
     _updatable = true;
+    _items["SteelRaw"] = 100;
+    _items["CopperRaw"] = 100;
     setHp(1000);
 }
 

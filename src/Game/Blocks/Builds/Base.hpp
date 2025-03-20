@@ -14,7 +14,7 @@ class Base : public ABuilds
         Base();
         void update(float deltaTime, MapGrid map) override;
         bool addElement(Item item) override;
-        std::map<std::string, int> getItems() { return _items; }
+        std::map<std::string, int> &getItems() { return _items; }
     
     private:
         std::map<std::string, int> _items;

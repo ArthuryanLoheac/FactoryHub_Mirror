@@ -14,4 +14,5 @@ Tapis::Tapis()
         sdf::GetterTextures::instance->getTexture("Tapis"));
     _deltaMinPercent = 0.12f;
     _travelTime = 3.0f;
+    _cost = {{"CopperRaw", 2}};
 }

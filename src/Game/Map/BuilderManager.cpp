@@ -162,6 +162,8 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
             if (((Base *)(map.getBase()))->getItems()[item.first] < item.second){
                 printf("Not enough %s\n", item.first.c_str());
                 return;
+            } else {
+                ((Base *)(map.getBase()))->getItems()[item.first] -= item.second;
             }
         }
     }
