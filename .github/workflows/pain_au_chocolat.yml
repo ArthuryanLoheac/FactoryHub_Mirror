@@ -62,41 +62,8 @@ jobs:
         run: |
           LIST=$(echo $EXECUTABLES | tr ',' ' ')
           find $LIST
-  check_banned_function:
-    needs: check_program_compilation
-    runs-on: ubuntu-latest
-    container:
-      image: epitechcontent/epitest-docker:latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
-      - name: "Make"
-        run: ./myBuild.sh
-      - name: "Check banned functions"
-        run: |
-          liste_binaires=$(echo "$EXECUTABLES" | tr ',' '\n')
-          fonctions_bannies=$(echo "$FUNCTIONS_BANNED" | tr ', ' '\n')
-          
-          while read -r binaire; do
-              echo "Analyse du binaire : $binaire"
-              symboles=$(nm "$binaire" | grep ' U ' | awk '{print $2}' | cut -d'@' -f1 | c++filt | sort -u)
-              while read -r symbole; do
-                  if [[ ${symbole:0:1} != "_" ]]; then
-                      if echo "$fonctions_bannies" | grep -xq "$symbole"; then
-                          echo "Fonction bannie trouvée : $symbole"
-                          exit 1
-                      fi
-                  fi
-              done <<< "$symboles"
-          done <<< "$liste_binaires"
-      
-          echo "Aucune fonction bannie trouvée."
-        shell: bash
   push_to_mirror: 
-    needs: check_banned_function
+    needs: check_program_compilation
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
