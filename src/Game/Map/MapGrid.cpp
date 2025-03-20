@@ -17,6 +17,7 @@
 #include "Stone.hpp"
 #include "ATapis.hpp"
 #include "AMiner.hpp"
+#include <Base.hpp>
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
@@ -51,6 +52,8 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, Direct
     _grid[X][Y].push_back(block);
     if (block.get()->isUpdatable())
         _blocksUpdated.push_back(block);
+    if (base != nullptr && dynamic_cast<Base *>(block.get()) != nullptr)
+        base = dynamic_cast<Base *>(block.get());
 }
 
 void MapGrid::addBorder(void)
@@ -97,6 +100,11 @@ void MapGrid::update(float deltaTime)
 {
     for (size_t i = 0; i < _blocksUpdated.size(); i++)
         _blocksUpdated[i]->update(deltaTime, *this);
+}
+
+IBlock *MapGrid::getBase()
+{
+    return base;
 }
 
 void MapGrid::initEmptyMap(size_t X, size_t Y)

@@ -150,6 +150,24 @@ void BuilderManager::set_isBuilding(typeBuild isBuilding)
     _direction = Direction::UP;
 }
 
+void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
+{
+    std::shared_ptr<IBlock> block = getCopyBlockBuilding();
+    std::vector<std::pair<std::string, int>> cost;
+
+    ABuilds *build = dynamic_cast<ABuilds *>(block.get());
+    if (build != nullptr) {
+        cost = build->getCost();
+        for (auto &item : cost) {
+            if (((Base *)(map.getBase()))->getItems()[item.first] < item.second){
+                printf("Not enough %s\n", item.first.c_str());
+                return;
+            }
+        }
+    }
+    map.addBlock(block, pos.x, pos.y, _direction);
+}
+
 void BuilderManager::buildBlockFree(GLFWwindow *window, MapGrid &map)
 {
     glm::vec2 pos = getMousePos(window);
@@ -159,8 +177,7 @@ void BuilderManager::buildBlockFree(GLFWwindow *window, MapGrid &map)
         blocks = map.getAllBlocksAtPos(pos.x, pos.y);
         if (blocks.size() != 0 && blocks[blocks.size() - 1].get()->getIsConstructible() == false)
             return;
-        std::shared_ptr<IBlock> block = getCopyBlockBuilding();
-        map.addBlock(block, pos.x, pos.y, _direction);
+        BuildBlock(pos, map);
     } catch (std::exception &e) {}
 }
 
@@ -175,8 +192,7 @@ void BuilderManager::buildBlockVein(GLFWwindow *window, MapGrid &map)
             return;
         if (blocks.size() == 0 || dynamic_cast<AVein *>(blocks[blocks.size() - 1].get()) == nullptr)
             return;
-        std::shared_ptr<IBlock> block = getCopyBlockBuilding();
-        map.addBlock(block, pos.x, pos.y, _direction);
+        BuildBlock(pos, map);
     } catch (std::exception &e) {}
 }
 

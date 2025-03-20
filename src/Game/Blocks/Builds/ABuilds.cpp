@@ -56,6 +56,7 @@ ABuilds::ABuilds()
     _isBlocking = true;
     sdf::Texture textureStone = sdf::Texture("Assets/Error.png");
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f), textureStone);
+    _cost = std::vector<std::pair<std::string, int>>();
 }
 
 #pragma region GettersSetters
@@ -161,6 +162,11 @@ void ABuilds::draw(sdf::Renderer &renderer)
 bool ABuilds::isUpdatable()
 {
     return _updatable;
+}
+
+std::vector<std::pair<std::string, int>> ABuilds::getCost()
+{
+    return _cost;
 }
 
 #pragma endregion GettersSetters
