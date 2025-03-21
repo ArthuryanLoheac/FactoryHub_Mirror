@@ -65,7 +65,8 @@ sdf::GetterTextures::GetterTextures()
     textures["MinerT1"] = new sdf::Texture("Assets/Miner.png");
     textures["Base"] = new sdf::Texture("Assets/Base.png");
     // Load textures UI
-    textures["StartMenu"] = new sdf::Texture("Assets/StartMenu.png");
+    textures["StartMenu"] = new sdf::Texture("Assets/UI/StartMenu.png");
+    textures["Help1"] = new sdf::Texture("Assets/UI/Help1.png");
 }
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)
