@@ -15,15 +15,20 @@ void WindowsManager::initHelp(MapGrid &map)
     _saveZoom = sdf::Camera::instance->getZoom();
     sdf::Camera::instance->setRawZoom(14.f);
     sdf::Camera::instance->setPosition(glm::vec2(0, 0));
+
+    _lastKeyStates[GLFW_KEY_F1] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_RIGHT] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_LEFT] = GLFW_RELEASE;
     if (_spritesHelp.size() > 0)
         return;
-    _spritesHelp.push_back(new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Help1")));
+    for (int i = 1; i < 5; i++)
+        _spritesHelp.push_back(new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+            sdf::GetterTextures::instance->getTexture("Help" + std::to_string(i))));
 }
 
 void WindowsManager::drawHelp(MapGrid map, sdf::Renderer &renderer)
 {
-    _spritesHelp[0]->draw(renderer);
+    _spritesHelp[stateHelp]->draw(renderer);
 }
 
 void WindowsManager::updateHelp(MapGrid map, float deltaTime)
@@ -37,5 +42,17 @@ void WindowsManager::processInputsHelp(GLFWwindow *window, sdf::Renderer &render
         sdf::Camera::instance->setRawZoom(_saveZoom);
         sdf::Camera::instance->setPosition(_savePos);
     }
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_RIGHT] != GLFW_PRESS) {
+        stateHelp++;
+        if (stateHelp >= _spritesHelp.size())
+            stateHelp = _spritesHelp.size() - 1;
+    }
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_LEFT] != GLFW_PRESS) {
+        stateHelp--;
+        if (stateHelp < 0)
+            stateHelp = 0;
+    }
     _lastKeyStates[GLFW_KEY_F1] = glfwGetKey(window, GLFW_KEY_F1);
+    _lastKeyStates[GLFW_KEY_RIGHT] = glfwGetKey(window, GLFW_KEY_RIGHT);
+    _lastKeyStates[GLFW_KEY_LEFT] = glfwGetKey(window, GLFW_KEY_LEFT);
 }

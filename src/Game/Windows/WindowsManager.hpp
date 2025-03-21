@@ -38,6 +38,7 @@ class WindowsManager
         sdf::Sprite *_startMenu;
 
         std::vector<sdf::Sprite *> _spritesHelp;
+        int stateHelp = 0;
         std::map<int, int> _lastKeyStates;
         float _saveZoom = 0;
         glm::vec2 _savePos = glm::vec2(0, 0);
