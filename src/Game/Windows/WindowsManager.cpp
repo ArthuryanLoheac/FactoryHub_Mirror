@@ -18,6 +18,10 @@ WindowsManager::WindowsManager()
                                             &WindowsManager::drawMenu,
                                             &WindowsManager::updateMenu,
                                             &WindowsManager::processInputsMenu);
+    _functs[State::HELP] = std::make_tuple( &WindowsManager::initHelp,
+                                            &WindowsManager::drawHelp,
+                                            &WindowsManager::updateHelp,
+                                            &WindowsManager::processInputsHelp);
 }
 
 void WindowsManager::init(MapGrid &map)

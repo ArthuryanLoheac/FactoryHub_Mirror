@@ -49,6 +49,16 @@ sdf::GetterTextures::GetterTextures()
     textures["High_Power_EMP_Charge"] = new sdf::Texture("Assets/High_Power_EMP_Charge.png");
     textures["Conductive_Socket"] = new sdf::Texture("Assets/Conductive_Socket.png");
     textures["Chemical_Plant"] = new sdf::Texture("Assets/Chemical_Plant.png");
+    textures["Smelter"] = new sdf::Texture("Assets/Smelter.png");
+    textures["Foundry"] = new sdf::Texture("Assets/Foundry.png");
+    textures["Molding_Workshop"] = new sdf::Texture("Assets/Molding_Workshop.png");
+    textures["Assembly_Workshop"] = new sdf::Texture("Assets/Assembly_Workshop.png");
+    textures["Wiring_Factory"] = new sdf::Texture("Assets/Wiring_Factory.png");
+    textures["Capacitor_Factory"] = new sdf::Texture("Assets/Capacitor_Factory.png");
+    textures["High_Voltage_Generator"] = new sdf::Texture("Assets/High_Voltage_Generator.png");
+    textures["Nuclear_Refinery"] = new sdf::Texture("Assets/Nuclear_Refinery.png");
+    textures["Advanced_Smelter"] = new sdf::Texture("Assets/Advanced_Smelter.png");
+    textures["Advanced_Assembly_Workshop"] = new sdf::Texture("Assets/Advanced_Assembly_Workshop.png");
     // Load textures ammunitions
     textures["Perforating_Projectile"] = new sdf::Texture("Assets/Perforating_Projectile.png");
     textures["Black_Powder_Ammo"] = new sdf::Texture("Assets/Black_Powder_Ammo.png");
@@ -65,7 +75,12 @@ sdf::GetterTextures::GetterTextures()
     textures["MinerT1"] = new sdf::Texture("Assets/Miner.png");
     textures["Base"] = new sdf::Texture("Assets/Base.png");
     // Load textures UI
-    textures["StartMenu"] = new sdf::Texture("Assets/StartMenu.png");
+    textures["StartMenu"] = new sdf::Texture("Assets/UI/StartMenu.png");
+    textures["Help1"] = new sdf::Texture("Assets/UI/1.png");
+    textures["Help2"] = new sdf::Texture("Assets/UI/2.png");
+    textures["Help3"] = new sdf::Texture("Assets/UI/3.png");
+    textures["Help4"] = new sdf::Texture("Assets/UI/4.png");
+    textures["Help5"] = new sdf::Texture("Assets/UI/5.png");
 }
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)
