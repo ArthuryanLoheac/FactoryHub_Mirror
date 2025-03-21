@@ -9,7 +9,7 @@
 
 bool ATapis::addElement(Item item)
 {
-    return addElementTapis(item);
+    return addElementTapis(item, _direction);
 }
 
 void ATapis::setDirection(Direction direction)
@@ -18,36 +18,36 @@ void ATapis::setDirection(Direction direction)
     _sprite->setDirection(direction * 90);
 }
 
-bool ATapis::myAddElement(Item item)
+bool ATapis::myAddElement(Item item, Direction direction)
 {
     if (_AllItemAccepted) {
-        std::tuple<float, Item, Direction> tuple = std::make_tuple(0.0f, item, _direction);
+        std::tuple<float, Item, Direction> tuple = std::make_tuple(0.0f, item, direction);
         _itemsTransitting.push_back(tuple);
         return true;
     }
     for (Item &it : _AcceptedItems) {
         if (it.getName() == item.getName()) {
-            _itemsTransitting.push_back(std::make_tuple(0.0f, item, _direction));
+            _itemsTransitting.push_back(std::make_tuple(0.0f, item, direction));
             return true;
         }
     }
     return false;
 }
 
-bool ATapis::addElementTapis(Item item)
+bool ATapis::addElementTapis(Item item, Direction direction)
 {
     if (_itemsTransitting.size() > 0 &&
         std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) >= _deltaMinPercent)
-        return myAddElement(item);
+        return myAddElement(item, direction);
     else if (_itemsTransitting.size() == 0)
-        return myAddElement(item);
+        return myAddElement(item, direction);
     return false;
 }
 
 static bool outElementToTapis(ATapis *tapis,
-    std::vector<std::tuple<float, Item, Direction>> &_itemsTransitting)
+    std::vector<std::tuple<float, Item, Direction>> &_itemsTransitting, Direction direction)
 {
-    if (tapis->addElementTapis(std::get<1>(_itemsTransitting[0]))) {
+    if (tapis->addElementTapis(std::get<1>(_itemsTransitting[0]), direction)) {
         _itemsTransitting.erase(_itemsTransitting.begin());
         return true;
     }
@@ -78,7 +78,7 @@ bool ATapis::outElementTapis(std::string name, MapGrid map)
             return false;
         tapis = dynamic_cast<ATapis *>(blocks[blocks.size() - 1].get());
         if (tapis != nullptr)
-            return outElementToTapis(tapis, _itemsTransitting);
+            return outElementToTapis(tapis, _itemsTransitting, _direction);
         block = dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get());
         if (block != nullptr)
             return outElementToABuilds(block, _itemsTransitting);
@@ -178,25 +178,50 @@ void ATapis::updatePushItemFront(MapGrid map)
         block = dynamic_cast<ABuilds *>(blocksBehind[blocksBehind.size() - 1].get());
         if (block == nullptr) return;
         tapis = dynamic_cast<ATapis *>(block);
-        if (tapis != nullptr && tapis->getDirection() == (_direction + 2) % 4) return;
-        if (block->addElement(std::get<1>(_itemsTransitting[i])) == true) {
-            _itemsTransitting.erase(_itemsTransitting.begin() + i);
-            return;
+        if (tapis != nullptr) {
+            if (tapis->getDirection() == (_direction + 2) % 4)
+                return;
+            if (tapis->myAddElement(std::get<1>(_itemsTransitting[i]), _direction))
+                _itemsTransitting.erase(_itemsTransitting.begin() + i);
+        } else {
+            if (block->addElement(std::get<1>(_itemsTransitting[i])) == true)
+                _itemsTransitting.erase(_itemsTransitting.begin() + i);
         }
     }
 }
 
+void ATapis::updatePosSpriteFirst(size_t i)
+{
+    if (std::get<2>(_itemsTransitting[i]) == UP)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY - 0.5f + std::get<0>(_itemsTransitting[i])); 
+    if (std::get<2>(_itemsTransitting[i]) == DOWN)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY + 0.5f - std::get<0>(_itemsTransitting[i]));
+    if (std::get<2>(_itemsTransitting[i]) == RIGHT)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX - 0.5f + std::get<0>(_itemsTransitting[i]), _posY);
+    if (std::get<2>(_itemsTransitting[i]) == LEFT)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX + 0.5f - std::get<0>(_itemsTransitting[i]), _posY);
+}
+
+void ATapis::updatePosSpriteSecond(size_t i)
+{
+    if (_direction == UP)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY - 0.5f + std::get<0>(_itemsTransitting[i])); 
+    if (_direction == DOWN)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY + 0.5f - std::get<0>(_itemsTransitting[i]));
+    if (_direction == RIGHT)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX - 0.5f + std::get<0>(_itemsTransitting[i]), _posY);
+    if (_direction == LEFT)
+        std::get<1>(_itemsTransitting[i]).setPos(_posX + 0.5f - std::get<0>(_itemsTransitting[i]), _posY);
+}
+
+
 void ATapis::updatePosSprite()
 {
     for (size_t i = 0; i < _itemsTransitting.size(); i++) {
-        if (_direction == UP)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY - 0.5f + std::get<0>(_itemsTransitting[i])); 
-        if (_direction == DOWN)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX, _posY + 0.5f - std::get<0>(_itemsTransitting[i]));
-        if (_direction == RIGHT)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX - 0.5f + std::get<0>(_itemsTransitting[i]), _posY);
-        if (_direction == LEFT)
-            std::get<1>(_itemsTransitting[i]).setPos(_posX + 0.5f - std::get<0>(_itemsTransitting[i]), _posY);
+        if (std::get<0>(_itemsTransitting[i]) < 0.5f)
+            updatePosSpriteFirst(i);
+        else
+            updatePosSpriteSecond(i);
     }
 }
 
