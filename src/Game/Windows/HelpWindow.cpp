@@ -19,9 +19,10 @@ void WindowsManager::initHelp(MapGrid &map)
     _lastKeyStates[GLFW_KEY_F1] = GLFW_RELEASE;
     _lastKeyStates[GLFW_KEY_RIGHT] = GLFW_RELEASE;
     _lastKeyStates[GLFW_KEY_LEFT] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_ESCAPE] = GLFW_RELEASE;
     if (_spritesHelp.size() > 0)
         return;
-    for (int i = 1; i < 5; i++)
+    for (int i = 1; i <= 5; i++)
         _spritesHelp.push_back(new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
             sdf::GetterTextures::instance->getTexture("Help" + std::to_string(i))));
 }
@@ -42,6 +43,11 @@ void WindowsManager::processInputsHelp(GLFWwindow *window, sdf::Renderer &render
         sdf::Camera::instance->setRawZoom(_saveZoom);
         sdf::Camera::instance->setPosition(_savePos);
     }
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_ESCAPE] != GLFW_PRESS) {
+        _state = State::GAME;
+        sdf::Camera::instance->setRawZoom(_saveZoom);
+        sdf::Camera::instance->setPosition(_savePos);
+    }
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_RIGHT] != GLFW_PRESS) {
         stateHelp++;
         if (stateHelp >= _spritesHelp.size())
@@ -55,4 +61,5 @@ void WindowsManager::processInputsHelp(GLFWwindow *window, sdf::Renderer &render
     _lastKeyStates[GLFW_KEY_F1] = glfwGetKey(window, GLFW_KEY_F1);
     _lastKeyStates[GLFW_KEY_RIGHT] = glfwGetKey(window, GLFW_KEY_RIGHT);
     _lastKeyStates[GLFW_KEY_LEFT] = glfwGetKey(window, GLFW_KEY_LEFT);
+    _lastKeyStates[GLFW_KEY_ESCAPE] = glfwGetKey(window, GLFW_KEY_ESCAPE);
 }

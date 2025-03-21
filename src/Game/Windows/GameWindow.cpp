@@ -32,8 +32,6 @@ void WindowsManager::updateGame(MapGrid map, float deltaTime)
 
 void WindowsManager::processInputsGame(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
     if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_F1] != GLFW_PRESS) {
         initHelp(map);
         _state = State::HELP;

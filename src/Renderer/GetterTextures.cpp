@@ -76,10 +76,11 @@ sdf::GetterTextures::GetterTextures()
     textures["Base"] = new sdf::Texture("Assets/Base.png");
     // Load textures UI
     textures["StartMenu"] = new sdf::Texture("Assets/UI/StartMenu.png");
-    textures["Help1"] = new sdf::Texture("Assets/UI/Help1.png");
-    textures["Help2"] = new sdf::Texture("Assets/UI/Help2.png");
-    textures["Help3"] = new sdf::Texture("Assets/UI/Help3.png");
-    textures["Help4"] = new sdf::Texture("Assets/UI/Help4.png");
+    textures["Help1"] = new sdf::Texture("Assets/UI/1.png");
+    textures["Help2"] = new sdf::Texture("Assets/UI/2.png");
+    textures["Help3"] = new sdf::Texture("Assets/UI/3.png");
+    textures["Help4"] = new sdf::Texture("Assets/UI/4.png");
+    textures["Help5"] = new sdf::Texture("Assets/UI/5.png");
 }
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)
