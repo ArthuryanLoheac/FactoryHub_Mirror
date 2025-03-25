@@ -14,8 +14,8 @@ Nuclear_Refinery::Nuclear_Refinery() : AFactory()
         sdf::GetterTextures::instance->getTexture("Nuclear_Refinery"));
 
     std::vector<Item> r_in1;
-    r_in1.push_back(Item("UraniunRaw"));
-    _AcceptedItems.push_back(Item("UraniunRaw"));
+    r_in1.push_back(Item("UraniumRaw"));
+    _AcceptedItems.push_back(Item("UraniumRaw"));
     r_in1.push_back(Item("WaterRaw"));
     _AcceptedItems.push_back(Item("WaterRaw"));
     r_in1.push_back(Item("Steel_BAR"));
