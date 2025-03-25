@@ -63,7 +63,7 @@ void sdf::Renderer::swapBuffers(void)
 void sdf::Renderer::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     if (_instance)
-        _instance->getGameCamera().setZoom(_instance->getGameCamera().getZoom() + (yoffset / 10));
+        _instance->getCamera().setZoom(_instance->getCamera().getZoom() + (yoffset / 10));
 }
 
 void sdf::Renderer::pollEvent(MapGrid &map)
@@ -86,14 +86,9 @@ sdf::Shader &sdf::Renderer::getShader(const std::string &key)
     return _shaders.at(key);
 }
 
-sdf::Camera &sdf::Renderer::getGameCamera(void)
+sdf::Camera &sdf::Renderer::getCamera(void)
 {
-    return _gameCamera;
-}
-
-sdf::Camera &sdf::Renderer::getUICamera(void)
-{
-    return _UICamera;
+    return _camera;
 }
 
 double sdf::Renderer::getDeltaTime(void)

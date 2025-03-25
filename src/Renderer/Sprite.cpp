@@ -14,7 +14,7 @@
 
 sdf::Sprite::Sprite(const glm::vec3 &position, sdf::Texture &texture,
     float direction)
-    : _position(position), _texture(texture), _direction(direction), _isUI(false)
+    : _position(position), _size(1, 1), _texture(texture), _direction(direction), _isUI(false)
 {
     // Starting vertices for a `square` sprite
     // A vertice is a point in space, here, I ignore the third dimension
@@ -58,6 +58,8 @@ sdf::Sprite::Sprite(const glm::vec3 &position, sdf::Texture &texture,
 
 void sdf::Sprite::draw(sdf::Renderer &renderer)
 {
+    int width, height;
+    glfwGetWindowSize(renderer.getWindow(), &width, &height);
     // Bind shader
     renderer.getShader("Sprite").use();
 
@@ -68,18 +70,35 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
 
     // Define matrices used to correctly position the sprites
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, _position);
+    if (_isUI)
+        model = glm::translate(model, glm::vec3(_position.x + _size.x * 0.5f, _position.y + _size.y * 0.5f, _position.z));
+    else
+        model = glm::translate(model, _position);
     model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
+    if (_isUI)
+        model = glm::scale(model, glm::vec3(-_size, 1.0f));
+    else
+        model = glm::scale(model, glm::vec3(_size, 1.0f));
+
     glm::mat4 view;
     if (_isUI)
-        view = renderer.getUICamera().getTransformationMatrix();
+        view = glm::mat4(1.0f);
     else
-        view = renderer.getGameCamera().getTransformationMatrix();
+        view = renderer.getCamera().getTransformationMatrix();
+
     glm::mat4 projection;
     if (_isUI)
-        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+        projection = glm::ortho(
+            0.0f, static_cast<float>(width),    // Left,    Right
+            static_cast<float>(height), 0.0f,   // Bottom,  Top
+            -100.0f, 10.0f                      // Near,    Far
+        );
     else
-        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+        projection = glm::ortho(
+            static_cast<float>(width / -100), static_cast<float>(width / 100),      // Left,    Right
+            static_cast<float>(height / -100), static_cast<float>(height / 100),    // Bottom,  Top
+            -100.0f, 10.0f                                                          // Near,    Far
+        );
     // Send them to the shader
     renderer.getShader("Sprite").set("model", model);
     renderer.getShader("Sprite").set("view", view);
@@ -96,6 +115,11 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
 void sdf::Sprite::setPosition(const glm::vec2 &position)
 {
     _position = {position.x, position.y, _position.z};
+}
+
+void sdf::Sprite::setSize(const glm::vec2 &size)
+{
+    _size = size;
 }
 
 void sdf::Sprite::setLayer(float layer)

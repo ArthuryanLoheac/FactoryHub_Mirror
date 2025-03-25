@@ -30,8 +30,7 @@ namespace sdf {
 
             GLFWwindow *getWindow(void);
             sdf::Shader &getShader(const std::string &key);
-            sdf::Camera &getGameCamera(void);
-            sdf::Camera &getUICamera(void);
+            sdf::Camera &getCamera(void);
             double getDeltaTime(void);
             void resetDeltaTime(void);
 
@@ -40,8 +39,7 @@ namespace sdf {
         private:
             std::unique_ptr<sdf::Window> _window;
             std::unordered_map<std::string, sdf::Shader> _shaders;
-            sdf::Camera _gameCamera;
-            sdf::Camera _UICamera;
+            sdf::Camera _camera;
 
             static Renderer *_instance;
 
