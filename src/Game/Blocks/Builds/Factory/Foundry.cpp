@@ -6,7 +6,7 @@
 */
 #include "Foundry.hpp"
 
-FoundryT1::FoundryT1() : AFactory()
+Foundry::Foundry() : AFactory()
 {
     _cost = {{"SteelRaw", 20}, {"CoalRaw", 10}};
     _sprite = new sdf::Sprite(glm::vec3(0.0f, 0.0f, 30.0f),

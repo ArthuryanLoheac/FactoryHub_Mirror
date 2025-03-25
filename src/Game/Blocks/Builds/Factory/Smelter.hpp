@@ -8,8 +8,8 @@
 #pragma once
 #include "AFactory.hpp"
 
-class SmelterT1 : public AFactory
+class Smelter : public AFactory
 {
     public:
-        SmelterT1();
+        Smelter();
 };
