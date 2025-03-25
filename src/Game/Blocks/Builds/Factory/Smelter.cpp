@@ -6,7 +6,7 @@
 */
 #include "Smelter.hpp"
 
-SmelterT1::SmelterT1() : AFactory()
+Smelter::Smelter() : AFactory()
 {
     sdf::Texture textureSmelter = sdf::Texture("Assets/Smelter.png");
     _cost = {{"CopperRaw", 20}, {"CoalRaw", 15}};

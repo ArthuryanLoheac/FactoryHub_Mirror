@@ -8,8 +8,8 @@
 #pragma once
 #include "AFactory.hpp"
 
-class FoundryT1 : public AFactory
+class Foundry : public AFactory
 {
     public:
-        FoundryT1();
+        Foundry();
 };

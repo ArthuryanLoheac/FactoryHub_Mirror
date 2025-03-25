@@ -16,6 +16,24 @@ Base::Base()
     _updatable = true;
     _items["SteelRaw"] = 100;
     _items["CopperRaw"] = 100;
+    //  DEVTOOL, START WITH ALL THE MATERIAL
+    //_items["SteelRaw"] = 10000;
+    //_items["CopperRaw"] = 10000;
+    //_items["CoalRaw"] = 10000;
+    //_items["Steel_BAR"] = 10000;
+    //_items["SaltpeterRaw"] = 10000;
+    //_items["ZincRaw"] = 10000;
+    //_items["Copper_Wire"] = 10000;
+    //_items["Energy_Capacitor"] = 10000;
+    //_items["UraniumRaw"] = 10000;
+    //_items["Reinforced_Socket"] = 10000;
+    //_items["Zinc_Plate"] = 10000;
+    //_items["Rubber"] = 10000;
+    //_items["WaterRaw"] = 10000;
+    //_items["Reinforced_Brass"] = 10000;
+    //_items["Copper_Balls"] = 10000;
+    //_items["Black_Powder"] = 10000;
+    //_items["Gunpowder"] = 10000;
     setHp(1000);
 }
 

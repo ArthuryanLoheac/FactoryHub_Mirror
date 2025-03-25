@@ -6,7 +6,7 @@
 */
 #include "Molding_Workshop.hpp"
 
-Molding_WorkshopT1::Molding_WorkshopT1() : AFactory()
+Molding_Workshop::Molding_Workshop() : AFactory()
 {
     sdf::Texture textureMolding = sdf::Texture("Assets/Molding_Workshop.png");
     _cost = {{"ZincRaw", 15}, {"CopperRaw", 15}};
