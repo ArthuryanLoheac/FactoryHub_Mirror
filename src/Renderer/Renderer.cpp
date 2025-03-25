@@ -69,8 +69,9 @@ void sdf::Renderer::scroll_callback(GLFWwindow* window, double xoffset, double y
 void sdf::Renderer::pollEvent(MapGrid &map)
 {
     double actualTime = glfwGetTime();
-    _deltaTime = glfwGetTime() - _lastFrame;
-    _lastFrame = glfwGetTime();
+
+    _deltaTime = actualTime - _lastFrame;
+    _lastFrame = actualTime;
 
     glfwPollEvents();
 }
