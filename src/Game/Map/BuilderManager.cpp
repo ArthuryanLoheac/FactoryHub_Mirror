@@ -8,7 +8,19 @@
 #include "Tapis.hpp"
 #include "MinerT1.hpp"
 #include "Base.hpp"
-#include <AVein.hpp>
+#include "AVein.hpp"
+#include "Advanced_Assembly_Workshop.hpp"
+#include "Advanced_Smelter.hpp"
+#include "Assembly_Workshop.hpp"
+#include "Capacitor_Factory.hpp"
+#include "Chemical_Plant.hpp"
+#include "Cutting_Machine.hpp"
+#include "Foundry.hpp"
+#include "High_Voltage_Generator.hpp"
+#include "Molding_Workshop.hpp"
+#include "Nuclear_Refinery.hpp"
+#include "Smelter.hpp"
+#include "Wiring_Factory.hpp"
 
 BuilderManager *BuilderManager::instance = nullptr;
 
@@ -68,6 +80,54 @@ void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
         _placementType = VEIN_ONLY;
         blockBuilding = std::make_shared<MinerT1>();
     }
+    if (isKeyClicked(window, GLFW_KEY_E, _lastKeyStates[GLFW_KEY_E]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Smelter>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_Y, _lastKeyStates[GLFW_KEY_Y]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Advanced_Smelter>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_U, _lastKeyStates[GLFW_KEY_U]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Foundry>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_I, _lastKeyStates[GLFW_KEY_I]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Chemical_Plant>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_O, _lastKeyStates[GLFW_KEY_O]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Molding_Workshop>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_P, _lastKeyStates[GLFW_KEY_P]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Cutting_Machine>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_F, _lastKeyStates[GLFW_KEY_F]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Assembly_Workshop>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_G, _lastKeyStates[GLFW_KEY_G]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Advanced_Assembly_Workshop>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_H, _lastKeyStates[GLFW_KEY_H]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Capacitor_Factory>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_J, _lastKeyStates[GLFW_KEY_J]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<High_Voltage_Generator>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_K, _lastKeyStates[GLFW_KEY_K]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Wiring_Factory>();
+    }
+    if (isKeyClicked(window, GLFW_KEY_L, _lastKeyStates[GLFW_KEY_L]) && !_isBase){
+        _placementType = FREE;
+        blockBuilding = std::make_shared<Nuclear_Refinery>();
+    }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
         if (_placementType == VEIN_ONLY)
             buildBlockVein(window, map);
@@ -117,7 +177,10 @@ void BuilderManager::setIsBase(bool isBase)
 
 BuilderManager::BuilderManager()
 {
-    _keys = {GLFW_KEY_B, GLFW_KEY_V, GLFW_KEY_R, GLFW_KEY_T, GLFW_KEY_M};
+    _keys = {GLFW_KEY_B, GLFW_KEY_V, GLFW_KEY_E, GLFW_KEY_T, GLFW_KEY_M,
+        GLFW_KEY_R, GLFW_KEY_Y, GLFW_KEY_U, GLFW_KEY_I,
+        GLFW_KEY_O, GLFW_KEY_P, GLFW_KEY_F, GLFW_KEY_G,
+        GLFW_KEY_H, GLFW_KEY_J, GLFW_KEY_K, GLFW_KEY_L};
     _mouseKeys = {GLFW_MOUSE_BUTTON_1, GLFW_MOUSE_BUTTON_2};
     if (instance == nullptr)
         instance = this;
@@ -246,6 +309,30 @@ std::shared_ptr<IBlock> BuilderManager::getCopyBlockBuilding()
         return std::make_shared<MinerT1>();
     if (dynamic_cast<Base *>(blockBuilding.get()))
         return std::make_shared<Base>();
+    if (dynamic_cast<Advanced_Assembly_Workshop *>(blockBuilding.get()))
+        return std::make_shared<Advanced_Assembly_Workshop>();
+    if (dynamic_cast<Advanced_Smelter *>(blockBuilding.get()))
+        return std::make_shared<Advanced_Smelter>();
+    if (dynamic_cast<Assembly_Workshop *>(blockBuilding.get()))
+        return std::make_shared<Assembly_Workshop>();
+    if (dynamic_cast<Capacitor_Factory *>(blockBuilding.get()))
+        return std::make_shared<Capacitor_Factory>();
+    if (dynamic_cast<Chemical_Plant *>(blockBuilding.get()))
+        return std::make_shared<Chemical_Plant>();
+    if (dynamic_cast<Cutting_Machine *>(blockBuilding.get()))
+        return std::make_shared<Cutting_Machine>();
+    if (dynamic_cast<Foundry *>(blockBuilding.get()))
+        return std::make_shared<Foundry>();
+    if (dynamic_cast<High_Voltage_Generator *>(blockBuilding.get()))
+        return std::make_shared<High_Voltage_Generator>();
+    if (dynamic_cast<Molding_Workshop *>(blockBuilding.get()))
+        return std::make_shared<Molding_Workshop>();
+    if (dynamic_cast<Nuclear_Refinery *>(blockBuilding.get()))
+        return std::make_shared<Nuclear_Refinery>();
+    if (dynamic_cast<Smelter *>(blockBuilding.get()))
+        return std::make_shared<Smelter>();
+    if (dynamic_cast<Wiring_Factory *>(blockBuilding.get()))
+        return std::make_shared<Wiring_Factory>();
     return blockBuilding;
 }
 
