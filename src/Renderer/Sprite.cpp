@@ -58,6 +58,8 @@ sdf::Sprite::Sprite(const glm::vec3 &position, sdf::Texture &texture,
 
 void sdf::Sprite::draw(sdf::Renderer &renderer)
 {
+    int width, height;
+    glfwGetWindowSize(renderer.getWindow(), &width, &height);
     // Bind shader
     renderer.getShader("Sprite").use();
 
@@ -72,14 +74,22 @@ void sdf::Sprite::draw(sdf::Renderer &renderer)
     model = glm::rotate(model, glm::radians(_direction), glm::vec3(0.0f, 0.0f, 1.0f));
     glm::mat4 view;
     if (_isUI)
-        view = renderer.getUICamera().getTransformationMatrix();
+        view = glm::mat4(1.0f);
     else
-        view = renderer.getGameCamera().getTransformationMatrix();
+        view = renderer.getCamera().getTransformationMatrix();
     glm::mat4 projection;
     if (_isUI)
-        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+        projection = glm::ortho(
+            0.0f, static_cast<float>(width),    // Left,    Right
+            static_cast<float>(height), 0.0f,   // Bottom,  Top
+            -100.0f, 10.0f                      // Near,    Far
+        );
     else
-        projection = glm::ortho(-10.8f, 10.8f, -7.2f, 7.2f, -100.0f, 10.0f);
+        projection = glm::ortho(
+            static_cast<float>(width / -100), static_cast<float>(width / 100),      // Left,    Right
+            static_cast<float>(height / 100), static_cast<float>(height / -100),    // Bottom,  Top
+            -100.0f, 10.0f                                                          // Near,    Far
+        );
     // Send them to the shader
     renderer.getShader("Sprite").set("model", model);
     renderer.getShader("Sprite").set("view", view);

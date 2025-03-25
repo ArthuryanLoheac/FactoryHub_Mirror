@@ -35,10 +35,10 @@ void sdf::Camera::move(sdf::Camera::Direction direction, double deltaTime, float
 
     switch (direction) {
         case sdf::Camera::Direction::UP:
-            _position = glm::vec2(_position.x, _position.y - distance);
+            _position = glm::vec2(_position.x, _position.y + distance);
             break;
         case sdf::Camera::Direction::DOWN:
-            _position = glm::vec2(_position.x, _position.y + distance);
+            _position = glm::vec2(_position.x, _position.y - distance);
             break;
         case sdf::Camera::Direction::RIGHT:
             _position = glm::vec2(_position.x - distance, _position.y);

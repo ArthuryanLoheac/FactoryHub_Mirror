@@ -213,7 +213,7 @@ glm::vec2 BuilderManager::getMousePos(GLFWwindow *window)
     glfwGetWindowSize(window, &width, &height);
     glm::vec2 vec = sdf::Camera::instance->getPosition();
     xpos = std::round((width / 2) - xpos) / (50 * sdf::Camera::instance->getZoom());
-    ypos = std::round((height / 2) - ypos) / (50 * sdf::Camera::instance->getZoom());    
+    ypos = std::round((height / 2) - ypos) / -(50 * sdf::Camera::instance->getZoom());    
     pos.x = (int)(-vec.x + (xpos + 0.5f));
     pos.y = (int)(-vec.y + (ypos + 0.5f));
     return pos;
