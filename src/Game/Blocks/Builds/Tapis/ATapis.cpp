@@ -22,10 +22,6 @@ bool ATapis::myAddElement(Item item, Direction direction)
 {
     if (_AllItemAccepted) {
         std::tuple<float, Item, Direction> tuple = std::make_tuple(0.0f, item, direction);
-        if (_itemsTransitting.size() > 0)
-            printf("Added %f %f\n", std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]), _deltaMinPercent);
-        else
-            printf("Added Solo\n");
         if (_itemsTransitting.size() > 0 &&
             std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) < _deltaMinPercent)
             return false;
@@ -164,10 +160,8 @@ void ATapis::updatePushItemFront(MapGrid map)
         if (tapis != nullptr) {
             if (tapis->getDirection() == (_direction + 2) % 4)
                 return;
-            if (tapis->myAddElement(std::get<1>(_itemsTransitting[i]), _direction)){
-                printf("Pushed\n");
+            if (tapis->myAddElement(std::get<1>(_itemsTransitting[i]), _direction))
                 _itemsTransitting.erase(_itemsTransitting.begin() + i);
-            }
         } else {
             if (block->addElement(std::get<1>(_itemsTransitting[i])) == true)
                 _itemsTransitting.erase(_itemsTransitting.begin() + i);
