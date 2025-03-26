@@ -22,6 +22,13 @@ bool ATapis::myAddElement(Item item, Direction direction)
 {
     if (_AllItemAccepted) {
         std::tuple<float, Item, Direction> tuple = std::make_tuple(0.0f, item, direction);
+        if (_itemsTransitting.size() > 0)
+            printf("Added %f %f\n", std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]), _deltaMinPercent);
+        else
+            printf("Added Solo\n");
+        if (_itemsTransitting.size() > 0 &&
+            std::get<0>(_itemsTransitting[_itemsTransitting.size() - 1]) < _deltaMinPercent)
+            return false;
         _itemsTransitting.push_back(tuple);
         return true;
     }
@@ -62,30 +69,6 @@ static bool outElementToABuilds(ABuilds *block,
         return true;
     }
     return false;
-}
-
-bool ATapis::outElementTapis(std::string name, MapGrid map)
-{
-    int newPosX = _posX + (_direction == RIGHT ? 1 : (_direction == LEFT ? -1 : 0));
-    int newPosY = _posY + (_direction == DOWN ? 1 : (_direction == UP ? -1 : 0));
-    std::vector<std::shared_ptr<IBlock>> blocks;
-    ABuilds *block;
-    ATapis *tapis;
-
-    try {
-        blocks = map.getAllBlocksAtPos(newPosX, newPosY);
-        if (blocks.size() == 0)
-            return false;
-        tapis = dynamic_cast<ATapis *>(blocks[blocks.size() - 1].get());
-        if (tapis != nullptr)
-            return outElementToTapis(tapis, _itemsTransitting, _direction);
-        block = dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get());
-        if (block != nullptr)
-            return outElementToABuilds(block, _itemsTransitting);
-        return false;
-    } catch (std::out_of_range &e) {
-        return false;
-    }
 }
 
 static std::vector<std::shared_ptr<IBlock>> getIBlockAtModPos(MapGrid map, int X, int Y, Direction direction)
@@ -181,8 +164,10 @@ void ATapis::updatePushItemFront(MapGrid map)
         if (tapis != nullptr) {
             if (tapis->getDirection() == (_direction + 2) % 4)
                 return;
-            if (tapis->myAddElement(std::get<1>(_itemsTransitting[i]), _direction))
+            if (tapis->myAddElement(std::get<1>(_itemsTransitting[i]), _direction)){
+                printf("Pushed\n");
                 _itemsTransitting.erase(_itemsTransitting.begin() + i);
+            }
         } else {
             if (block->addElement(std::get<1>(_itemsTransitting[i])) == true)
                 _itemsTransitting.erase(_itemsTransitting.begin() + i);

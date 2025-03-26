@@ -15,7 +15,6 @@ class ATapis : public ABuilds
         bool addElement(Item item) override;
         void setDirection(Direction direction) override;
         bool addElementTapis(Item item, Direction direction);
-        bool outElementTapis(std::string name, MapGrid map);
         void update(float deltaTime, MapGrid map) override;
         void updateTakeBehind(MapGrid map);
         void addElementFromBehind(ABuilds *block);
