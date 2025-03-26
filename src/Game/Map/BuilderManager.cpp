@@ -21,6 +21,8 @@
 #include "Nuclear_Refinery.hpp"
 #include "Smelter.hpp"
 #include "Wiring_Factory.hpp"
+#include "Unlockable.hpp"
+#include "iostream"
 
 BuilderManager *BuilderManager::instance = nullptr;
 
@@ -82,51 +84,75 @@ void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
     }
     if (isKeyClicked(window, GLFW_KEY_E, _lastKeyStates[GLFW_KEY_E]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Smelter>();
+        if (Unlockable::instance->isUnlocked("Smelter") == true){
+            blockBuilding = std::make_shared<Smelter>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_Y, _lastKeyStates[GLFW_KEY_Y]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Advanced_Smelter>();
+        if (Unlockable::instance->isUnlocked("Advanced_Smelter") == true){
+            blockBuilding = std::make_shared<Advanced_Smelter>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_U, _lastKeyStates[GLFW_KEY_U]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Foundry>();
+        if (Unlockable::instance->isUnlocked("Foundry") == true){
+            blockBuilding = std::make_shared<Foundry>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_I, _lastKeyStates[GLFW_KEY_I]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Chemical_Plant>();
+        if (Unlockable::instance->isUnlocked("Chemical_Plant") == true){
+            blockBuilding = std::make_shared<Chemical_Plant>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_O, _lastKeyStates[GLFW_KEY_O]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Molding_Workshop>();
+        if (Unlockable::instance->isUnlocked("Molding_Workshop") == true){
+            blockBuilding = std::make_shared<Molding_Workshop>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_P, _lastKeyStates[GLFW_KEY_P]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Cutting_Machine>();
+        if (Unlockable::instance->isUnlocked("Cutting_Machine") == true){
+            blockBuilding = std::make_shared<Cutting_Machine>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_F, _lastKeyStates[GLFW_KEY_F]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Assembly_Workshop>();
+        if (Unlockable::instance->isUnlocked("Assembly_Workshop") == true){
+            blockBuilding = std::make_shared<Assembly_Workshop>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_G, _lastKeyStates[GLFW_KEY_G]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Advanced_Assembly_Workshop>();
+        if (Unlockable::instance->isUnlocked("Advanced_Assembly_Workshop") == true){
+            blockBuilding = std::make_shared<Advanced_Assembly_Workshop>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_H, _lastKeyStates[GLFW_KEY_H]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Capacitor_Factory>();
+        if (Unlockable::instance->isUnlocked("Capacitor_Factory") == true){
+            blockBuilding = std::make_shared<Capacitor_Factory>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_J, _lastKeyStates[GLFW_KEY_J]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<High_Voltage_Generator>();
+        if (Unlockable::instance->isUnlocked("Arthuryan_Module") == true){
+            blockBuilding = std::make_shared<High_Voltage_Generator>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_K, _lastKeyStates[GLFW_KEY_K]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Wiring_Factory>();
+        if (Unlockable::instance->isUnlocked("Wiring_Factory") == true){
+            blockBuilding = std::make_shared<Wiring_Factory>();
+        }
     }
     if (isKeyClicked(window, GLFW_KEY_L, _lastKeyStates[GLFW_KEY_L]) && !_isBase){
         _placementType = FREE;
-        blockBuilding = std::make_shared<Nuclear_Refinery>();
+        if (Unlockable::instance->isUnlocked("Nuclear_Refinery") == true){
+            blockBuilding = std::make_shared<Nuclear_Refinery>();
+        }
     }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
         if (_placementType == VEIN_ONLY)

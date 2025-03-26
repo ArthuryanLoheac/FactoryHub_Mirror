@@ -39,8 +39,8 @@ class Unlockable
         void unlockBurst_Turret();
         void unlockSniper_Turret();
 
-        void unlockTreadmill_T2();
-        void unlockTreadmill_T3();
+        void unlockConveyer_belt_T2();
+        void unlockConveyer_belt_T3();
 
         void unlockMiner_T2();
         void unlockMiner_T3();
@@ -53,7 +53,7 @@ class Unlockable
 
 ////Unlocked at the start
 //
-//tapis = Treadmill_T1
+//tapis = Conveyer_belt_T1
 //mineur t1 = Miner_T1
 //tourelle = Improvised_Turret
 //base = Base
@@ -84,11 +84,11 @@ class Unlockable
 //Burst_Turret  --> Tourelle à rafale
 //Sniper_Turret
 //
-////TREADMILL (Tapis) ////
+////Conveyer_belt (Tapis) ////
 //
-//Treadmill_T1 --> Unlocked at the start
-//Treadmill_T2
-//Treadmill_T3
+//Conveyer_belt_T1 --> Unlocked at the start
+//Conveyer_belt_T2
+//Conveyer_belt_T3
 //
 ////Miner////
 //
