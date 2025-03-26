@@ -17,5 +17,7 @@ namespace sdf
             UISprite(const glm::vec3 &position,
                 sdf::Texture &texture,
                 float rotation = SDF_UP);
+            glm::vec3 getPosition(void) { return _position; }
+            glm::vec2 getSize(void) { return _size; }
     };
 }
