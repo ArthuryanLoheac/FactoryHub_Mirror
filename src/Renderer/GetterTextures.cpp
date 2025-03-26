@@ -82,6 +82,10 @@ sdf::GetterTextures::GetterTextures()
     textures["Help3"] = new sdf::Texture("Assets/UI/3.png");
     textures["Help4"] = new sdf::Texture("Assets/UI/4.png");
     textures["Help5"] = new sdf::Texture("Assets/UI/5.png");
+
+    textures["Quit"] = new sdf::Texture("Assets/UI/Buttons/Quit1.png");
+    textures["QuitHover"] = new sdf::Texture("Assets/UI/Buttons/Quit2.png");
+    textures["QuitClicked"] = new sdf::Texture("Assets/UI/Buttons/Quit3.png");
 }
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)

@@ -17,6 +17,12 @@
 class WindowsManager
 {
     public:
+        enum ButtonState {
+            NORMAL = 0,
+            HOVER = 1,
+            CLICKED = 2
+        };
+
         enum class State {
             MENU,
             GAME,
@@ -66,5 +72,8 @@ class WindowsManager
         void processInputsPause(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
         sdf::UISprite *_pauseMenu;
+        std::vector<sdf::UISprite *> _spritesQuit;
+        ButtonState stateQuit = ButtonState::NORMAL;
+        int lastButton = GLFW_RELEASE;
 };
 

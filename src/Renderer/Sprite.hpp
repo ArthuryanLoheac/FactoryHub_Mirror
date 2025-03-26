@@ -34,10 +34,10 @@ namespace sdf
             unsigned int getTexture(void);
         protected:
             bool _isUI;
-        private:
-            sdf::Texture _texture;
             glm::vec3 _position;
             glm::vec2 _size;
+        private:
+            sdf::Texture _texture;
             float _direction;
 
             unsigned int _VAO;
