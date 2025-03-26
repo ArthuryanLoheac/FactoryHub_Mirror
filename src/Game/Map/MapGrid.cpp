@@ -107,6 +107,17 @@ IBlock *MapGrid::getBase()
     return base;
 }
 
+void MapGrid::clear()
+{
+    for (size_t i = 0; i < _sizeX; i++) {
+        for (size_t j = 0; j < _sizeY; j++) {
+            _grid[i][j].clear();
+        }
+    }
+    _blocksUpdated.clear();
+    base = nullptr;
+}
+
 void MapGrid::initEmptyMap(size_t X, size_t Y)
 {
     for (size_t i = 0; i < X; i++) {

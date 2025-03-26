@@ -8,6 +8,20 @@
 #include "UISprite.hpp"
 #include "WindowsManager.hpp"
 
+void WindowsManager::initButton(std::string name, std::vector<sdf::UISprite *> &sprites, glm::vec2 pos)
+{
+    sprites.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture(name)));
+    sprites.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture(name + "Hover")));
+    sprites.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
+        sdf::GetterTextures::instance->getTexture(name + "Clicked")));
+    for (auto &sprite : sprites) {
+        sprite->setSize(glm::vec2(300, 100));
+        sprite->setPosition(pos);
+    }
+}
+
 void WindowsManager::initPause(MapGrid &map)
 {
     _savePos = sdf::Camera::instance->getPosition();
@@ -19,21 +33,14 @@ void WindowsManager::initPause(MapGrid &map)
         sdf::GetterTextures::instance->getTexture("PauseUI"));
     _pauseMenu->setSize(glm::vec2(1080, 720));
     _lastKeyStates[GLFW_KEY_ESCAPE] = GLFW_RELEASE;
-    _spritesQuit.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("Quit")));
-    _spritesQuit.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("QuitHover")));
-    _spritesQuit.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
-        sdf::GetterTextures::instance->getTexture("QuitClicked")));
-    for (auto &sprite : _spritesQuit) {
-        sprite->setSize(glm::vec2(300, 100));
-        sprite->setPosition(glm::vec2(390, 500));
-    }
+    initButton("Quit", _spritesQuit, glm::vec2(390, 500));
+    initButton("Menu", _spritesMenu, glm::vec2(390, 300));
 }
 
 void WindowsManager::drawPause(MapGrid map, sdf::Renderer &renderer)
 {
     _spritesQuit[stateQuit]->draw(renderer);
+    _spritesMenu[stateMenu]->draw(renderer);
     _pauseMenu->draw(renderer);
 }
 
@@ -52,6 +59,20 @@ bool mouseInButton(GLFWwindow *window, sdf::UISprite *sprite)
     return false;
 }
 
+bool WindowsManager::handleButton(GLFWwindow *window, sdf::UISprite *sprite, ButtonState &state)
+{
+    if (mouseInButton(window, sprite)) {
+        state = ButtonState::HOVER;
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+            state = ButtonState::CLICKED;
+        else if (lastButton == GLFW_PRESS)
+            return true;
+    } else {
+        state = ButtonState::NORMAL;
+    }
+    return false;
+}
+
 void WindowsManager::processInputsPause(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map)
 {
     double mouseX, mouseY;
@@ -64,15 +85,9 @@ void WindowsManager::processInputsPause(GLFWwindow *window, sdf::Renderer &rende
     glfwGetCursorPos(window, &mouseX, &mouseY);
     _lastKeyStates[GLFW_KEY_ESCAPE] = glfwGetKey(window, GLFW_KEY_ESCAPE);
 
-    if (mouseInButton(window, _spritesQuit[stateQuit])) {
-        stateQuit = ButtonState::HOVER;
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-            stateQuit = ButtonState::CLICKED;
-        else if (lastButton == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, GL_TRUE);
-        lastButton = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1);
-    } else {
-        stateQuit = ButtonState::NORMAL;
-        lastButton = GLFW_RELEASE;
-    }
+    if (handleButton(window, _spritesMenu[stateMenu], stateMenu))
+        _state = State::MENU;
+    if (handleButton(window, _spritesQuit[stateQuit], stateQuit))
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    lastButton = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1);
 }

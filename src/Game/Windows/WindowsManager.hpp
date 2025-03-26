@@ -66,6 +66,8 @@ class WindowsManager
         float _saveZoom = 0;
         glm::vec2 _savePos = glm::vec2(0, 0);
 
+        void initButton(std::string name, std::vector<sdf::UISprite *> &sprites, glm::vec2 pos);
+        bool handleButton(GLFWwindow *window, sdf::UISprite *sprite, ButtonState &state);
         void initPause(MapGrid &map);
         void drawPause(MapGrid map, sdf::Renderer &renderer);
         void updatePause(MapGrid map, float deltaTime);
@@ -74,6 +76,8 @@ class WindowsManager
         sdf::UISprite *_pauseMenu;
         std::vector<sdf::UISprite *> _spritesQuit;
         ButtonState stateQuit = ButtonState::NORMAL;
+        std::vector<sdf::UISprite *> _spritesMenu;
+        ButtonState stateMenu = ButtonState::NORMAL;
         int lastButton = GLFW_RELEASE;
 };
 

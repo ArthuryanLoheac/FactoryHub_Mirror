@@ -31,6 +31,7 @@ class MapGrid
         void draw(sdf::Renderer &renderer);
         void update(float deltaTime);
         IBlock *getBase();
+        void clear();
 
     private:
         IBlock *base;
