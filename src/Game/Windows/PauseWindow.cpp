@@ -34,13 +34,15 @@ void WindowsManager::initPause(MapGrid &map)
     _pauseMenu->setSize(glm::vec2(1080, 720));
     _lastKeyStates[GLFW_KEY_ESCAPE] = GLFW_RELEASE;
     initButton("Quit", _spritesQuit, glm::vec2(390, 500));
-    initButton("Menu", _spritesMenu, glm::vec2(390, 300));
+    initButton("Menu", _spritesMenu, glm::vec2(390, 350));
+    initButton("Resume", _spritesResume, glm::vec2(390, 200));
 }
 
 void WindowsManager::drawPause(MapGrid map, sdf::Renderer &renderer)
 {
     _spritesQuit[stateQuit]->draw(renderer);
     _spritesMenu[stateMenu]->draw(renderer);
+    _spritesResume[stateResume]->draw(renderer);
     _pauseMenu->draw(renderer);
 }
 
@@ -87,6 +89,11 @@ void WindowsManager::processInputsPause(GLFWwindow *window, sdf::Renderer &rende
 
     if (handleButton(window, _spritesMenu[stateMenu], stateMenu))
         _state = State::MENU;
+    if (handleButton(window, _spritesResume[stateResume], stateResume)){
+        sdf::Camera::instance->setRawZoom(_saveZoom);
+        sdf::Camera::instance->setPosition(_savePos);
+        _state = State::GAME;
+    }
     if (handleButton(window, _spritesQuit[stateQuit], stateQuit))
         glfwSetWindowShouldClose(window, GL_TRUE);
     lastButton = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1);
