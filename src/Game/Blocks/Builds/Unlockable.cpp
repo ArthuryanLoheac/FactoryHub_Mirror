@@ -6,19 +6,20 @@
 */
 
 #include "Unlockable.hpp"
+#include <iostream>
 
 Unlockable *Unlockable::instance = nullptr;
 
-Unlockable::Unlockable(/* args */)
+Unlockable::Unlockable()
 {
-    if (instance == nullptr)
-        instance = this;
-    else
-        return;
-    _unlockedBuild.push_back("treadmill");
+    std::vector<std::string> list;
+    _unlockedBuild = list; 
+    _unlockedBuild.push_back("Conveyer_belt");
     _unlockedBuild.push_back("MinerT1");
     _unlockedBuild.push_back("Turret");
     _unlockedBuild.push_back("Base");
+    if (instance == nullptr)
+        instance = this;
 }
 
 Unlockable::~Unlockable()
@@ -27,9 +28,13 @@ Unlockable::~Unlockable()
 
 bool Unlockable::isUnlocked(std::string building)
 {
-    if (find(_unlockedBuild.begin(), _unlockedBuild.end(), building)
-        != _unlockedBuild.end()){
-        return (true);
+    int i = 0;
+
+    while (i < _unlockedBuild.size()){
+        if (_unlockedBuild[i] == building){
+            return (true);
+        }
+        i += 1;
     }
     return (false);
 }
@@ -130,14 +135,14 @@ void Unlockable::unlockSniper_Turret()
     _unlockedBuild.push_back("Sniper_Turret");
 }
 
-void Unlockable::unlockTreadmill_T2()
+void Unlockable::unlockConveyer_belt_T2()
 {
-    _unlockedBuild.push_back("Treadmill_T2");
+    _unlockedBuild.push_back("Conveyer_belt_T2");
 }
 
-void Unlockable::unlockTreadmill_T3()
+void Unlockable::unlockConveyer_belt_T3()
 {
-    _unlockedBuild.push_back("Treadmill_T3");
+    _unlockedBuild.push_back("Conveyer_belt_T3");
 }
 
 void Unlockable::unlockMiner_T2()
