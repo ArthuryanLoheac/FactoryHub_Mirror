@@ -82,77 +82,65 @@ void BuilderManager::updateBuildKeys(GLFWwindow *window, MapGrid &map)
         _placementType = VEIN_ONLY;
         blockBuilding = std::make_shared<MinerT1>();
     }
-    if (isKeyClicked(window, GLFW_KEY_E, _lastKeyStates[GLFW_KEY_E]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_E, _lastKeyStates[GLFW_KEY_E]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Smelter") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Smelter") == true){
-            blockBuilding = std::make_shared<Smelter>();
-        }
+        blockBuilding = std::make_shared<Smelter>();
     }
-    if (isKeyClicked(window, GLFW_KEY_Y, _lastKeyStates[GLFW_KEY_Y]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_Y, _lastKeyStates[GLFW_KEY_Y]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Advanced_Smelter") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Advanced_Smelter") == true){
-            blockBuilding = std::make_shared<Advanced_Smelter>();
-        }
+        blockBuilding = std::make_shared<Advanced_Smelter>();
     }
-    if (isKeyClicked(window, GLFW_KEY_U, _lastKeyStates[GLFW_KEY_U]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_U, _lastKeyStates[GLFW_KEY_U]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Foundry") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Foundry") == true){
-            blockBuilding = std::make_shared<Foundry>();
-        }
+        blockBuilding = std::make_shared<Foundry>();
     }
-    if (isKeyClicked(window, GLFW_KEY_I, _lastKeyStates[GLFW_KEY_I]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_I, _lastKeyStates[GLFW_KEY_I]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Chemical_Plant") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Chemical_Plant") == true){
-            blockBuilding = std::make_shared<Chemical_Plant>();
-        }
+        blockBuilding = std::make_shared<Chemical_Plant>();
     }
-    if (isKeyClicked(window, GLFW_KEY_O, _lastKeyStates[GLFW_KEY_O]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_O, _lastKeyStates[GLFW_KEY_O]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Molding_Workshop") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Molding_Workshop") == true){
-            blockBuilding = std::make_shared<Molding_Workshop>();
-        }
+        blockBuilding = std::make_shared<Molding_Workshop>();
     }
-    if (isKeyClicked(window, GLFW_KEY_P, _lastKeyStates[GLFW_KEY_P]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_P, _lastKeyStates[GLFW_KEY_P]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Cutting_Machine") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Cutting_Machine") == true){
-            blockBuilding = std::make_shared<Cutting_Machine>();
-        }
+        blockBuilding = std::make_shared<Cutting_Machine>();
     }
-    if (isKeyClicked(window, GLFW_KEY_F, _lastKeyStates[GLFW_KEY_F]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_F, _lastKeyStates[GLFW_KEY_F]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Assembly_Workshop") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Assembly_Workshop") == true){
-            blockBuilding = std::make_shared<Assembly_Workshop>();
-        }
+        blockBuilding = std::make_shared<Assembly_Workshop>();
     }
-    if (isKeyClicked(window, GLFW_KEY_G, _lastKeyStates[GLFW_KEY_G]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_G, _lastKeyStates[GLFW_KEY_G]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Advanced_Assembly_Workshop") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Advanced_Assembly_Workshop") == true){
-            blockBuilding = std::make_shared<Advanced_Assembly_Workshop>();
-        }
+        blockBuilding = std::make_shared<Advanced_Assembly_Workshop>();
     }
-    if (isKeyClicked(window, GLFW_KEY_H, _lastKeyStates[GLFW_KEY_H]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_H, _lastKeyStates[GLFW_KEY_H]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Capacitor_Factory") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Capacitor_Factory") == true){
-            blockBuilding = std::make_shared<Capacitor_Factory>();
-        }
+        blockBuilding = std::make_shared<Capacitor_Factory>();
     }
-    if (isKeyClicked(window, GLFW_KEY_J, _lastKeyStates[GLFW_KEY_J]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_J, _lastKeyStates[GLFW_KEY_J]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Arthuryan_Module") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Arthuryan_Module") == true){
-            blockBuilding = std::make_shared<High_Voltage_Generator>();
-        }
+        blockBuilding = std::make_shared<High_Voltage_Generator>();
     }
-    if (isKeyClicked(window, GLFW_KEY_K, _lastKeyStates[GLFW_KEY_K]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_K, _lastKeyStates[GLFW_KEY_K]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Wiring_Factory") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Wiring_Factory") == true){
-            blockBuilding = std::make_shared<Wiring_Factory>();
-        }
+        blockBuilding = std::make_shared<Wiring_Factory>();
     }
-    if (isKeyClicked(window, GLFW_KEY_L, _lastKeyStates[GLFW_KEY_L]) && !_isBase){
+    if (isKeyClicked(window, GLFW_KEY_L, _lastKeyStates[GLFW_KEY_L]) &&
+        !_isBase && (Unlockable::instance->isUnlocked("Nuclear_Refinery") == true)){
         _placementType = FREE;
-        if (Unlockable::instance->isUnlocked("Nuclear_Refinery") == true){
-            blockBuilding = std::make_shared<Nuclear_Refinery>();
-        }
+        blockBuilding = std::make_shared<Nuclear_Refinery>();
     }
     if (isMouseClicked(window, GLFW_MOUSE_BUTTON_1, _lastKeyStates[GLFW_MOUSE_BUTTON_1]) && _isBuilding == BUILD){
         if (_placementType == VEIN_ONLY)
