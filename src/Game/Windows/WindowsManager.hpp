@@ -20,7 +20,8 @@ class WindowsManager
         enum class State {
             MENU,
             GAME,
-            HELP
+            HELP,
+            PAUSE,
         };
     
         WindowsManager();
@@ -38,12 +39,6 @@ class WindowsManager
         State _state;
         sdf::Sprite *_startMenu;
 
-        std::vector<sdf::Sprite *> _spritesHelp;
-        int stateHelp = 0;
-        std::map<int, int> _lastKeyStates;
-        float _saveZoom = 0;
-        glm::vec2 _savePos = glm::vec2(0, 0);
-
         void initGame(MapGrid &map);
         void drawGame(MapGrid map, sdf::Renderer &renderer);
         void updateGame(MapGrid map, float deltaTime);
@@ -58,5 +53,18 @@ class WindowsManager
         void drawHelp(MapGrid map, sdf::Renderer &renderer);
         void updateHelp(MapGrid map, float deltaTime);
         void processInputsHelp(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
+
+        std::vector<sdf::UISprite *> _spritesHelp;
+        int stateHelp = 0;
+        std::map<int, int> _lastKeyStates;
+        float _saveZoom = 0;
+        glm::vec2 _savePos = glm::vec2(0, 0);
+
+        void initPause(MapGrid &map);
+        void drawPause(MapGrid map, sdf::Renderer &renderer);
+        void updatePause(MapGrid map, float deltaTime);
+        void processInputsPause(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
+
+        sdf::UISprite *_pauseMenu;
 };
 

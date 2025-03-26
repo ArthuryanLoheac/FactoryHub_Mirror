@@ -22,6 +22,10 @@ WindowsManager::WindowsManager()
                                             &WindowsManager::drawHelp,
                                             &WindowsManager::updateHelp,
                                             &WindowsManager::processInputsHelp);
+    _functs[State::PAUSE] = std::make_tuple(&WindowsManager::initPause,
+                                            &WindowsManager::drawPause,
+                                            &WindowsManager::updatePause,
+                                            &WindowsManager::processInputsPause);
 }
 
 void WindowsManager::init(MapGrid &map)

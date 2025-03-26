@@ -76,6 +76,7 @@ sdf::GetterTextures::GetterTextures()
     textures["Base"] = new sdf::Texture("Assets/Base.png");
     // Load textures UI
     textures["StartMenu"] = new sdf::Texture("Assets/UI/StartMenu.png");
+    textures["PauseUI"] = new sdf::Texture("Assets/UI/PauseUI.png");
     textures["Help1"] = new sdf::Texture("Assets/UI/1.png");
     textures["Help2"] = new sdf::Texture("Assets/UI/2.png");
     textures["Help3"] = new sdf::Texture("Assets/UI/3.png");

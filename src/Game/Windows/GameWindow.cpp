@@ -17,6 +17,7 @@ void WindowsManager::initGame(MapGrid &map)
     BuilderManager::instance->setBlockBuilding(std::make_shared<Base>(), true);
     BuilderManager::instance->set_isBuilding(BuilderManager::typeBuild::BUILD);
     _lastKeyStates[GLFW_KEY_F1] = GLFW_RELEASE;
+    _lastKeyStates[GLFW_KEY_ESCAPE] = GLFW_RELEASE;
 }
 
 void WindowsManager::drawGame(MapGrid map, sdf::Renderer &renderer)
@@ -36,6 +37,10 @@ void WindowsManager::processInputsGame(GLFWwindow *window, sdf::Renderer &render
         initHelp(map);
         _state = State::HELP;
     }
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS && _lastKeyStates[GLFW_KEY_ESCAPE] != GLFW_PRESS) {
+        initPause(map);
+        _state = State::PAUSE;
+    }
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         sdf::Camera::instance->move(sdf::Camera::Direction::UP, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -46,5 +51,6 @@ void WindowsManager::processInputsGame(GLFWwindow *window, sdf::Renderer &render
         sdf::Camera::instance->move(sdf::Camera::Direction::RIGHT, renderer.getDeltaTime(), map.getSizeX(), map.getSizeY());
      glfwSetScrollCallback(window, sdf::Renderer::scroll_callback);
     _lastKeyStates[GLFW_KEY_F1] = glfwGetKey(window, GLFW_KEY_F1);
+    _lastKeyStates[GLFW_KEY_ESCAPE] = glfwGetKey(window, GLFW_KEY_ESCAPE);
     BuilderManager::instance->updateKeyState(window, map);
 }
