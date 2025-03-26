@@ -19,6 +19,7 @@
 #include "GetterTextures.hpp"
 #include "BuilderManager.hpp"
 #include "WindowsManager.hpp"
+#include "Unlockable.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
@@ -27,6 +28,7 @@ int main(void)
     sdf::Renderer renderer;
     sdf::GetterTextures getterTextures;
     BuilderManager builderManager;
+    Unlockable unlockable;
     WindowsManager windowsManager;
     MapGrid map(100, 100);
 
