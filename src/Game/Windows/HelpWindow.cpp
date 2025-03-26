@@ -22,9 +22,11 @@ void WindowsManager::initHelp(MapGrid &map)
     _lastKeyStates[GLFW_KEY_ESCAPE] = GLFW_RELEASE;
     if (_spritesHelp.size() > 0)
         return;
-    for (int i = 1; i <= 5; i++)
-        _spritesHelp.push_back(new sdf::Sprite(glm::vec3(0.0f, 0.0f, 0.0f),
+    for (int i = 1; i <= 5; i++){
+        _spritesHelp.push_back(new sdf::UISprite(glm::vec3(0.0f, 0.0f, 0.0f),
             sdf::GetterTextures::instance->getTexture("Help" + std::to_string(i))));
+        _spritesHelp[i - 1]->setSize(glm::vec2(1080, 720));
+    }
 }
 
 void WindowsManager::drawHelp(MapGrid map, sdf::Renderer &renderer)

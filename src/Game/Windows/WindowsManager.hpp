@@ -12,6 +12,7 @@
 #include "MapGrid.hpp"
 #include "BuilderManager.hpp"
 #include "GetterTextures.hpp"
+#include "UISprite.hpp"
 
 class WindowsManager
 {
