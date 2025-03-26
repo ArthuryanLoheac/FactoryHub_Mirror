@@ -36,7 +36,6 @@ bool Unlockable::isUnlocked(std::string building)
         }
         i += 1;
     }
-    std::cout << building << " is locked" << std::endl;
     return (false);
 }
 
