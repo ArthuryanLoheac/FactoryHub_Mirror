@@ -52,7 +52,7 @@ void MapGrid::addBlock(std::shared_ptr<IBlock> block, size_t X, size_t Y, Direct
     _grid[X][Y].push_back(block);
     if (block.get()->isUpdatable())
         _blocksUpdated.push_back(block);
-    if (base != nullptr && dynamic_cast<Base *>(block.get()) != nullptr)
+    if (base == nullptr && dynamic_cast<Base *>(block.get()) != nullptr)
         base = dynamic_cast<Base *>(block.get());
 }
 
@@ -102,7 +102,7 @@ void MapGrid::update(float deltaTime)
         _blocksUpdated[i]->update(deltaTime, *this);
 }
 
-IBlock *MapGrid::getBase()
+Base *MapGrid::getBase()
 {
     return base;
 }
