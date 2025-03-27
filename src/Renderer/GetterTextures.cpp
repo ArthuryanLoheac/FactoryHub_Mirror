@@ -89,6 +89,9 @@ sdf::GetterTextures::GetterTextures()
     textures["Menu"] = new sdf::Texture("Assets/UI/Buttons/Menu1.png");
     textures["MenuHover"] = new sdf::Texture("Assets/UI/Buttons/Menu2.png");
     textures["MenuClicked"] = new sdf::Texture("Assets/UI/Buttons/Menu3.png");
+    textures["Resume"] = new sdf::Texture("Assets/UI/Buttons/Resume1.png");
+    textures["ResumeHover"] = new sdf::Texture("Assets/UI/Buttons/Resume2.png");
+    textures["ResumeClicked"] = new sdf::Texture("Assets/UI/Buttons/Resume3.png");
 }
 
 sdf::Texture &sdf::GetterTextures::getTexture(const std::string &name)

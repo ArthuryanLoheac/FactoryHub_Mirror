@@ -78,6 +78,8 @@ class WindowsManager
         ButtonState stateQuit = ButtonState::NORMAL;
         std::vector<sdf::UISprite *> _spritesMenu;
         ButtonState stateMenu = ButtonState::NORMAL;
+        std::vector<sdf::UISprite *> _spritesResume;
+        ButtonState stateResume = ButtonState::NORMAL;
         int lastButton = GLFW_RELEASE;
 };
 
