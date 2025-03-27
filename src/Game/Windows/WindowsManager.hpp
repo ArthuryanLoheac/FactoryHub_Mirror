@@ -44,6 +44,7 @@ class WindowsManager
     private:
         State _state;
         sdf::Sprite *_startMenu;
+        sdf::Sprite *_loadingMenu;
 
         void initGame(MapGrid &map);
         void drawGame(MapGrid map, sdf::Renderer &renderer);
