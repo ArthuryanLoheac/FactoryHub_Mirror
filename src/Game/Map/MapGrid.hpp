@@ -15,6 +15,8 @@
 #include "Sdf.hpp"
 #include "Direction.hpp"
 
+class Base;
+
 class IBlock;
 
 class MapGrid
@@ -30,11 +32,11 @@ class MapGrid
         size_t getSizeY() const { return _sizeY; }
         void draw(sdf::Renderer &renderer);
         void update(float deltaTime);
-        IBlock *getBase();
+        Base *getBase();
         void clear();
 
     private:
-        IBlock *base;
+        Base *base;
         void initEmptyMap(size_t X, size_t Y);
 
         std::vector<std::vector<std::vector<

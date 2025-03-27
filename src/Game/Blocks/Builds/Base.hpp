@@ -6,7 +6,10 @@
 */
 
 #pragma once
+#include <map>
+#include <string>
 #include "ABuilds.hpp"
+#include "MapGrid.hpp"
 
 class Base : public ABuilds
 {

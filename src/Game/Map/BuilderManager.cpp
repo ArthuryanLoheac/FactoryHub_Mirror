@@ -231,12 +231,12 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
     if (build != nullptr) {
         cost = build->getCost();
         for (auto &item : cost) {
-            if (((Base *)(map.getBase()))->getItems()[item.first] < item.second){
-                printf("Not enough %s\n", item.first.c_str());
+            if (((Base *)(map.getBase())) == nullptr)
                 return;
-            } else {
+            if (((Base *)(map.getBase()))->getItems()[item.first] < item.second)
+                return;
+            else
                 ((Base *)(map.getBase()))->getItems()[item.first] -= item.second;
-            }
         }
     }
     map.addBlock(block, pos.x, pos.y, _direction);
