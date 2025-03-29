@@ -6,11 +6,16 @@
 */
 
 #include "Sound.hpp"
+#include <iostream>
 
-Sound::Sound(/* args */)
+Sound *Sound::instance = nullptr;
+
+Sound::Sound()
 {
-    sounds["Create"] = "Assets/Sound/create.mp3";
-    sounds["DestroyGhost"] = "Assets/Sound/destroy_final.mp3";
+    sounds["Create"] = "Assets/Sound/create.wav";
+    sounds["Destroy"] = "Assets/Sound/destroy_final.wav";
+    if (instance == nullptr)
+        instance = this;
 }
 
 Sound::~Sound()
@@ -28,11 +33,10 @@ std::string Sound::getSound(const std::string &name)
 
 void Sound::playSound(const std::string &name)
 {
-    FMOD_RESULT result;
-    FMOD::System *pSystem = nullptr;
-    FMOD::Sound *pSound = nullptr;
-
-    result = FMOD::System_Create(&pSystem);
-    pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
-    //pSystem->createSound(getSound(name).c_str(), FMOD_DEFAULT, )
+    if (!buffer.loadFromFile(name)) {
+        std::cerr << "Failed to load sound file!" << std::endl;
+        return;
+    }
+    sound_effect.setBuffer(buffer);
+    sound_effect.play();
 }

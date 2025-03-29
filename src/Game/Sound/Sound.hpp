@@ -6,10 +6,10 @@
 */
 
 #pragma once
-#include "fmod.hpp"
 #include <map>
 #include <string>
 #include <stdexcept>
+#include <SFML/Audio.hpp>
 
 class Sound
 {
@@ -22,5 +22,7 @@ class Sound
         std::string getSound(const std::string &name);
         void playSound(const std::string &name);
 
-        std::map<std::string, std::string> sounds; 
+        std::map<std::string, std::string> sounds;
+        sf::SoundBuffer buffer;
+        sf::Sound sound_effect;
 };
