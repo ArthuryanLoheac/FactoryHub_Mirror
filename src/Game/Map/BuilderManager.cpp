@@ -22,6 +22,7 @@
 #include "Smelter.hpp"
 #include "Wiring_Factory.hpp"
 #include "Unlockable.hpp"
+#include "Sound.hpp"
 #include "iostream"
 
 BuilderManager *BuilderManager::instance = nullptr;
@@ -227,6 +228,7 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
     std::shared_ptr<IBlock> block = getCopyBlockBuilding();
     std::vector<std::pair<std::string, int>> cost;
 
+    Sound::instance->playSound(Sound::instance->getSound("Create"));
     ABuilds *build = dynamic_cast<ABuilds *>(block.get());
     if (build != nullptr) {
         cost = build->getCost();
@@ -282,6 +284,7 @@ void BuilderManager::destroyBlock(GLFWwindow *window, MapGrid &map)
     std::vector<std::shared_ptr<IBlock>> blocks;
 
     try {
+        Sound::instance->playSound(Sound::instance->getSound("Destroy"));
         blocks = map.getAllBlocksAtPos(pos.x, pos.y);
         if (blocks.size() == 0 || dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get()) == nullptr)
             return;
