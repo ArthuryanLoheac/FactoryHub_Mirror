@@ -20,6 +20,7 @@
 #include "BuilderManager.hpp"
 #include "WindowsManager.hpp"
 #include "Unlockable.hpp"
+#include "Sound.hpp"
 
 void processInputs(GLFWwindow *window, sdf::Renderer &renderer, MapGrid &map);
 
@@ -29,6 +30,7 @@ int main(void)
     sdf::GetterTextures getterTextures;
     BuilderManager builderManager;
     Unlockable unlockable;
+    Sound sound;
     WindowsManager windowsManager;
     MapGrid map(100, 100);
 

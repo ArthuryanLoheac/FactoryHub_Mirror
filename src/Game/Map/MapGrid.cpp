@@ -18,6 +18,7 @@
 #include "ATapis.hpp"
 #include "AMiner.hpp"
 #include <Base.hpp>
+#include "Sound.hpp"
 
 MapGrid::MapGrid(size_t X, size_t Y)
 {
@@ -73,6 +74,7 @@ void MapGrid::addBorder(void)
 
 void MapGrid::deleteBlock(size_t X, size_t Y, size_t Z)
 {
+    Sound::instance->playDestroy();
     if (X >= _sizeX || Y >= _sizeY || Z >= _grid[X][Y].size())
         throw std::out_of_range("Out of range");
     _grid[X][Y][Z]->setDestroy();

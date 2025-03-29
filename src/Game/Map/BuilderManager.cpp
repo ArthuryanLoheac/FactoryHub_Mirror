@@ -22,6 +22,7 @@
 #include "Smelter.hpp"
 #include "Wiring_Factory.hpp"
 #include "Unlockable.hpp"
+#include "Sound.hpp"
 #include "iostream"
 
 BuilderManager *BuilderManager::instance = nullptr;
@@ -239,6 +240,7 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
                 ((Base *)(map.getBase()))->getItems()[item.first] -= item.second;
         }
     }
+    Sound::instance->playCreate();
     map.addBlock(block, pos.x, pos.y, _direction);
 }
 
