@@ -19,10 +19,11 @@ class Sound
         Sound();
         ~Sound();
 
-        std::string getSound(const std::string &name);
-        void playSound(const std::string &name);
+        void playCreate(void);
+        void playDestroy(void);
 
-        std::map<std::string, std::string> sounds;
-        sf::SoundBuffer buffer;
-        sf::Sound sound_effect;
+        sf::SoundBuffer buffer_create;
+        std::vector<sf::Sound> sound_effect_create;
+        sf::SoundBuffer buffer_destroy;
+        std::vector<sf::Sound> sound_effect_destroy;
 };

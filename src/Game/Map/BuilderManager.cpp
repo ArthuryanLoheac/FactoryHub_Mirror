@@ -228,7 +228,6 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
     std::shared_ptr<IBlock> block = getCopyBlockBuilding();
     std::vector<std::pair<std::string, int>> cost;
 
-    Sound::instance->playSound(Sound::instance->getSound("Create"));
     ABuilds *build = dynamic_cast<ABuilds *>(block.get());
     if (build != nullptr) {
         cost = build->getCost();
@@ -241,6 +240,7 @@ void BuilderManager::BuildBlock(glm::vec2 pos, MapGrid &map)
                 ((Base *)(map.getBase()))->getItems()[item.first] -= item.second;
         }
     }
+    Sound::instance->playCreate();
     map.addBlock(block, pos.x, pos.y, _direction);
 }
 
@@ -284,7 +284,6 @@ void BuilderManager::destroyBlock(GLFWwindow *window, MapGrid &map)
     std::vector<std::shared_ptr<IBlock>> blocks;
 
     try {
-        Sound::instance->playSound(Sound::instance->getSound("Destroy"));
         blocks = map.getAllBlocksAtPos(pos.x, pos.y);
         if (blocks.size() == 0 || dynamic_cast<ABuilds *>(blocks[blocks.size() - 1].get()) == nullptr)
             return;

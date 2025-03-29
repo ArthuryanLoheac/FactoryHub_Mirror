@@ -12,8 +12,15 @@ Sound *Sound::instance = nullptr;
 
 Sound::Sound()
 {
-    sounds["Create"] = "Assets/Sound/create.wav";
-    sounds["Destroy"] = "Assets/Sound/destroy_final.wav";
+    buffer_create.loadFromFile("Assets/Sound/create.wav");
+    sound_effect_create.resize(10);
+    for (auto& sound : sound_effect_create)
+        sound.setBuffer(buffer_create);
+    
+    buffer_destroy.loadFromFile("Assets/Sound/destroy_final.wav");
+    sound_effect_destroy.resize(10);
+    for (auto& sound : sound_effect_destroy)
+        sound.setBuffer(buffer_destroy);
     if (instance == nullptr)
         instance = this;
 }
@@ -22,21 +29,22 @@ Sound::~Sound()
 {
 }
 
-std::string Sound::getSound(const std::string &name)
+void Sound::playCreate(void)
 {
-    try {
-        return sounds.at(name);
-    } catch (std::out_of_range &e) {
-        throw std::invalid_argument("Sound not found : " + name);
+    for (auto& sound : sound_effect_create) {
+        if (sound.getStatus() != sf::Sound::Playing){
+            sound.play();
+            return;
+        }
     }
 }
 
-void Sound::playSound(const std::string &name)
+void Sound::playDestroy(void)
 {
-    if (!buffer.loadFromFile(name)) {
-        std::cerr << "Failed to load sound file!" << std::endl;
-        return;
+    for (auto& sound : sound_effect_destroy) {
+        if (sound.getStatus() != sf::Sound::Playing){
+            sound.play();
+            return;
+        }
     }
-    sound_effect.setBuffer(buffer);
-    sound_effect.play();
 }
